@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -88,7 +88,6 @@
 				BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */,
 				1BB3DCAD621D6E318835C7F0 /* Pods-Parking Manager.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -104,6 +103,7 @@
 				54187608231E3A2C005893B3 /* Frameworks */,
 				54187609231E3A2C005893B3 /* Resources */,
 				4972C9BF54E6E268FEF8821A /* [CP] Embed Pods Frameworks */,
+				54187623231E4544005893B3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -178,6 +178,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parking Manager/Pods-Parking Manager-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		54187623231E4544005893B3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		90E1E0A4FB729C0722C7C223 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -357,6 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = "Parking Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

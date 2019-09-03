@@ -14,5 +14,9 @@ target 'Parking Manager' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Database'
+	pod 'Fabric'
+	pod 'Crashlytics' 
+
+	pod 'SwiftLint'
 
 end
