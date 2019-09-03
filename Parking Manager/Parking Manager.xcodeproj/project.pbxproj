@@ -15,6 +15,7 @@
 		54187621231E3B08005893B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54187620231E3B08005893B3 /* GoogleService-Info.plist */; };
 		54187628231E6D64005893B3 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187627231E6D64005893B3 /* BaseVC.swift */; };
 		5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187629231E6D8B005893B3 /* LoginVC.swift */; };
+		5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418762C231E9EB0005893B3 /* FirebaseManager.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		54187620231E3B08005893B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54187627231E6D64005893B3 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		54187629231E6D8B005893B3 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		5418762C231E9EB0005893B3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.debug.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 		54187626231E4F32005893B3 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				5418762C231E9EB0005893B3 /* FirebaseManager.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 				54187609231E3A2C005893B3 /* Resources */,
 				4972C9BF54E6E268FEF8821A /* [CP] Embed Pods Frameworks */,
 				54187623231E4544005893B3 /* ShellScript */,
+				A84D1AF5AF0572D99D66A197 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,6 +257,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A84D1AF5AF0572D99D66A197 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parking Manager/Pods-Parking Manager-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parking Manager/Pods-Parking Manager-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parking Manager/Pods-Parking Manager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -262,6 +283,7 @@
 			files = (
 				54187611231E3A2C005893B3 /* ViewController.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
+				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
 			);
