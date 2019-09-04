@@ -23,9 +23,6 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-            }
-    
     @IBAction func manualLogin(_ sender: Any) {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
@@ -83,19 +80,18 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
             print(error)
             return
         }
-        
         guard let accessToken = AccessToken.current else { return }
         print(accessToken.tokenString)
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
         print(credential.provider)
-        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+            .start(completionHandler: { (connection, result, error) -> Void in
             if  error == nil {
                 if let dict = result as? [String: AnyObject] {
                     print(dict)
                 }
             }
         })
-        
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 print(error)
@@ -112,5 +108,4 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
             print(error)
         }
     }
-    
 }
