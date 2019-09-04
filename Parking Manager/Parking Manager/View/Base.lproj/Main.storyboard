@@ -53,39 +53,59 @@
                                     <action selector="manualLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DVo-ln-Wit"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCg-Ks-NHt" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="71" y="527" width="233" height="42"/>
-                                <color key="backgroundColor" red="0.054625952229999997" green="0.17847076989999999" blue="0.76048277220000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2Z-fq-U2E">
+                                <rect key="frame" x="71" y="457" width="233" height="42"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hj-Zx-TcY" customClass="GIDSignInButton">
+                                        <rect key="frame" x="6" y="4" width="220" height="34"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="PsV-X6-ODs"/>
+                                    <constraint firstAttribute="height" constant="42" id="18g-DE-VcP"/>
+                                    <constraint firstAttribute="trailing" secondItem="2hj-Zx-TcY" secondAttribute="trailing" constant="7" id="8eQ-zh-iR2"/>
+                                    <constraint firstItem="2hj-Zx-TcY" firstAttribute="top" secondItem="g2Z-fq-U2E" secondAttribute="top" constant="4" id="BzQ-bJ-h3s"/>
+                                    <constraint firstItem="2hj-Zx-TcY" firstAttribute="leading" secondItem="g2Z-fq-U2E" secondAttribute="leading" constant="6" id="LcS-QK-Qjt"/>
+                                    <constraint firstAttribute="bottom" secondItem="2hj-Zx-TcY" secondAttribute="bottom" constant="4" id="mkd-sh-5sR"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2hj-Zx-TcY" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="461" width="241" height="42"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtS-9k-ef4">
+                                <rect key="frame" x="71" y="524" width="233" height="42"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCg-Ks-NHt" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="6" y="8" width="220" height="28"/>
+                                        <color key="backgroundColor" red="0.054625952229999997" green="0.17847076989999999" blue="0.76048277220000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.054625952229999997" green="0.17847076989999999" blue="0.76048277220000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="sgf-HC-ytE"/>
+                                    <constraint firstAttribute="height" constant="42" id="082-VM-jYi"/>
+                                    <constraint firstAttribute="bottom" secondItem="YCg-Ks-NHt" secondAttribute="bottom" constant="6" id="5wk-7p-8NY"/>
+                                    <constraint firstAttribute="trailing" secondItem="YCg-Ks-NHt" secondAttribute="trailing" constant="7" id="CNe-yP-O34"/>
+                                    <constraint firstItem="YCg-Ks-NHt" firstAttribute="top" secondItem="TtS-9k-ef4" secondAttribute="top" constant="8" id="Hel-qs-CmJ"/>
+                                    <constraint firstItem="YCg-Ks-NHt" firstAttribute="leading" secondItem="TtS-9k-ef4" secondAttribute="leading" constant="6" id="gcL-Lj-AtT"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.26380814520000001" green="0.83004838199999997" blue="0.73719108779999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="g2Z-fq-U2E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="1Iz-WD-RUe"/>
+                            <constraint firstItem="g2Z-fq-U2E" firstAttribute="top" secondItem="JdK-p8-Ygj" secondAttribute="bottom" constant="25" id="2HC-dM-8No"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TtS-9k-ef4" secondAttribute="trailing" constant="71" id="6Zm-e8-I8V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mV9-XS-s9C" secondAttribute="trailing" constant="71" id="Afi-BZ-nyv"/>
+                            <constraint firstItem="TtS-9k-ef4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="BOp-Qe-QWR"/>
+                            <constraint firstItem="TtS-9k-ef4" firstAttribute="top" secondItem="g2Z-fq-U2E" secondAttribute="bottom" constant="25" id="HJf-1p-i9b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g2Z-fq-U2E" secondAttribute="trailing" constant="71" id="LCS-D5-2li"/>
                             <constraint firstItem="ZFo-A9-zep" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LfC-0E-xjk"/>
                             <constraint firstItem="mV9-XS-s9C" firstAttribute="top" secondItem="ZFo-A9-zep" secondAttribute="bottom" constant="50" id="S8h-d1-mOa"/>
                             <constraint firstItem="9rk-51-DJD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="SIg-OL-qb1"/>
                             <constraint firstItem="JdK-p8-Ygj" firstAttribute="top" secondItem="9rk-51-DJD" secondAttribute="bottom" constant="52" id="Upt-hz-RZ1"/>
                             <constraint firstItem="JdK-p8-Ygj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="Xrf-IJ-7md"/>
                             <constraint firstItem="mV9-XS-s9C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="d8w-eP-AZZ"/>
-                            <constraint firstItem="2hj-Zx-TcY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="eHF-3L-P8u"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YCg-Ks-NHt" secondAttribute="trailing" constant="71" id="eQq-A8-xOg"/>
-                            <constraint firstItem="2hj-Zx-TcY" firstAttribute="top" secondItem="JdK-p8-Ygj" secondAttribute="bottom" constant="29" id="h6B-MW-ccr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JdK-p8-Ygj" secondAttribute="trailing" constant="71" id="ihK-GR-DLs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9rk-51-DJD" secondAttribute="trailing" constant="71" id="kVB-I0-7Da"/>
                             <constraint firstItem="ZFo-A9-zep" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="oWG-5z-3o3"/>
-                            <constraint firstItem="YCg-Ks-NHt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="t0L-r9-Cvf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2hj-Zx-TcY" secondAttribute="trailing" constant="67" id="xQ9-TC-imW"/>
-                            <constraint firstItem="YCg-Ks-NHt" firstAttribute="top" secondItem="2hj-Zx-TcY" secondAttribute="bottom" constant="24" id="ydq-k8-qXJ"/>
                             <constraint firstItem="ZFo-A9-zep" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71.5" id="zch-Ji-oi0"/>
                             <constraint firstItem="9rk-51-DJD" firstAttribute="top" secondItem="mV9-XS-s9C" secondAttribute="bottom" constant="23" id="ziV-Vs-St9"/>
                         </constraints>
@@ -94,12 +114,13 @@
                     <connections>
                         <outlet property="emailField" destination="mV9-XS-s9C" id="Hbd-Me-CO2"/>
                         <outlet property="fbLoginButton" destination="YCg-Ks-NHt" id="6Cg-fb-3IN"/>
+                        <outlet property="googleLoginButton" destination="2hj-Zx-TcY" id="UiN-gx-6IE"/>
                         <outlet property="passwordField" destination="9rk-51-DJD" id="7SK-8p-6V2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="83.705357142857139"/>
+            <point key="canvasLocation" x="130.40000000000001" y="83.497536945812811"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gxb-xx-xn4">

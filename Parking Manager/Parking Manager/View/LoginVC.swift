@@ -15,12 +15,15 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var fbLoginButton: FBLoginButton!
     var viewModel = LoginVM()
     override func viewDidLoad() {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
+//        googleLoginButton.style = .standard
+//        googleLoginButton.layer.borderColor = UIColor.white.cgColor
         super.viewDidLoad()
     }
     
