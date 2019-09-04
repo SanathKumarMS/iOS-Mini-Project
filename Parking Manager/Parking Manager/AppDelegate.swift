@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+//        let str_URL = url.absoluteString as NSString
+//        if str_URL.contains("")
         return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         //return true
     }

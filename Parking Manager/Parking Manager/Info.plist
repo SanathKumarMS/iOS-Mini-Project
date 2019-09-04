@@ -2,19 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!--    <key>CFBundleURLTypes</key>-->
-<!--    <array>-->
-<!--        <dict>-->
-<!--            <key>CFBundleURLSchemes</key>-->
-<!--            <array>-->
-<!--                <string>fb957718157732164</string>-->
-<!--            </array>-->
-<!--        </dict>-->
-<!--    </array>-->
     <key>FacebookAppID</key>
     <string>957718157732164</string>
     <key>FacebookDisplayName</key>
-    <string>Sanath Kumar</string>
+    <string>Parking Manager</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>fbapi</string>
