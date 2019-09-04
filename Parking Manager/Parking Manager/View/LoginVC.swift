@@ -19,6 +19,7 @@ class LoginVC: BaseVC, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
         super.viewDidLoad()
     }
+    
     @IBAction func manualLogin(_ sender: Any) {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
@@ -43,7 +44,7 @@ class LoginVC: BaseVC, GIDSignInDelegate {
                     print("User already present. Signing in")
                     Auth.auth().signIn(withEmail: email, password: password)
                 }
-            } else { Auth.auth().createUser(withEmail: email, password: password){ (user, error) in
+            } else { Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                     if error == nil {
                         print("User not present. Creating account and signing in")
                         Auth.auth().signIn(withEmail: email, password: password)
