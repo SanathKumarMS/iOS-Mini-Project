@@ -84,7 +84,8 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         print(accessToken.tokenString)
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
         print(credential.provider)
-        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+        GraphRequest(graphPath: "me",
+                     parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
             .start(completionHandler: { (connection, result, error) -> Void in
             if  error == nil {
                 if let dict = result as? [String: AnyObject] {

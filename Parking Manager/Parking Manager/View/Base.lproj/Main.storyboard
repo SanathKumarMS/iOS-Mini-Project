@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginVC" customModule="Parking_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PARKING MANAGER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFo-A9-zep">
-                                <rect key="frame" x="71.5" y="84" width="271" height="121"/>
+                                <rect key="frame" x="71.666666666666686" y="84" width="232" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="121" id="cV2-gu-8OY"/>
                                 </constraints>
@@ -28,24 +28,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mV9-XS-s9C">
-                                <rect key="frame" x="71" y="255" width="272" height="30"/>
+                                <rect key="frame" x="71" y="255" width="233" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9rk-51-DJD">
-                                <rect key="frame" x="71" y="308" width="272" height="30"/>
+                                <rect key="frame" x="71" y="308" width="233" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdK-p8-Ygj">
-                                <rect key="frame" x="71" y="390" width="272" height="41"/>
+                                <rect key="frame" x="71" y="390" width="233" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="1fv-Gc-zw9"/>
+                                    <constraint firstAttribute="height" constant="42" id="1fv-Gc-zw9"/>
                                 </constraints>
-                                <state key="normal" title="Login">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login/Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -53,14 +54,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCg-Ks-NHt" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="71" y="526" width="272" height="42"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="71" y="527" width="233" height="42"/>
+                                <color key="backgroundColor" red="0.054625952229999997" green="0.17847076989999999" blue="0.76048277220000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="PsV-X6-ODs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hj-Zx-TcY" customClass="GIDSignInButton">
-                                <rect key="frame" x="71" y="460" width="272" height="42"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2hj-Zx-TcY" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="461" width="241" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="sgf-HC-ytE"/>
@@ -76,14 +77,14 @@
                             <constraint firstItem="JdK-p8-Ygj" firstAttribute="top" secondItem="9rk-51-DJD" secondAttribute="bottom" constant="52" id="Upt-hz-RZ1"/>
                             <constraint firstItem="JdK-p8-Ygj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="Xrf-IJ-7md"/>
                             <constraint firstItem="mV9-XS-s9C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="d8w-eP-AZZ"/>
-                            <constraint firstItem="2hj-Zx-TcY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="eHF-3L-P8u"/>
+                            <constraint firstItem="2hj-Zx-TcY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="eHF-3L-P8u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YCg-Ks-NHt" secondAttribute="trailing" constant="71" id="eQq-A8-xOg"/>
                             <constraint firstItem="2hj-Zx-TcY" firstAttribute="top" secondItem="JdK-p8-Ygj" secondAttribute="bottom" constant="29" id="h6B-MW-ccr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JdK-p8-Ygj" secondAttribute="trailing" constant="71" id="ihK-GR-DLs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9rk-51-DJD" secondAttribute="trailing" constant="71" id="kVB-I0-7Da"/>
                             <constraint firstItem="ZFo-A9-zep" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="oWG-5z-3o3"/>
                             <constraint firstItem="YCg-Ks-NHt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="t0L-r9-Cvf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2hj-Zx-TcY" secondAttribute="trailing" constant="71" id="xQ9-TC-imW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2hj-Zx-TcY" secondAttribute="trailing" constant="67" id="xQ9-TC-imW"/>
                             <constraint firstItem="YCg-Ks-NHt" firstAttribute="top" secondItem="2hj-Zx-TcY" secondAttribute="bottom" constant="24" id="ydq-k8-qXJ"/>
                             <constraint firstItem="ZFo-A9-zep" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71.5" id="zch-Ji-oi0"/>
                             <constraint firstItem="9rk-51-DJD" firstAttribute="top" secondItem="mV9-XS-s9C" secondAttribute="bottom" constant="23" id="ziV-Vs-St9"/>
@@ -106,7 +107,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UGI-ro-46q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7GW-au-89S">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -123,7 +124,7 @@
             <objects>
                 <viewController id="04H-jX-KF9" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h07-Vl-YCu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="WY6-vg-ZkV"/>
@@ -139,7 +140,7 @@
             <objects>
                 <viewController id="AUW-5s-AdO" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EXK-ag-4la">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="MHO-1P-4sx"/>
@@ -155,7 +156,7 @@
             <objects>
                 <viewController id="zvb-JU-5q2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LRO-Z5-Uoo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EKz-jt-hX3"/>
@@ -171,7 +172,7 @@
             <objects>
                 <viewController id="BXZ-gl-p8w" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8zf-Yp-Ryj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="31b-MY-gQh"/>
