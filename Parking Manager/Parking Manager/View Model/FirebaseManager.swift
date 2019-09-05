@@ -19,21 +19,17 @@ class FirebaseManager {
         
     }
     
-//    typealias signInHandler = ((User?, Error?) -> Void)
-//    typealias createUserHandler = (AuthDataResult?, Error?) -> Void
     typealias ErrorHandler = (Error?) -> Void
+    let ref = Database.database().reference(withPath: "grocery-items")
     
     func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
         Auth.auth().fetchSignInMethods(forEmail: email) {(signInMethods, error) in
-            if let error = error {
-                print(error)
-            }
+            guard let error = error else { return }
             if let signInMethods = signInMethods {
                 print("Sign in Methods ", signInMethods)
                 if signInMethods.contains(EmailPasswordAuthSignInMethod) {
                     print("User already present. Signing in")
-                    Auth.auth().signIn(withEmail: email, password: password) {
-                        (user, error) in
+                    Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                             completionHandler(error)
                     }
                 }
@@ -60,14 +56,14 @@ class FirebaseManager {
     func signInWithFB(accessToken: AccessToken, completionHandler: @escaping ErrorHandler) {
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
         print(credential.provider)
-        GraphRequest(graphPath: "me",
-                     parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-                if error == nil {
-                    if let dict = result as? [String: AnyObject] {
-                        print(dict)
-                    }
-                }
-            })
+//        GraphRequest(graphPath: "me",
+//                     parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+//                if error == nil {
+//                    if let dict = result as? [String: AnyObject] {
+//                        print(dict)
+//                    }
+//                }
+//            })
         signInWithCredential(credential: credential, completionHandler: completionHandler)
     }
     

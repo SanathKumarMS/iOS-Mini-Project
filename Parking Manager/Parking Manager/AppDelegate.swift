@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        //return true
+        //return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

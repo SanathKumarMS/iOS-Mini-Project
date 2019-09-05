@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 
-class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
+class LoginVC: BaseVC {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -30,7 +30,6 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         print(email, password)
-        var msg: String = ""
         if email.isEmpty == false && password.isEmpty == false {
             if email.isValidEmail() == true {
                 viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
@@ -47,12 +46,22 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
             }
         }
     }
+}
 
+// MARK: - GIDSignInDelegate
+
+extension LoginVC: GIDSignInDelegate {
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         viewModel.signInWithGoogle(user: user, error: error)
         guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
         self.navigationController?.pushViewController(userDetailsVC, animated: true)
     }
+}
+
+// MARK: - LoginButtonDelegate
+
+extension LoginVC: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         viewModel.signInWithFB(result: result, error: error)
@@ -64,4 +73,5 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         viewModel.signOut()
     }
 }
+
 
