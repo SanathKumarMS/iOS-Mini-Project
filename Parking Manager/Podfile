@@ -19,6 +19,4 @@ target 'Parking Manager' do
 	pod 'GoogleSignIn'
 	pod 'FBSDKLoginKit' 
 
-	pod 'SwiftLint'
-
 end

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418760E231E3A2C005893B3 /* AppDelegate.swift */; };
-		54187611231E3A2C005893B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187610231E3A2C005893B3 /* ViewController.swift */; };
 		54187614231E3A2C005893B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54187612231E3A2C005893B3 /* Main.storyboard */; };
 		54187616231E3A34005893B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54187615231E3A34005893B3 /* Assets.xcassets */; };
 		54187619231E3A34005893B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54187617231E3A34005893B3 /* LaunchScreen.storyboard */; };
@@ -18,6 +17,7 @@
 		5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418762C231E9EB0005893B3 /* FirebaseManager.swift */; };
 		54187631231FEAB4005893B3 /* BaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187630231FEAB4005893B3 /* BaseVM.swift */; };
 		54187633231FEAE4005893B3 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187632231FEAE4005893B3 /* LoginVM.swift */; };
+		541876362320DD77005893B3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541876352320DD76005893B3 /* Extension+String.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,6 @@
 		1BB3DCAD621D6E318835C7F0 /* Pods-Parking Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.release.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.release.xcconfig"; sourceTree = "<group>"; };
 		5418760B231E3A2C005893B3 /* Parking Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parking Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5418760E231E3A2C005893B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		54187610231E3A2C005893B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		54187613231E3A2C005893B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54187615231E3A34005893B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54187618231E3A34005893B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		5418762C231E9EB0005893B3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		54187630231FEAB4005893B3 /* BaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVM.swift; sourceTree = "<group>"; };
 		54187632231FEAE4005893B3 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		541876352320DD76005893B3 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.debug.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +88,7 @@
 				54187615231E3A34005893B3 /* Assets.xcassets */,
 				5418761A231E3A34005893B3 /* Info.plist */,
 				54187620231E3B08005893B3 /* GoogleService-Info.plist */,
+				541876352320DD76005893B3 /* Extension+String.swift */,
 			);
 			path = "Parking Manager";
 			sourceTree = "<group>";
@@ -104,7 +105,6 @@
 			children = (
 				54187612231E3A2C005893B3 /* Main.storyboard */,
 				54187617231E3A34005893B3 /* LaunchScreen.storyboard */,
-				54187610231E3A2C005893B3 /* ViewController.swift */,
 				54187627231E6D64005893B3 /* BaseVC.swift */,
 				54187629231E6D8B005893B3 /* LoginVC.swift */,
 			);
@@ -144,6 +144,7 @@
 				4972C9BF54E6E268FEF8821A /* [CP] Embed Pods Frameworks */,
 				54187623231E4544005893B3 /* ShellScript */,
 				A84D1AF5AF0572D99D66A197 /* [CP] Copy Pods Resources */,
+				541876372320DF23005893B3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -239,7 +240,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		541876372320DF23005893B3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		90E1E0A4FB729C0722C7C223 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -288,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54187633231FEAE4005893B3 /* LoginVM.swift in Sources */,
-				54187611231E3A2C005893B3 /* ViewController.swift in Sources */,
+				541876362320DD77005893B3 /* Extension+String.swift in Sources */,
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
 				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,

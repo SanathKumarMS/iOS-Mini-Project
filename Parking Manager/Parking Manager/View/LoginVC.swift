@@ -22,8 +22,6 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
-//        googleLoginButton.style = .standard
-//        googleLoginButton.layer.borderColor = UIColor.white.cgColor
         super.viewDidLoad()
     }
     
@@ -31,9 +29,13 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         print(email, password)
-//        print(Auth.auth().currentUser ?? "none")
-//
-        viewModel.loginOrSignUp(email: email, password: password)
+        if email.count > 0, password.count > 0 {
+            if email.isValidEmail() == true {
+                viewModel.loginOrSignUp(email: email, password: password)
+            } else {
+                print("Invalid Email")
+            }
+        }
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -45,11 +47,10 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
-        do {
-            try Auth.auth().signOut()
-        } catch let error {
-            print(error)
-        }
+        viewModel.signOut()
     }
+}
+
+extension LoginVC: UITextFieldDelegate {
+    
 }
