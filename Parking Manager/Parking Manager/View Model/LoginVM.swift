@@ -12,8 +12,17 @@ import FBSDKLoginKit
 
 class LoginVM: BaseVM {
     
-    func loginOrSignUp(email: String, password: String) {
-        FirebaseManager.shared.loginOrSignUp(email: email, password: password)
+    typealias ErrorHandler = ((String) -> Void)
+    func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler)
+    {
+        FirebaseManager.shared.loginOrSignUp(email: email, password: password) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                let msg = error.localizedDescription
+                completionHandler(msg)
+            }
+            completionHandler("nil")
+        }
     }
     
     func signInWithGoogle(user: GIDGoogleUser?, error: Error?) {
@@ -24,7 +33,13 @@ class LoginVM: BaseVM {
             return
         }
         guard let authentication = user.authentication else { return }
-        FirebaseManager.shared.signInWithGoogle(authentication: authentication)
+        FirebaseManager.shared.signInWithGoogle(authentication: authentication) { (error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return error.localizedDescription
+//            }
+//            return "nil"
+        }
     }
     
     func signInWithFB(result: LoginManagerLoginResult?, error: Error?) {
@@ -32,7 +47,13 @@ class LoginVM: BaseVM {
             return
         }
         guard let accessToken = AccessToken.current else { return }
-        FirebaseManager.shared.signInWithFB(accessToken: accessToken)
+        FirebaseManager.shared.signInWithFB(accessToken: accessToken) { (error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return error.localizedDescription
+//            }
+//            return "nil"
+        }
     }
     func signOut() {
         FirebaseManager.shared.signOut()

@@ -30,9 +30,18 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         print(email, password)
+        var msg: String = ""
         if email.isEmpty == false && password.isEmpty == false {
             if email.isValidEmail() == true {
-                viewModel.loginOrSignUp(email: email, password: password)
+                viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
+                    if msg != "nil" {
+                        let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
+                        self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                    } else {
+                        guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
+                        self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                    }
+                }
             } else {
                 print("Invalid Email")
             }
@@ -41,10 +50,14 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         viewModel.signInWithGoogle(user: user, error: error)
+        guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
+        self.navigationController?.pushViewController(userDetailsVC, animated: true)
     }
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         viewModel.signInWithFB(result: result, error: error)
+        guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
+        self.navigationController?.pushViewController(userDetailsVC, animated: true)
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
@@ -52,6 +65,3 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
     }
 }
 
-extension LoginVC: UITextFieldDelegate {
-    
-}
