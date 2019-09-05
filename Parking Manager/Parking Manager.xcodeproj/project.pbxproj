@@ -18,6 +18,7 @@
 		54187631231FEAB4005893B3 /* BaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187630231FEAB4005893B3 /* BaseVM.swift */; };
 		54187633231FEAE4005893B3 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187632231FEAE4005893B3 /* LoginVM.swift */; };
 		541876362320DD77005893B3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541876352320DD76005893B3 /* Extension+String.swift */; };
+		543A10792321024D004B577C /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A10782321024D004B577C /* TabBarVC.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		54187630231FEAB4005893B3 /* BaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVM.swift; sourceTree = "<group>"; };
 		54187632231FEAE4005893B3 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		541876352320DD76005893B3 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		543A10782321024D004B577C /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.debug.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +109,7 @@
 				54187617231E3A34005893B3 /* LaunchScreen.storyboard */,
 				54187627231E6D64005893B3 /* BaseVC.swift */,
 				54187629231E6D8B005893B3 /* LoginVC.swift */,
+				543A10782321024D004B577C /* TabBarVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
 				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
+				543A10792321024D004B577C /* TabBarVC.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

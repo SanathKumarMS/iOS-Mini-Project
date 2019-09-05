@@ -33,16 +33,16 @@ class FirebaseManager {
                         completionHandler()
                     }
                 }
-            } else { Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-                if error == nil {
-                    print("User not present. Creating account and signing in")
-                    Auth.auth().signIn(withEmail: email, password: password)
-                    if let completionHandler = completionHandler {
-                        completionHandler()
+            } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
+                    if error == nil {
+                        print("User not present. Creating account and signing in")
+                        Auth.auth().signIn(withEmail: email, password: password)
+                        if let completionHandler = completionHandler {
+                            completionHandler()
+                        }
+                    } else {
+                        print(error ?? "No error")
                     }
-                } else {
-                    print(error ?? "No error")
-                }
                 }
             }
         }
@@ -76,7 +76,7 @@ class FirebaseManager {
     }
     
     func signInWithCredential(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { (_, error) in
             if let error = error {
                 print(error)
                 return

@@ -18,6 +18,7 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var fbLoginButton: FBLoginButton!
     var viewModel = LoginVM()
+    
     override func viewDidLoad() {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
@@ -25,11 +26,11 @@ class LoginVC: BaseVC, GIDSignInDelegate, LoginButtonDelegate {
         super.viewDidLoad()
     }
     
-    @IBAction func manualLogin(_ sender: Any) {
+    @IBAction private func manualLogin(_ sender: Any) {
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         print(email, password)
-        if email.count > 0, password.count > 0 {
+        if email.isEmpty == false && password.isEmpty == false {
             if email.isValidEmail() == true {
                 viewModel.loginOrSignUp(email: email, password: password)
             } else {
