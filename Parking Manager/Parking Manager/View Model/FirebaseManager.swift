@@ -20,7 +20,7 @@ class FirebaseManager {
     }
     
     typealias ErrorHandler = (Error?) -> Void
-    let ref = Database.database().reference(withPath: "grocery-items")
+    let ref = Database.database().reference(withPath: "")
     
     func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
         Auth.auth().fetchSignInMethods(forEmail: email) {(signInMethods, error) in
