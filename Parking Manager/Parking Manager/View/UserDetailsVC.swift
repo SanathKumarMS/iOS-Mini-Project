@@ -34,7 +34,7 @@ class UserDetailsVC: BaseVC {
     }
     
     func setupUI() {
-        imageView.layer.cornerRadius = imageView.frame.size.width
+        imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
     }
 }
