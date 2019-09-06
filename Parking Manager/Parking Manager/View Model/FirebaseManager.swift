@@ -21,6 +21,7 @@ class FirebaseManager {
     
     let root = Database.database().reference()
     let userDetails = Database.database().reference(withPath: "UserDetails")
+    
     typealias ErrorHandler = (Error?) -> Void
     
     // MARK: - Authentication

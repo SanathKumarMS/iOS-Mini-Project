@@ -23,7 +23,7 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //viewModel.add()
+        viewModel.add(email: "sanath@gmail.com", name: "Sanath", phone: "9980869477", vehicleNumber: "KA-01 4608", vehicleType: "Bike")
     }
 }
 
