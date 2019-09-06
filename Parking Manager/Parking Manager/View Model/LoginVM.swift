@@ -13,13 +13,13 @@ import FBSDKLoginKit
 class LoginVM: BaseVM {
     
     typealias ErrorHandler = ((String) -> Void)
-    func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler)
-    {
+    func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
         FirebaseManager.shared.loginOrSignUp(email: email, password: password) { (error) in
             if let error = error {
                 print(error.localizedDescription)
                 let msg = error.localizedDescription
                 completionHandler(msg)
+                return
             }
             completionHandler("nil")
         }

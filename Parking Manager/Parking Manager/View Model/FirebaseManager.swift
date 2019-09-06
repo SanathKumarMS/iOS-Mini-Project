@@ -19,12 +19,18 @@ class FirebaseManager {
         
     }
     
+    let root = Database.database().reference()
+    let userDetails = Database.database().reference(withPath: "UserDetails")
     typealias ErrorHandler = (Error?) -> Void
-    let ref = Database.database().reference(withPath: "")
+    
+    // MARK: - Authentication
     
     func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
         Auth.auth().fetchSignInMethods(forEmail: email) {(signInMethods, error) in
-            guard let error = error else { return }
+            if let error = error {
+                completionHandler(error)
+                return
+            }
             if let signInMethods = signInMethods {
                 print("Sign in Methods ", signInMethods)
                 if signInMethods.contains(EmailPasswordAuthSignInMethod) {
@@ -34,12 +40,12 @@ class FirebaseManager {
                     }
                 }
             } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
-                    if error == nil {
-                        print("User not present. Creating account and signing in")
-                        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-                            completionHandler(error)
-                        }
-                    } else {
+                        if error == nil {
+                            print("User not present. Creating account and signing in")
+                            Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
+                                completionHandler(error)
+                            }
+                        } else {
                         print(error ?? "No error")
                     }
                 }
@@ -81,5 +87,22 @@ class FirebaseManager {
         } catch let error {
             print(error)
         }
+    }
+    
+    func getLoggedInUserEmail() -> String {
+        guard let user = Auth.auth().currentUser else {
+            return ""
+        }
+        guard let email = user.email else {
+            return ""
+        }
+        return email
+    }
+    
+    // MARK: - Realtime Database
+    
+    func addUser(user: User) {
+        let childRef = userDetails.child(user.md5HashOfEmail)
+        childRef.setValue(user.convertToJSON())
     }
 }

@@ -28,6 +28,7 @@ class LoginVC: BaseVC {
     
     @IBAction private func manualLogin(_ sender: Any) {
         let email = emailField.text ?? ""
+        print(email.hash)
         let password = passwordField.text ?? ""
         print(email, password)
         if email.isEmpty == false && password.isEmpty == false {
@@ -35,7 +36,9 @@ class LoginVC: BaseVC {
                 viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
                     if msg != "nil" {
                         let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
-                        self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                        DispatchQueue.main.async {
+                            self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                        }
                     } else {
                         guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
                         self?.navigationController?.pushViewController(userDetailsVC, animated: true)
@@ -73,5 +76,3 @@ extension LoginVC: LoginButtonDelegate {
         viewModel.signOut()
     }
 }
-
-

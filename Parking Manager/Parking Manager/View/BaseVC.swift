@@ -18,7 +18,7 @@ class BaseVC: UIViewController {
     
     func presentAlert(title: String, message: String, style: UIAlertController.Style, actions: [AlertAction]){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-        for item in actions{
+        for item in actions {
             alertController.addAction(UIAlertAction(title: item.title, style: item.style, handler: item.handler))
         }
         present(alertController, animated: true, completion: nil)
@@ -26,7 +26,7 @@ class BaseVC: UIViewController {
 
 }
 
-struct AlertAction{
+struct AlertAction {
     var title: String
     var style: UIAlertAction.Style
     var handler: ((UIAlertAction) -> Void)?

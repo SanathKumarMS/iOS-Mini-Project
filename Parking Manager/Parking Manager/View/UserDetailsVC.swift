@@ -13,15 +13,19 @@ class UserDetailsVC: BaseVC {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    var viewModel = UserDetailsVM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //viewModel.add()
+    }
 }
-
-
 
 // MARK: - UITableViewDelegate
 
