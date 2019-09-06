@@ -12,9 +12,11 @@ class UserDetailsVM: BaseVM {
     
     var users: [User] = []
     
-    func add(email: String, name: String, phone: String, vehicleNumber: String, vehicleType: String) {
+    func add(emailArg: String, name: String, phone: String, vehicleNumber: String, vehicleType: String) {
+        let email = FirebaseManager.shared.getLoggedInUserEmail()
         let md5Data = Helper.MD5(string: email)
         let md5Hex = md5Data.map { String(format: "%02hhx", $0) }.joined()
+        print(md5Hex)
         let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: md5Hex)
         FirebaseManager.shared.addUser(user: user)
     }
