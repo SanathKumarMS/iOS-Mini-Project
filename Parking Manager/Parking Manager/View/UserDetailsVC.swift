@@ -14,6 +14,7 @@ class UserDetailsVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     let imagePicker = UIImagePickerController()
+    let imageAddButton = UIButton()
     var viewModel = UserDetailsVM()
     
     override func viewDidLoad() {
@@ -36,6 +37,9 @@ class UserDetailsVC: BaseVC {
     func setupUI() {
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
+        imageAddButton.frame = imageView.bounds
+        imageAddButton.backgroundColor = .red
+        imageView.addSubview(imageAddButton)
     }
 }
 
