@@ -10,4 +10,7 @@ import Foundation
 
 class BaseVM {
     
+    func signOut() {
+        FirebaseManager.shared.signOut()
+    }
 }

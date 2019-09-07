@@ -45,7 +45,10 @@ class LoginVC: BaseVC {
                     }
                 }
             } else {
-                print("Invalid Email")
+                let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", message: "Invalid Email Entered", style: .alert, actions: [alertAction])
+                }
             }
         }
     }
@@ -56,9 +59,18 @@ class LoginVC: BaseVC {
 extension LoginVC: GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        viewModel.signInWithGoogle(user: user, error: error)
-        guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
-        self.navigationController?.pushViewController(userDetailsVC, animated: true)
+        viewModel.signInWithGoogle(user: user, error: error) { (msg) in
+            if msg != "nil" {
+                let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                }
+            } else {
+                guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
+                self.navigationController?.pushViewController(userDetailsVC, animated: true)
+            }
+        }
+        
     }
 }
 

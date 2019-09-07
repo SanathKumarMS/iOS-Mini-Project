@@ -80,6 +80,7 @@ class FirebaseManager {
             if let error = error {
                 completionHandler(error)
             }
+            completionHandler(error)
         }
     }
     
@@ -92,13 +93,21 @@ class FirebaseManager {
     }
     
     func getLoggedInUserEmail() -> String {
-        guard let user = Auth.auth().currentUser else {
-            return ""
+        if let user = Auth.auth().currentUser {
+            if let email = user.email {
+                return email
+            } else {
+                if let providerEmail = user.providerData[0].email {
+                    return providerEmail
+                }
+            }
         }
-        guard let email = user.email else {
-            return ""
+        if let googleUser = GIDSignIn.sharedInstance()?.currentUser {
+            if let email = googleUser.profile.email {
+                return email
+            }
         }
-        return email
+        return ""
     }
     
     // MARK: - Realtime Database
