@@ -17,6 +17,6 @@ target 'Parking Manager' do
 	pod 'Fabric'
 	pod 'Crashlytics'
 	pod 'GoogleSignIn'
-	pod 'FBSDKLoginKit' 
+	pod 'FBSDKLoginKit'  
 
 end

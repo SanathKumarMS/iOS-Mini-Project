@@ -35,11 +35,38 @@ class UserDetailsVC: BaseVC {
     }
     
     func setupUI() {
+        imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
         imageAddButton.frame = imageView.bounds
-        imageAddButton.backgroundColor = .red
+        //imageAddButton.backgroundColor = .red
+        imageAddButton.titleLabel?.text = "Add Image"
+        imageAddButton.addTarget(self, action: #selector(setImage), for: .touchUpInside)
         imageView.addSubview(imageAddButton)
+    }
+    
+    @objc func setImage() {
+        var alertActions: [AlertAction] = []
+        let camera = AlertAction(title: "Camera", style: .default, handler: { (alerAction) in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        let photoLibrary = AlertAction(title: "Albums", style: .default, handler: { (alerAction) in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        let cancel = AlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertActions.append(contentsOf: [camera, photoLibrary, cancel])
+        if imageView.image != nil {
+            let delete = AlertAction(title: "Delete", style: .default, handler: { (alerAction) in
+                self.imageView.image = nil
+            })
+            alertActions.append(delete)
+        }
+        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions)
+        imagePicker.allowsEditing = false
+//        imagePicker.sourceType = .photoLibrary
+//        present(imagePicker, animated: true, completion: nil)
     }
 }
 

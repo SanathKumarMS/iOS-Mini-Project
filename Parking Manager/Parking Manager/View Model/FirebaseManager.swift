@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
+import FirebaseAuth
 
 class FirebaseManager {
     

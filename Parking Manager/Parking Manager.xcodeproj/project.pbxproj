@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,7 @@
 		543A108523221544004B577C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108423221544004B577C /* User.swift */; };
 		543A108723222115004B577C /* UserDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108623222115004B577C /* UserDetailsVM.swift */; };
 		543A108B23223021004B577C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108A23223021004B577C /* Helper.swift */; };
-		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; };
+		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -254,11 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -271,11 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -288,15 +280,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Parking Manager-checkManifestLockResult.txt",
 			);
@@ -496,6 +484,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Parking Manager/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,6 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Parking Manager/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
