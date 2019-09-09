@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		543A108523221544004B577C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108423221544004B577C /* User.swift */; };
 		543A108723222115004B577C /* UserDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108623222115004B577C /* UserDetailsVM.swift */; };
 		543A108B23223021004B577C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108A23223021004B577C /* Helper.swift */; };
+		54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		543A108423221544004B577C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		543A108623222115004B577C /* UserDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVM.swift; sourceTree = "<group>"; };
 		543A108A23223021004B577C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.debug.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 				543A107C23211818004B577C /* UserDetailsVC.swift */,
 				543A108023213DE2004B577C /* UserDetailsTVCell.swift */,
 				543A108223213DF7004B577C /* BaseTVCell.swift */,
+				54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			files = (
 				543A108523221544004B577C /* User.swift in Sources */,
 				543A108323213DF7004B577C /* BaseTVCell.swift in Sources */,
+				54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */,
 				543A108B23223021004B577C /* Helper.swift in Sources */,
 				543A107D23211818004B577C /* UserDetailsVC.swift in Sources */,
 				543A107B23210B0D004B577C /* AddTabVC.swift in Sources */,

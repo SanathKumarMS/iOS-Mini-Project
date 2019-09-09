@@ -18,15 +18,19 @@ class LoginVC: BaseVC {
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var fbLoginButton: FBLoginButton!
     var viewModel = LoginVM()
+    var activityIndicator: SpinnerVC?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
-        super.viewDidLoad()
+        fbLoginButton.isHighlighted = false
+        fbLoginButton.showsTouchWhenHighlighted = false
     }
     
     @IBAction private func manualLogin(_ sender: Any) {
+        startActivityIndicator()
         let email = emailField.text ?? ""
         print(email.hash)
         let password = passwordField.text ?? ""
@@ -42,6 +46,9 @@ class LoginVC: BaseVC {
                     } else {
                         guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
                         self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                        DispatchQueue.main.async {
+                            self?.stopActivityIndicator()
+                        }
                     }
                 }
             } else {
@@ -50,7 +57,27 @@ class LoginVC: BaseVC {
                     self.presentAlert(title: "Error", message: "Invalid Email Entered", style: .alert, actions: [alertAction])
                 }
             }
+        } else {
+            let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
+            DispatchQueue.main.async {
+                self.presentAlert(title: "Error", message: "Email or password field empty", style: .alert, actions: [alertAction])
+            }
         }
+    }
+    
+    func startActivityIndicator() {
+        activityIndicator = SpinnerVC()
+        guard let activityIndicator = activityIndicator else { return }
+        addChild(activityIndicator)
+        activityIndicator.view.frame = view.frame
+        view.addSubview(activityIndicator.view)
+        activityIndicator.didMove(toParent: self)
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicator?.willMove(toParent: nil)
+        activityIndicator?.view.removeFromSuperview()
+        activityIndicator?.removeFromParent()
     }
 }
 
@@ -79,9 +106,17 @@ extension LoginVC: GIDSignInDelegate {
 extension LoginVC: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        viewModel.signInWithFB(result: result, error: error)
-        guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
-        self.navigationController?.pushViewController(userDetailsVC, animated: true)
+        viewModel.signInWithFB(result: result, error: error) { (msg) in
+            if msg != "nil" {
+                let alertAction = AlertAction(title: "Close", style: .cancel, handler: nil)
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                }
+            } else {
+                guard let userDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
+                self.navigationController?.pushViewController(userDetailsVC, animated: true)
+            }
+        }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {

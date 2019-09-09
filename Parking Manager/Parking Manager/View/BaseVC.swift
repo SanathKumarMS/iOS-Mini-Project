@@ -10,6 +10,7 @@ import UIKit
 
 class BaseVC: UIViewController {
 
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
     override func viewDidLoad() {
         super.viewDidLoad()
 

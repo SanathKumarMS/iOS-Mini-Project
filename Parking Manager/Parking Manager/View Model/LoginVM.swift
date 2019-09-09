@@ -25,7 +25,7 @@ class LoginVM: BaseVM {
         }
     }
     
-    func signInWithGoogle(user: GIDGoogleUser?, error: Error?, completionHandler : @escaping (String) -> Void) {
+    func signInWithGoogle(user: GIDGoogleUser?, error: Error?, completionHandler: @escaping (String) -> Void) {
         if let error = error {
             return
         }
@@ -40,19 +40,21 @@ class LoginVM: BaseVM {
             }
             completionHandler("nil")
         }
+        completionHandler("nil")
     }
     
-    func signInWithFB(result: LoginManagerLoginResult?, error: Error?) {
+    func signInWithFB(result: LoginManagerLoginResult?, error: Error?, completionHandler: @escaping (String) -> Void) {
         if let error = error {
+            completionHandler(error.localizedDescription)
             return
         }
         guard let accessToken = AccessToken.current else { return }
         FirebaseManager.shared.signInWithFB(accessToken: accessToken) { (error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return error.localizedDescription
-//            }
-//            return "nil"
+            if let error = error {
+                print(error.localizedDescription)
+                completionHandler(error.localizedDescription)
+            }
+            completionHandler("nil")
         }
     }
 //    func signOut() {

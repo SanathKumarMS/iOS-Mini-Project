@@ -32,6 +32,7 @@ class UserDetailsVC: BaseVC {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         viewModel.signOut()
     }
     
@@ -65,18 +66,18 @@ class UserDetailsVC: BaseVC {
     
     @objc func setImage() {
         var alertActions: [AlertAction] = []
-        let camera = AlertAction(title: "Camera", style: .default, handler: { (alerAction) in
+        let camera = AlertAction(title: "Camera", style: .default, handler: { (_) in
             self.imagePicker.sourceType = .camera
             self.present(self.imagePicker, animated: true, completion: nil)
         })
-        let photoLibrary = AlertAction(title: "Albums", style: .default, handler: { (alerAction) in
+        let photoLibrary = AlertAction(title: "Albums", style: .default, handler: { (_) in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         })
         let cancel = AlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
         if imageView.image != nil {
-            let delete = AlertAction(title: "Delete", style: .default, handler: { (alerAction) in
+            let delete = AlertAction(title: "Delete", style: .default, handler: { (_) in
                 self.imageView.image = UIImage(named: "Network-Profile")
             })
             alertActions.append(delete)
