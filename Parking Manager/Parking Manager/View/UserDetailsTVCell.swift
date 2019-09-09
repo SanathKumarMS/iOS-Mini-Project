@@ -12,7 +12,7 @@ protocol UserDetailTVCellDelegate {
     func addUser()
 }
 
-class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate{
+class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
 

@@ -117,6 +117,30 @@
             </objects>
             <point key="canvasLocation" x="1039.1304347826087" y="83.035714285714278"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="HHW-6c-bsz">
+            <objects>
+                <viewController id="IdC-k2-fvX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KVe-dQ-k0k">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Fjc-wx-XRh">
+                                <rect key="frame" x="189" y="430" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="bXa-6Z-EOo"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Fjc-wx-XRh" id="A2f-Zk-m8J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hXK-b3-Vnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2083" y="-669"/>
+        </scene>
         <!--User DetailsVC-->
         <scene sceneID="2MP-0X-mLK">
             <objects>

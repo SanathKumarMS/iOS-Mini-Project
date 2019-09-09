@@ -24,6 +24,7 @@ class FirebaseManager {
     let root = Database.database().reference()
     let userDetails = Database.database().reference(withPath: "UserDetails")
     let storage = Storage.storage()
+    
     typealias ErrorHandler = (Error?) -> Void
     
     // MARK: - Authentication
@@ -44,7 +45,7 @@ class FirebaseManager {
             } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
                         if error == nil {
                             print("User not present. Creating account and signing in")
-                            Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
+                            Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
                                 completionHandler(error)
                             }
                         } else {

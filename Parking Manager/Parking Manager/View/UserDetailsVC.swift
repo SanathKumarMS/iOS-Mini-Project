@@ -21,6 +21,13 @@ class UserDetailsVC: BaseVC {
     var toolBar = UIToolbar()
     var pickerTextField: UITextField?
     
+    private enum ActionTypes: String {
+        case camera = "Camera"
+        case photoLibrary = "Photo Library"
+        case cancel = "Cancel"
+        case delete = "Delete"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +37,6 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        viewModel.add(emailArg: "asdasd@gmail.com", name: "SanathL", phone: "9980869477", vehicleNumber: "KA-01 4608", vehicleType: "Car")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -93,23 +99,30 @@ class UserDetailsVC: BaseVC {
     
     @objc func setImage() {
         var alertActions: [AlertAction] = []
-        let camera = AlertAction(title: "Camera", style: .default, handler: { (_) in
-            self.imagePicker.sourceType = .camera
-            self.present(self.imagePicker, animated: true, completion: nil)
-        })
-        let photoLibrary = AlertAction(title: "Albums", style: .default, handler: { (_) in
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
-        })
-        let cancel = AlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let camera = AlertAction(title: "Camera", style: .default)
+        let photoLibrary = AlertAction(title: "Photo Library", style: .default)
+        let cancel = AlertAction(title: "Cancel", style: .cancel)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
         if imageView.image != UIImage(named: "Network-Profile") {
-            let delete = AlertAction(title: "Delete", style: .default, handler: { (_) in
-                self.imageView.image = UIImage(named: "Network-Profile")
-            })
+            let delete = AlertAction(title: "Delete", style: .default)
             alertActions.append(delete)
         }
-        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions) 
+        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions, completionHandler: { [weak self] (item) in
+            switch item.title {
+            case ActionTypes.camera.rawValue:
+                self?.imagePicker.sourceType = .camera
+                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
+            case ActionTypes.photoLibrary.rawValue:
+                self?.imagePicker.sourceType = .photoLibrary
+                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
+            case ActionTypes.cancel.rawValue:
+                return
+            case ActionTypes.delete.rawValue:
+                self?.imageView.image = UIImage(named: "Network-Profile")
+            default:
+                break
+            }
+            })
         imagePicker.allowsEditing = false
     }
 }
@@ -198,11 +211,8 @@ extension UserDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-
 extension UserDetailsVC: UserDetailTVCellDelegate {
     func addUser() {
         
     }
 }
-
-
