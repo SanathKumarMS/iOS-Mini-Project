@@ -21,8 +21,8 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         imagePicker.delegate = self
-        tableView.allowsSelection = false
         setupUI()
     }
     
@@ -36,12 +36,12 @@ class UserDetailsVC: BaseVC {
         viewModel.signOut()
     }
     
+    //TO-DO check for empty array, protocol to read data from cells, Enum
     @IBAction private func addUser(_ sender: Any) {
         var dataFromUser: [String] = []
         for index in 0...viewModel.inputDetails.count {
             if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UserDetailsTVCell {
-                print(cell.textField.text ?? "nil")
-                let data = cell.textField.text ?? "nil"
+                let data = cell.textField.text ?? ""
                 dataFromUser.append(data)
             }
         }
@@ -49,15 +49,14 @@ class UserDetailsVC: BaseVC {
     }
     
     func setupUI() {
-        //self.navigationController?.navigationBar.topItem?.title = "Parking Manager"
         self.title = "Parking Manager"
         picker.delegate = self
         picker.dataSource = self
+        picker.showsSelectionIndicator = true
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
         imageAddButton.frame = imageView.bounds
-        //imageAddButton.backgroundColor = .red
         imageAddButton.titleLabel?.text = "Add Image"
         imageAddButton.addTarget(self, action: #selector(setImage), for: .touchUpInside)
         imageView.addSubview(imageAddButton)
@@ -76,13 +75,13 @@ class UserDetailsVC: BaseVC {
         })
         let cancel = AlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
-        if imageView.image != nil {
+        if imageView.image != UIImage(named: "Network-Profile") {
             let delete = AlertAction(title: "Delete", style: .default, handler: { (_) in
                 self.imageView.image = UIImage(named: "Network-Profile")
             })
             alertActions.append(delete)
         }
-        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions)
+        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions) 
         imagePicker.allowsEditing = false
     }
 }
@@ -94,9 +93,6 @@ extension UserDetailsVC: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -113,12 +109,10 @@ extension UserDetailsVC: UITableViewDataSource {
         label.text = viewModel.inputDetails[indexPath.row] + ":"
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         label.font = UIFont.systemFont(ofSize: 12)
-        //label.backgroundColor = .red
         cell.textField.leftViewMode = .always
         cell.textField.leftView = label
-        //cell.textField.placeholder = viewModel.inputDetails[indexPath.row]
         if indexPath.row == 0 {
-            if loggedInEmailID != "" {
+            if !loggedInEmailID.isEmpty {
                 cell.textField.text = loggedInEmailID
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.backgroundColor = .lightGray
@@ -126,6 +120,7 @@ extension UserDetailsVC: UITableViewDataSource {
         }
         if indexPath.row == 3 {
             cell.textField.inputView = picker
+            cell.textField.text = "Bike"
         }
         
         return cell

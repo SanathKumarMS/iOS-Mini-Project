@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-class BaseTVCell: UITableViewCell{
+class BaseTVCell: UITableViewCell {
     
 }
