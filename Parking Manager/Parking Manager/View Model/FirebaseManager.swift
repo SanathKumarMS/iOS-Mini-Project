@@ -11,6 +11,7 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseStorage
 
 class FirebaseManager {
     
@@ -22,7 +23,7 @@ class FirebaseManager {
     
     let root = Database.database().reference()
     let userDetails = Database.database().reference(withPath: "UserDetails")
-    
+    let storage = Storage.storage()
     typealias ErrorHandler = (Error?) -> Void
     
     // MARK: - Authentication
@@ -112,5 +113,16 @@ class FirebaseManager {
     func addUser(user: User) {
         let childRef = userDetails.child(user.md5HashOfEmail)
         childRef.setValue(user.convertToJSON())
+    }
+    
+    // MARK: - Firebase Storage
+    
+    func uploadPhotoToStorage(name: String, imageData: Data?) {
+        let storageRef = storage.reference()
+        let imagesRef = storageRef.child("images")
+        let imageName = name + ".jpg"
+        let imageRef = imagesRef.child(imageName)
+        guard let imageData = imageData else { return }
+
     }
 }

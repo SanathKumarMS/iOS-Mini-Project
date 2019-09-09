@@ -8,7 +8,11 @@
 
 import UIKit
 
-class UserDetailsTVCell: BaseTVCell {
+protocol UserDetailTVCellDelegate {
+    func addUser()
+}
+
+class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate{
     
     @IBOutlet weak var textField: UITextField!
 
@@ -21,6 +25,13 @@ class UserDetailsTVCell: BaseTVCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.tag == 0 {
+            
+        }
+        return true
     }
 
 }

@@ -18,6 +18,8 @@ class UserDetailsVC: BaseVC {
     let picker = UIPickerView()
     var viewModel = UserDetailsVM()
     var loggedInEmailID: String = ""
+    var toolBar = UIToolbar()
+    var pickerTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,10 @@ class UserDetailsVC: BaseVC {
                 dataFromUser.append(data)
             }
         }
-        viewModel.addUserToDatabase(emailArg: dataFromUser[0], name: dataFromUser[1], phone: dataFromUser[2], vehicleNumber: dataFromUser[3], vehicleType: dataFromUser[4])
+        let imageData = imageView.image?.pngData()
+        if dataFromUser.count == 5 {
+            viewModel.addUserToDatabase(emailArg: dataFromUser[0], name: dataFromUser[1], phone: dataFromUser[2], vehicleNumber: dataFromUser[3], vehicleType: dataFromUser[4], imageData: imageData)
+        }
     }
     
     func setupUI() {
@@ -53,6 +58,26 @@ class UserDetailsVC: BaseVC {
         picker.delegate = self
         picker.dataSource = self
         picker.showsSelectionIndicator = true
+        loggedInEmailID = viewModel.getCurrentUsersEmail()
+        setUpPicker()
+        makeCircularImageView()
+    }
+    
+    func setUpPicker() {
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePicker))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+    }
+    
+    func makeCircularImageView() {
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
@@ -60,7 +85,10 @@ class UserDetailsVC: BaseVC {
         imageAddButton.titleLabel?.text = "Add Image"
         imageAddButton.addTarget(self, action: #selector(setImage), for: .touchUpInside)
         imageView.addSubview(imageAddButton)
-        loggedInEmailID = viewModel.getCurrentUsersEmail()
+    }
+    
+    @objc func donePicker() {
+        pickerTextField?.resignFirstResponder()
     }
     
     @objc func setImage() {
@@ -119,8 +147,10 @@ extension UserDetailsVC: UITableViewDataSource {
             }
         }
         if indexPath.row == 3 {
+            pickerTextField = cell.textField
             cell.textField.inputView = picker
             cell.textField.text = "Bike"
+            cell.textField.inputAccessoryView = toolBar
         }
         
         return cell
@@ -167,3 +197,12 @@ extension UserDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
 }
+
+
+extension UserDetailsVC: UserDetailTVCellDelegate {
+    func addUser() {
+        
+    }
+}
+
+

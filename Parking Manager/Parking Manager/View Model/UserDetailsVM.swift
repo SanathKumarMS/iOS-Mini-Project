@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDetailsVM: BaseVM {
     
@@ -14,11 +15,12 @@ class UserDetailsVM: BaseVM {
     let inputDetails = ["Email", "Name", "Phone", "Vehicle Type", "Vehicle No"]
     let vehicleTypes = ["Bike", "Car"]
     
-    func addUserToDatabase(emailArg: String, name: String, phone: String, vehicleNumber: String, vehicleType: String) {
+    func addUserToDatabase(emailArg: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?) {
         let email = FirebaseManager.shared.getLoggedInUserEmail()
         let md5Data = Helper.MD5(string: email)
         let md5Hex = md5Data.map { String(format: "%02hhx", $0) }.joined()
         print(md5Hex)
+        FirebaseManager.shared.uploadPhotoToStorage(name: name, imageData: imageData)
         let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: md5Hex)
         FirebaseManager.shared.addUser(user: user)
     }
