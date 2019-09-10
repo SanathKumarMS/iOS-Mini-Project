@@ -50,7 +50,7 @@ class FirebaseManager {
                             }
                         } else {
                     }
-                }
+            }
             }
         }
     }
@@ -124,6 +124,25 @@ class FirebaseManager {
         let imageName = name + ".jpg"
         let imageRef = imagesRef.child(imageName)
         guard let imageData = imageData else { return }
-
+        
+        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            let size = metadata.size
+            // You can also access to download URL after upload.
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+            }
+        }
     }
 }
