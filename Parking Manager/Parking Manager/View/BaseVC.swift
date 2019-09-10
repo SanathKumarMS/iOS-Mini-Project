@@ -9,22 +9,43 @@
 import UIKit
 
 class BaseVC: UIViewController {
-
+    
+    var spinnerVC: SpinnerVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // Creates an Activity Indicator
+    func startSpin() {
+        spinnerVC = SpinnerVC()
+        guard let spinnerVC = spinnerVC else { return }
+        
+        addChild(spinnerVC)
+        spinnerVC.view.frame = view.frame
+        view.addSubview(spinnerVC.view)
+        spinnerVC.didMove(toParent: self)
     }
-    */
 
+    func stopSpin() {
+        spinnerVC?.willMove(toParent: nil)
+        spinnerVC?.view.removeFromSuperview()
+        spinnerVC?.removeFromParent()
+    }
+    
+    func presentAlert(title: String, message: String, style: UIAlertController.Style, actions: [AlertAction], completionHandler: ((AlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        for item in actions {
+            alertController.addAction(UIAlertAction(title: item.title, style: item.style, handler: { (alertAction) in
+                completionHandler?(item)
+            }))
+        }
+        present(alertController, animated: true, completion: nil)
+    }
+
+}
+
+struct AlertAction {
+    var title: String
+    var style: UIAlertAction.Style
 }
