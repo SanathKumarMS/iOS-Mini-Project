@@ -42,7 +42,6 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel.signOut()
     }
     
     @IBAction private func addUser(_ sender: Any) {

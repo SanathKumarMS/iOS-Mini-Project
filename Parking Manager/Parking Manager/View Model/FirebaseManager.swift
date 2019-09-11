@@ -114,14 +114,7 @@ class FirebaseManager {
                 return
             }
             print(details)
-            let email = details["email"] as? String ?? ""
-            let name = details["name"] as? String ?? ""
-            let phone = details["phone"] as? String ?? ""
-            let vehicleType = details["vehicleType"] as? String ?? ""
-            let vehicleNumber = details["vehicleNumber"] as? String ?? ""
-            let profilePicturePath = details["profilePicturePath"] as? String ?? ""
-            let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: key, profilePicturePath: profilePicturePath)
-            completionHandler(user)
+            completionHandler(details as? [String : String])
         })
     }
     
@@ -158,6 +151,25 @@ class FirebaseManager {
         let imageRef = imagesRef.child(imageName)
         imageRef.delete(completion: { (error) in
             completionHandler(error)
+        })
+    }
+    
+    //Download Image from Storage
+    func downloadImageFromStorage(name: String, completionHandler: @escaping GetImageCompletionHandler) {
+        let storageRef = storage.reference()
+        let imagesRef = storageRef.child("images")
+        let imageName = name + ".jpg"
+        let imageRef = imagesRef.child(imageName)
+        imageRef.getData(maxSize: 30 * 1024 * 1024, completion: { (data, error) in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            guard let data = data else {
+                completionHandler(nil, nil)
+                return
+            }
+            completionHandler(data, nil)
         })
     }
 }

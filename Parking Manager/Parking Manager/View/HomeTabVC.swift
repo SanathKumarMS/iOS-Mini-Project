@@ -14,6 +14,7 @@ class HomeTabVC: BaseVC {
     @IBOutlet weak var updateDetailsButton: UIButton!
     @IBOutlet private weak var homeTableView: UITableView!
     private var viewModel = HomeTabVM()
+    private var loggedInEmailID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,16 @@ class HomeTabVC: BaseVC {
     }
     
     func setupUI() {
-        print(profilePictureButton.bounds.size.width / 2)
+        loggedInEmailID = viewModel.getCurrentUsersEmail()
         profilePictureButton.layer.cornerRadius = profilePictureButton.bounds.size.width / 2
         profilePictureButton.clipsToBounds = true
-        viewModel.getLoggedInUserDetails()
+        profilePictureButton.showsTouchWhenHighlighted = false
+        viewModel.getLoggedInUserDetails { [weak self] (success, image) in
+            if success == true {
+                self?.homeTableView.reloadData()
+                self?.profilePictureButton.setImage(image, for: .normal)
+            }
+        }
     }
 
 }
@@ -50,7 +57,8 @@ extension HomeTabVC: UITableViewDataSource {
         cell.displayTextField.tag = indexPath.row
         cell.detailLabel.text = UserDetails.allCases[indexPath.row].title + ":"
         cell.detailLabel.font = UIFont.systemFont(ofSize: 12)
-        cell.displayTextField.text = viewModel.currentUser?.email
+        cell.displayTextField.isUserInteractionEnabled = false
+        cell.displayTextField.text = viewModel.dict[UserDetailsFromStructure.allCases[indexPath.row].rawValue]
         return cell
     }
 }
