@@ -18,6 +18,10 @@
 		54187631231FEAB4005893B3 /* BaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187630231FEAB4005893B3 /* BaseVM.swift */; };
 		54187633231FEAE4005893B3 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187632231FEAE4005893B3 /* LoginVM.swift */; };
 		541876362320DD77005893B3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541876352320DD76005893B3 /* Extension+String.swift */; };
+		54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E7F2328EE30004AAC5B /* TabBarVC.swift */; };
+		54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E812328F78E004AAC5B /* HomeTabVC.swift */; };
+		54190E842328FD96004AAC5B /* HomeTabTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E832328FD96004AAC5B /* HomeTabTVCell.swift */; };
+		54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E852329099C004AAC5B /* HomeTabVM.swift */; };
 		543A107B23210B0D004B577C /* AddTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107A23210B0D004B577C /* AddTabVC.swift */; };
 		543A107D23211818004B577C /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107C23211818004B577C /* UserDetailsVC.swift */; };
 		543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108023213DE2004B577C /* UserDetailsTVCell.swift */; };
@@ -45,6 +49,10 @@
 		54187630231FEAB4005893B3 /* BaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVM.swift; sourceTree = "<group>"; };
 		54187632231FEAE4005893B3 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		541876352320DD76005893B3 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		54190E7F2328EE30004AAC5B /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		54190E812328F78E004AAC5B /* HomeTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabVC.swift; sourceTree = "<group>"; };
+		54190E832328FD96004AAC5B /* HomeTabTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabTVCell.swift; sourceTree = "<group>"; };
+		54190E852329099C004AAC5B /* HomeTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabVM.swift; sourceTree = "<group>"; };
 		543A107A23210B0D004B577C /* AddTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabVC.swift; sourceTree = "<group>"; };
 		543A107C23211818004B577C /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		543A108023213DE2004B577C /* UserDetailsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsTVCell.swift; sourceTree = "<group>"; };
@@ -132,6 +140,9 @@
 				543A108023213DE2004B577C /* UserDetailsTVCell.swift */,
 				543A108223213DF7004B577C /* BaseTVCell.swift */,
 				54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */,
+				54190E7F2328EE30004AAC5B /* TabBarVC.swift */,
+				54190E812328F78E004AAC5B /* HomeTabVC.swift */,
+				54190E832328FD96004AAC5B /* HomeTabTVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +154,7 @@
 				54187630231FEAB4005893B3 /* BaseVM.swift */,
 				54187632231FEAE4005893B3 /* LoginVM.swift */,
 				543A108623222115004B577C /* UserDetailsVM.swift */,
+				54190E852329099C004AAC5B /* HomeTabVM.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -341,7 +353,11 @@
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
 				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,
+				54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */,
+				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
+				54190E842328FD96004AAC5B /* HomeTabTVCell.swift in Sources */,
+				54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
 				543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */,
 			);

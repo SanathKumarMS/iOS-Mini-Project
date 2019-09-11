@@ -54,22 +54,23 @@ class UserDetailsVC: BaseVC {
             if imageView.image != UIImage(named: defaultProfilePhoto) {
                 imageData = imageView.image?.pngData()
             }
-            viewModel.addUserToDatabase(email: loggedInEmailID, name: name, phone: phone, vehicleNumber: vehicleNumber, vehicleType: vehicleType, imageData: imageData, completionHandler: { (message) in
+            viewModel.addUserToDatabase(email: loggedInEmailID, name: name, phone: phone, vehicleNumber: vehicleNumber, vehicleType: vehicleType, imageData: imageData, completionHandler: { [weak self] (message) in
                 guard let message = message else { return }
 
                 if message == successMessage {
-                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                    self.presentAlert(title: AlertTitles.success, message: "", style: .alert, actions: [alertAction])
+//                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+//                    self?.presentAlert(title: AlertTitles.success, message: "", style: .alert, actions: [alertAction])
+                    guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+                    self?.present(tabBarVC, animated: true, completion: nil)
                 } else {
                     let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                    self.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
                 }
             })
         }
     }
     
     func setupUI() {
-        self.title = projectName
         imagePicker.delegate = self
         loggedInEmailID = viewModel.getCurrentUsersEmail()
         makeCircularImageView()

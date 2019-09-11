@@ -12,6 +12,7 @@ typealias ErrorHandler = (Error?) -> Void
 typealias ImageHandler = (URL?, Error?) -> Void
 typealias StringCompletionHandler = (String?) -> Void
 typealias FBCompletionHandler = (String?, Bool) -> Void
+typealias GetUserDetailsCompletionHandler = (User?) -> Void
 
 let projectName = "Parking Manager"
 let defaultProfilePhoto = "Network-Profile"

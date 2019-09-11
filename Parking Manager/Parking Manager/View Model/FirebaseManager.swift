@@ -107,6 +107,24 @@ class FirebaseManager {
         childRef.setValue(user.convertToJSON())
     }
     
+    func getUserDetails(key: String, completionHandler: @escaping GetUserDetailsCompletionHandler) {
+        userDetails.child(key).observe(.value, with: { (snapshot) in
+            guard let details = snapshot.value as? [String: Any] else {
+                completionHandler(nil)
+                return
+            }
+            print(details)
+            let email = details["email"] as? String ?? ""
+            let name = details["name"] as? String ?? ""
+            let phone = details["phone"] as? String ?? ""
+            let vehicleType = details["vehicleType"] as? String ?? ""
+            let vehicleNumber = details["vehicleNumber"] as? String ?? ""
+            let profilePicturePath = details["profilePicturePath"] as? String ?? ""
+            let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: key, profilePicturePath: profilePicturePath)
+            completionHandler(user)
+        })
+    }
+    
     // MARK: - Firebase Storage
     
     //Upload Profile picture to Firebase Storage and get its download URL
@@ -132,6 +150,7 @@ class FirebaseManager {
         }
     }
     
+    //Delete Image from Storage
     func deleteImageFromStorage(name: String, completionHandler: @escaping ErrorHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
