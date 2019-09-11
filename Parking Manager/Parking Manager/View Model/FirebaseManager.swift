@@ -113,7 +113,6 @@ class FirebaseManager {
                 completionHandler(nil)
                 return
             }
-            print(details)
             completionHandler(details as? [String : String])
         })
     }

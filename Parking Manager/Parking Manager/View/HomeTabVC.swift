@@ -14,7 +14,6 @@ class HomeTabVC: BaseVC {
     @IBOutlet weak var updateDetailsButton: UIButton!
     @IBOutlet private weak var homeTableView: UITableView!
     private var viewModel = HomeTabVM()
-    private var loggedInEmailID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,6 @@ class HomeTabVC: BaseVC {
     }
     
     func setupUI() {
-        loggedInEmailID = viewModel.getCurrentUsersEmail()
         profilePictureButton.layer.cornerRadius = profilePictureButton.bounds.size.width / 2
         profilePictureButton.clipsToBounds = true
         profilePictureButton.showsTouchWhenHighlighted = false
