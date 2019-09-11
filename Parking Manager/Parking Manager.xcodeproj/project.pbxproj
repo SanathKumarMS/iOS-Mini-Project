@@ -26,6 +26,7 @@
 		543A108723222115004B577C /* UserDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108623222115004B577C /* UserDetailsVM.swift */; };
 		543A108B23223021004B577C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108A23223021004B577C /* Helper.swift */; };
 		54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */; };
+		54A0D066232783D600A3DBA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D065232783D600A3DBA9 /* Constants.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		543A108623222115004B577C /* UserDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVM.swift; sourceTree = "<group>"; };
 		543A108A23223021004B577C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
+		54A0D065232783D600A3DBA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE919277A06B456D57268FF7 /* Pods-Parking Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking Manager.debug.xcconfig"; path = "Target Support Files/Pods-Parking Manager/Pods-Parking Manager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 		5418760D231E3A2C005893B3 /* Parking Manager */ = {
 			isa = PBXGroup;
 			children = (
+				54A0D064232770F000A3DBA9 /* Helper */,
 				54187624231E4F27005893B3 /* Model */,
 				54187625231E4F2C005893B3 /* View */,
 				54187626231E4F32005893B3 /* View Model */,
@@ -140,9 +143,17 @@
 				54187630231FEAB4005893B3 /* BaseVM.swift */,
 				54187632231FEAE4005893B3 /* LoginVM.swift */,
 				543A108623222115004B577C /* UserDetailsVM.swift */,
-				543A108A23223021004B577C /* Helper.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		54A0D064232770F000A3DBA9 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				543A108A23223021004B577C /* Helper.swift */,
+				54A0D065232783D600A3DBA9 /* Constants.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		EE30F31D0A5A8123CA25DD2B /* Pods */ = {
@@ -324,6 +335,7 @@
 				543A107D23211818004B577C /* UserDetailsVC.swift in Sources */,
 				543A107B23210B0D004B577C /* AddTabVC.swift in Sources */,
 				543A108723222115004B577C /* UserDetailsVM.swift in Sources */,
+				54A0D066232783D600A3DBA9 /* Constants.swift in Sources */,
 				54187633231FEAE4005893B3 /* LoginVM.swift in Sources */,
 				541876362320DD77005893B3 /* Extension+String.swift in Sources */,
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,

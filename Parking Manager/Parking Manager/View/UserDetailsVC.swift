@@ -9,19 +9,18 @@
 import UIKit
 
 class UserDetailsVC: BaseVC {
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addButton: UIButton!
-    let imagePicker = UIImagePickerController()
-    let imageAddButton = UIButton()
-    let picker = UIPickerView()
-    var viewModel = UserDetailsVM()
-    var loggedInEmailID: String = ""
-    var toolBar = UIToolbar()
-    var pickerTextField: UITextField?
     
-    private enum ActionTypes: String {
+    @IBOutlet private weak var imageViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var addButton: UIButton!
+    private let imagePicker = UIImagePickerController()
+    private let imageAddButton = UIButton()
+    private var viewModel = UserDetailsVM()
+    private var loggedInEmailID: String = ""
+    private var userData: [String: String] = [:]
+    
+    private enum ImagePickerActionTypes: String {
         case camera = "Camera"
         case photoLibrary = "Photo Library"
         case cancel = "Cancel"
@@ -30,8 +29,10 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePicker.delegate = self
+        print(UIScreen.main.bounds.height)
+        if UIScreen.main.bounds.height <= 568 {
+            imageViewTopConstraint.constant = 70
+        }
         setupUI()
     }
     
@@ -44,85 +45,70 @@ class UserDetailsVC: BaseVC {
         viewModel.signOut()
     }
     
-    //TO-DO check for empty array, protocol to read data from cells, Enum
     @IBAction private func addUser(_ sender: Any) {
-        var dataFromUser: [String] = []
-        for index in 0...viewModel.inputDetails.count {
-            if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UserDetailsTVCell {
-                let data = cell.textField.text ?? ""
-                dataFromUser.append(data)
+        if userData.count == UserDetails.allCases.count - 1 {
+            guard let name = userData[UserDetails.name.title], let phone = userData[UserDetails.phone.title], let vehicleNumber = userData[UserDetails.vehicleNumber.title], let vehicleType = userData[UserDetails.vehicleType.title] else {
+                return
             }
-        }
-        let imageData = imageView.image?.pngData()
-        if dataFromUser.count == 5 {
-            viewModel.addUserToDatabase(emailArg: dataFromUser[0], name: dataFromUser[1], phone: dataFromUser[2], vehicleNumber: dataFromUser[3], vehicleType: dataFromUser[4], imageData: imageData)
+            var imageData: Data?
+            if imageView.image != UIImage(named: defaultProfilePhoto) {
+                imageData = imageView.image?.pngData()
+            }
+            viewModel.addUserToDatabase(email: loggedInEmailID, name: name, phone: phone, vehicleNumber: vehicleNumber, vehicleType: vehicleType, imageData: imageData, completionHandler: { (message) in
+                guard let message = message else { return }
+
+                if message == successMessage {
+                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                    self.presentAlert(title: AlertTitles.success, message: "", style: .alert, actions: [alertAction])
+                } else {
+                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                    self.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                }
+            })
         }
     }
     
     func setupUI() {
-        self.title = "Parking Manager"
-        picker.delegate = self
-        picker.dataSource = self
-        picker.showsSelectionIndicator = true
+        self.title = projectName
+        imagePicker.delegate = self
         loggedInEmailID = viewModel.getCurrentUsersEmail()
-        setUpPicker()
         makeCircularImageView()
     }
     
-    func setUpPicker() {
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1)
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePicker))
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-    }
-    
     func makeCircularImageView() {
-        imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
         imageView.clipsToBounds = true
         imageAddButton.frame = imageView.bounds
-        imageAddButton.titleLabel?.text = "Add Image"
         imageAddButton.addTarget(self, action: #selector(setImage), for: .touchUpInside)
         imageView.addSubview(imageAddButton)
     }
-    
-    @objc func donePicker() {
-        pickerTextField?.resignFirstResponder()
-    }
-    
+
     @objc func setImage() {
         var alertActions: [AlertAction] = []
-        let camera = AlertAction(title: "Camera", style: .default)
-        let photoLibrary = AlertAction(title: "Photo Library", style: .default)
-        let cancel = AlertAction(title: "Cancel", style: .cancel)
+        let camera = AlertAction(title: ImagePickerActionTypes.camera.rawValue, style: .default)
+        let photoLibrary = AlertAction(title: ImagePickerActionTypes.photoLibrary.rawValue, style: .default)
+        let cancel = AlertAction(title: ImagePickerActionTypes.cancel.rawValue, style: .cancel)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
-        if imageView.image != UIImage(named: "Network-Profile") {
-            let delete = AlertAction(title: "Delete", style: .default)
+        if imageView.image != UIImage(named: defaultProfilePhoto) {
+            let delete = AlertAction(title: ImagePickerActionTypes.delete.rawValue, style: .default)
             alertActions.append(delete)
         }
-        presentAlert(title: "Profile Photo", message: "Choose your action", style: .actionSheet, actions: alertActions, completionHandler: { [weak self] (item) in
+        presentAlert(title: AlertTitles.profilePhoto, message: AlertMessages.chooseYourAction, style: .actionSheet, actions: alertActions, completionHandler: { [weak self] (item) in
             switch item.title {
-            case ActionTypes.camera.rawValue:
+            case ImagePickerActionTypes.camera.rawValue:
                 self?.imagePicker.sourceType = .camera
                 self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
-            case ActionTypes.photoLibrary.rawValue:
+            case ImagePickerActionTypes.photoLibrary.rawValue:
                 self?.imagePicker.sourceType = .photoLibrary
                 self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
-            case ActionTypes.cancel.rawValue:
+            case ImagePickerActionTypes.cancel.rawValue:
                 return
-            case ActionTypes.delete.rawValue:
-                self?.imageView.image = UIImage(named: "Network-Profile")
+            case ImagePickerActionTypes.delete.rawValue:
+                self?.imageView.image = UIImage(named: defaultProfilePhoto)
             default:
-                break
+                return
             }
-            })
+        })
         imagePicker.allowsEditing = false
     }
 }
@@ -140,32 +126,27 @@ extension UserDetailsVC: UITableViewDelegate {
 
 extension UserDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.inputDetails.count
+        return UserDetails.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserDetailsTVCell.self)) as? UserDetailsTVCell else { return UserDetailsTVCell() }
-        cell.tag = indexPath.row
-        let label = UILabel()
-        label.text = viewModel.inputDetails[indexPath.row] + ":"
-        label.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        label.font = UIFont.systemFont(ofSize: 12)
-        cell.textField.leftViewMode = .always
-        cell.textField.leftView = label
-        if indexPath.row == 0 {
+        cell.textField.tag = indexPath.row
+        cell.label.text = UserDetails.allCases[indexPath.row].title + ":"
+        cell.label.font = UIFont.systemFont(ofSize: 12)
+        cell.userDetailsCellDelegate = self
+        switch indexPath.row {
+        case UserDetails.email.rawValue:
             if !loggedInEmailID.isEmpty {
                 cell.textField.text = loggedInEmailID
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.backgroundColor = .lightGray
             }
+        case UserDetails.vehicleType.rawValue:
+            cell.addPickerToTextField()
+        default:
+            break
         }
-        if indexPath.row == 3 {
-            pickerTextField = cell.textField
-            cell.textField.inputView = picker
-            cell.textField.text = "Bike"
-            cell.textField.inputAccessoryView = toolBar
-        }
-        
         return cell
     }
 }
@@ -187,32 +168,14 @@ extension UserDetailsVC: UIImagePickerControllerDelegate, UINavigationController
     }
 }
 
-// MARK: - UIPickerViewDelegate
-
-extension UserDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.vehicleTypes.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return viewModel.vehicleTypes[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if let cell = tableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? UserDetailsTVCell {
-            cell.textField.text = viewModel.vehicleTypes[row]
-            cell.textField.endEditing(true)
-        }
-    }
-}
+// MARK: - UserDetailTVCellDelegate
 
 extension UserDetailsVC: UserDetailTVCellDelegate {
-    func addUser() {
-        
+    
+    func addUser(tag: Int, text: String) {
+        let key = UserDetails(rawValue: tag)?.title
+        guard let field = key else { return }
+        userData[field] = text
     }
+    
 }
