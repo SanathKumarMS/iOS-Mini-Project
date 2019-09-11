@@ -9,20 +9,65 @@
 import Foundation
 import UIKit
 
+enum VehicleTypes: String, CaseIterable {
+    case bike = "Bike"
+    case car = "Car"
+}
+
+enum UserDetails: Int, CaseIterable {
+    case email
+    case name
+    case phone
+    case vehicleType
+    case vehicleNumber
+    
+    var title: String {
+        switch self {
+        case .email:
+            return "Email"
+        case .name:
+            return "Name"
+        case .phone:
+            return "Phone"
+        case .vehicleType:
+            return "Vehicle Type"
+        case .vehicleNumber:
+            return "Vehicle No"
+        }
+    }
+}
+
 class UserDetailsVM: BaseVM {
     
     var users: [User] = []
-    let inputDetails = ["Email", "Name", "Phone", "Vehicle Type", "Vehicle No"]
-    let vehicleTypes = ["Bike", "Car"]
     
-    func addUserToDatabase(emailArg: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?) {
-        let email = FirebaseManager.shared.getLoggedInUserEmail()
+    func addUserToDatabase(email: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?, completionHandler: @escaping StringCompletionHandler) {
         let md5Data = Helper.MD5(string: email)
         let md5Hex = md5Data.map { String(format: "%02hhx", $0) }.joined()
-        print(md5Hex)
-        FirebaseManager.shared.uploadPhotoToStorage(name: name, imageData: imageData)
-        let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: md5Hex)
-        FirebaseManager.shared.addUser(user: user)
+        if let imageData = imageData {
+            FirebaseManager.shared.uploadImageToStorage(name: md5Hex, imageData: imageData, completionHandler: { (downloadURL, error) in
+                if let error = error {
+                    completionHandler(error.localizedDescription)
+                    return
+                }
+                guard let downloadURL = downloadURL else {
+                    completionHandler(defaultErrorMessage)
+                    return
+                }
+                
+                let path = downloadURL.absoluteString
+                let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: md5Hex, profilePicturePath: path)
+                FirebaseManager.shared.addUser(user: user)
+                completionHandler(successMessage)
+            })
+        } else {
+            FirebaseManager.shared.deleteImageFromStorage(name: md5Hex, completionHandler: { (error) in
+                completionHandler(error?.localizedDescription)
+            })
+            let user = User(email: email, name: name, phone: phone, vehicleType: vehicleType, vehicleNumber: vehicleNumber, md5HashOfEmail: md5Hex, profilePicturePath: "")
+            FirebaseManager.shared.addUser(user: user)
+            completionHandler(successMessage)
+        }
     }
     
     func getCurrentUsersEmail() -> String {

@@ -13,11 +13,11 @@ import FBSDKLoginKit
 
 class LoginVC: BaseVC {
 
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var googleLoginButton: GIDSignInButton!
-    @IBOutlet weak var fbLoginButton: FBLoginButton!
-    var viewModel = LoginVM()
+    @IBOutlet private weak var emailField: UITextField!
+    @IBOutlet private weak var passwordField: UITextField!
+    @IBOutlet private weak var googleLoginButton: GIDSignInButton!
+    @IBOutlet private weak var fbLoginButton: FBLoginButton!
+    private var viewModel = LoginVM()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,33 +37,31 @@ class LoginVC: BaseVC {
         startSpin()
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
-        // TO-DO - Remove print, guard, one line after guard
         if email.isEmpty == false && password.isEmpty == false {
             if email.isValidEmail() == true {
                 viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
                     if let msg = msg {
-                        let alertAction = AlertAction(title: "Close", style: .cancel)
+                        let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                         self?.stopSpin()
-                        self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                        self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
                     } else {
                         self?.stopSpin()
-                        guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
-                        
+                        guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                         self?.navigationController?.pushViewController(userDetailsVC, animated: true)
                     }
                 }
             } else {
-                let alertAction = AlertAction(title: "Close", style: .cancel)
+                let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                 self.stopSpin()
                 DispatchQueue.main.async {
-                    self.presentAlert(title: "Error", message: "Invalid Email Entered", style: .alert, actions: [alertAction])
+                    self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidEmail, style: .alert, actions: [alertAction])
                 }
             }
         } else {
-            let alertAction = AlertAction(title: "Close", style: .cancel)
+            let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
             DispatchQueue.main.async {
                 self.stopSpin()
-                self.presentAlert(title: "Error", message: "Email or password field empty", style: .alert, actions: [alertAction])
+                self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyField, style: .alert, actions: [alertAction])
             }
         }
     }
@@ -77,16 +75,16 @@ extension LoginVC: GIDSignInDelegate {
         startSpin()
         viewModel.signInWithGoogle(user: user, error: error) { [weak self] (msg) in
             if let msg = msg {
-                if msg != "The operation couldn’t be completed. (org.openid.appauth.general error -3.)" {
-                    let alertAction = AlertAction(title: "Close", style: .cancel)
-                    self?.stopSpin()
-                    self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                //For Handling Cancel in Google Sign in
+                self?.stopSpin()
+                if msg != AlertMessages.googleCancel {
+                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                    self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
                 }
-                self?.stopSpin()
             } else {
-                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
-                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
                 self?.stopSpin()
+                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
+                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }
         }
     }
@@ -98,19 +96,19 @@ extension LoginVC: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         startSpin()
-        viewModel.signInWithFB(result: result, error: error) { [weak self] (msg) in
-            if let msg = msg {
-                if msg == "Cancel" {
+        viewModel.signInWithFB(result: result, error: error) { [weak self] (msg, success) in
+            if !success {
+                guard let msg = msg else {
                     self?.stopSpin()
-                } else {
-                let alertAction = AlertAction(title: "Close", style: .cancel)
-                self?.stopSpin()
-                    self?.presentAlert(title: "Error", message: msg, style: .alert, actions: [alertAction])
+                    return
                 }
-            } else {
-                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailsVC") as? UserDetailsVC else { return }
-                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                 self?.stopSpin()
+                self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
+            } else {
+                self?.stopSpin()
+                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
+                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }
         }
     }

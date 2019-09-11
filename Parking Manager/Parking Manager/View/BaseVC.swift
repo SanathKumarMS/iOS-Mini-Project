@@ -36,7 +36,7 @@ class BaseVC: UIViewController {
     func presentAlert(title: String, message: String, style: UIAlertController.Style, actions: [AlertAction], completionHandler: ((AlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         for item in actions {
-            alertController.addAction(UIAlertAction(title: item.title, style: item.style, handler: { (alertAction) in
+            alertController.addAction(UIAlertAction(title: item.title, style: item.style, handler: { (_) in
                 completionHandler?(item)
             }))
         }

@@ -15,6 +15,7 @@ struct User {
     var vehicleType: String
     var vehicleNumber: String
     var md5HashOfEmail: String
+    var profilePicturePath: String
     
     func convertToJSON() -> [String: String] {
         var dict = [String: String]()
@@ -23,6 +24,7 @@ struct User {
         dict["phone"] = phone
         dict["vehicleType"] = vehicleType
         dict["vehicleNumber"] = vehicleNumber
+        dict["profilePicturePath"] = profilePicturePath
         return dict
     }
 }
