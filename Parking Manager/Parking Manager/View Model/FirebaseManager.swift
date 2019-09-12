@@ -107,6 +107,7 @@ class FirebaseManager {
         childRef.setValue(user.convertToJSON())
     }
     
+    //Get Details of a User Having Key as key
     func getUserDetails(key: String, completionHandler: @escaping GetUserDetailsCompletionHandler) {
         userDetails.child(key).observe(.value, with: { (snapshot) in
             guard let details = snapshot.value as? [String: Any] else {
@@ -114,6 +115,20 @@ class FirebaseManager {
                 return
             }
             completionHandler(details as? [String : String])
+        })
+    }
+    
+    func getAllUsersDetails(completionHandler: @escaping GetAllUserDetailsCompletionHandler) {
+        userDetails.observe(.value, with: { (snapshot) in
+            guard let details = snapshot.value as? [String: Any] else {
+                completionHandler(nil)
+                return
+            }
+//            for item in details {
+//                print(item.key)
+//                print(item.value)
+//            }
+            completionHandler(details)
         })
     }
     

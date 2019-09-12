@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View/LoginVC.swift"
-            timestampString = "589980392.5053"
+            timestampString = "589994338.407112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/FirebaseManager.swift"
-            timestampString = "589980392.505518"
+            timestampString = "589994338.407338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "getUserDetails(key:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -58,11 +58,11 @@
                   moduleName = "Parking Manager"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sanathkumarms/Documents/iOS-Mini-Project/Parking%20Manager/Parking%20Manager/View%20Model/FirebaseManager.swift"
-                  timestampString = "589979054.860629"
+                  timestampString = "589993543.695456"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
                   offsetFromSymbolStart = "52">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "Parking Manager"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sanathkumarms/Documents/iOS-Mini-Project/Parking%20Manager/Parking%20Manager/View%20Model/FirebaseManager.swift"
-                  timestampString = "589979054.8621939"
+                  timestampString = "589993543.6981061"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
                   offsetFromSymbolStart = "172">
                </Location>
             </Locations>
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/HomeTabVM.swift"
-            timestampString = "589980392.505639"
+            timestampString = "589994338.407462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/HomeTabVM.swift"
-            timestampString = "589980392.5057321"
+            timestampString = "589994338.407555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/FirebaseManager.swift"
-            timestampString = "589980392.50582"
+            timestampString = "589994338.407645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "downloadImageFromStorage(name:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/HomeTabVM.swift"
-            timestampString = "589980392.505898"
+            timestampString = "589994338.407732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/HomeTabVM.swift"
-            timestampString = "589980392.505971"
+            timestampString = "589994338.407809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/FirebaseManager.swift"
-            timestampString = "589980392.506038"
+            timestampString = "589994338.4078799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "getUserDetails(key:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/FirebaseManager.swift"
-            timestampString = "589980392.5061001"
+            timestampString = "589994338.4079551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
@@ -201,24 +201,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parking Manager/View Model/HomeTabVM.swift"
-            timestampString = "589980392.506161"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "getLoggedInUserDetails(completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Parking Manager/View Model/FirebaseManager.swift"
-            timestampString = "589980392.506223"
+            timestampString = "589994338.40811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -234,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View/HomeTabVC.swift"
-            timestampString = "589980392.5062881"
+            timestampString = "589994338.408196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -250,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View/UserDetailsVC.swift"
-            timestampString = "589980392.506351"
+            timestampString = "589994338.4082609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "addUser(tag:text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View/HomeTabVC.swift"
-            timestampString = "589980392.506783"
+            timestampString = "589994338.408327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -282,7 +266,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Parking Manager/View/UserDetailsVC.swift"
-            timestampString = "589980392.506843"
+            timestampString = "589994338.408378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Manager/View/UserDetailsVC.swift"
+            timestampString = "589994338.408434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -297,13 +297,109 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Parking Manager/View/UserDetailsVC.swift"
-            timestampString = "589980392.5071191"
+            filePath = "Parking Manager/View/SearchTabVC.swift"
+            timestampString = "589994338.408492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Manager/View/SearchTabVC.swift"
+            timestampString = "589994338.408884"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "searchBar(_:textDidChange:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Parking_Manager.SearchTabVC.searchBar(_: __C.UISearchBar, textDidChange: Swift.String) -&gt; ()"
+                  moduleName = "Parking Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sanathkumarms/Documents/iOS-Mini-Project/Parking%20Manager/Parking%20Manager/View/SearchTabVC.swift"
+                  timestampString = "589993543.778807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Parking_Manager.User) -&gt; Swift.Bool in Parking_Manager.SearchTabVC.searchBar(_: __C.UISearchBar, textDidChange: Swift.String) -&gt; ()"
+                  moduleName = "Parking Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sanathkumarms/Documents/iOS-Mini-Project/Parking%20Manager/Parking%20Manager/View/SearchTabVC.swift"
+                  timestampString = "589993543.780471"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "158">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Manager/View/SearchTabVC.swift"
+            timestampString = "589994338.409147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "numberOfSections(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Manager/View/SearchTabVC.swift"
+            timestampString = "589994338.4094141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Manager/View/SearchTabVC.swift"
+            timestampString = "589994338.409655"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

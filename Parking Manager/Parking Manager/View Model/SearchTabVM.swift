@@ -9,5 +9,32 @@
 import UIKit
 
 class SearchTabVM: BaseVM {
-
+    
+    var allUsers: [User] = []
+    
+    func getAllUsersData() {
+        FirebaseManager.shared.getAllUsersDetails(completionHandler: { [weak self] (details) in
+            guard let details = details else {
+                return
+            }
+            
+            for item in details {
+                let hashedKey = item.key
+                guard let dict = item.value as? [String: String] else {
+                    return
+                }
+                
+                let email = dict[UserDetailsFromStructure.email.rawValue]
+                let name = dict[UserDetailsFromStructure.name.rawValue]
+                let phone = dict[UserDetailsFromStructure.phone.rawValue]
+                let vehicleNumber = dict[UserDetailsFromStructure.vehicleNumber.rawValue]
+                let vehicleType = dict[UserDetailsFromStructure.vehicleType.rawValue]
+                let profilePicturePath = dict[UserDetailsFromStructure.profilePicturePath.rawValue]
+                
+                let user = User(email: email ?? EmptyString, name: name ?? EmptyString, phone: phone ?? EmptyString, vehicleType: vehicleType ?? EmptyString, vehicleNumber: vehicleNumber ?? EmptyString, md5HashOfEmail: hashedKey, profilePicturePath: profilePicturePath ?? EmptyString)
+                self?.allUsers.append(user)
+            }
+            print(self?.allUsers)
+        })
+    }
 }
