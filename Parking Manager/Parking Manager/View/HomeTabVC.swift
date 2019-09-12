@@ -16,6 +16,7 @@ class HomeTabVC: BaseVC {
     private var viewModel = HomeTabVM()
     private var imagePicker = UIImagePickerController()
     private var isTextEditable = false
+    private var updatedData: [String: String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,19 +26,40 @@ class HomeTabVC: BaseVC {
     
     @IBAction private func makeTextFieldEditable(_ sender: Any) {
         isTextEditable = true
+        updateDetailsButton.isHidden = false
         profilePictureButton.isUserInteractionEnabled = true
         homeTableView.reloadData()
     }
     
+    @IBAction private func updateDetails(_ sender: Any) {
+        startSpin()
+        var imageData: Data?
+        if profilePictureButton.imageView?.image != UIImage(named: defaultProfilePhoto) {
+            imageData = profilePictureButton.imageView?.image?.pngData()
+        }
+        viewModel.addUserToDatabase(email: viewModel.userData[UserDetailsFromStructure.email.rawValue] ?? EmptyString, name: viewModel.userData[UserDetailsFromStructure.name.rawValue] ?? EmptyString, phone: viewModel.userData[UserDetailsFromStructure.phone.rawValue] ?? EmptyString, vehicleNumber: viewModel.userData[UserDetailsFromStructure.vehicleNumber.rawValue] ?? EmptyString, vehicleType: viewModel.userData[UserDetailsFromStructure.vehicleType.rawValue] ?? EmptyString, imageData: imageData, completionHandler: { [weak self] (error) in
+            guard error == nil else {
+                let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                self?.stopSpin()
+                self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                return
+            }
+            self?.stopSpin()
+            let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+            self?.presentAlert(title: AlertTitles.success, message: AlertMessages.detailsUpdated, style: .alert, actions: [alertAction])
+        })
+    }
+    
     func setupUI() {
         startSpin()
+        navigationItem.title = "Home"
         imagePicker.delegate = self
         profilePictureButton.isUserInteractionEnabled = false
         profilePictureButton.addTarget(self, action: #selector(setImage), for:  .touchUpInside)
-        navigationItem.title = "Home"
         profilePictureButton.layer.cornerRadius = profilePictureButton.bounds.size.width / 2
         profilePictureButton.clipsToBounds = true
-        profilePictureButton.showsTouchWhenHighlighted = false
+        profilePictureButton.adjustsImageWhenHighlighted = false
+        updateDetailsButton.isHidden = true
         viewModel.getLoggedInUserDetails { [weak self] (success, image) in
             if success == true {
                 self?.homeTableView.reloadData()
@@ -96,14 +118,15 @@ extension HomeTabVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HomeTabTVCell.self)) as? HomeTabTVCell else { return HomeTabTVCell() }
-        cell.displayTextField.tag = indexPath.row
-        cell.detailLabel.text = UserDetails.allCases[indexPath.row].title + ":"
-        cell.displayTextField.isUserInteractionEnabled = isTextEditable
-        if cell.displayTextField.tag == UserDetails.email.rawValue {
-            cell.displayTextField.isUserInteractionEnabled = false
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserDetailsTVCell.self)) as? UserDetailsTVCell else { return UserDetailsTVCell() }
+        cell.textField.tag = indexPath.row
+        cell.label.text = UserDetails.allCases[indexPath.row].title + ":"
+        cell.textField.isUserInteractionEnabled = isTextEditable
+        cell.userDetailsCellDelegate = self
+        if cell.textField.tag == UserDetails.email.rawValue {
+            cell.textField.isUserInteractionEnabled = false
         }
-        cell.displayTextField.text = viewModel.dict[UserDetailsFromStructure.allCases[indexPath.row].rawValue]
+        cell.textField.text = viewModel.userData[UserDetailsFromStructure.allCases[indexPath.row].rawValue]
         return cell
     }
 }
@@ -121,5 +144,15 @@ extension HomeTabVC: UIImagePickerControllerDelegate, UINavigationControllerDele
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UserDetailTVCellDelegate
+
+extension HomeTabVC: UserDetailTVCellDelegate {
+    
+    func addUser(tag: Int, text: String) {
+        let key = UserDetailsFromStructure.allCases[tag].rawValue
+        viewModel.userData[key] = text
     }
 }

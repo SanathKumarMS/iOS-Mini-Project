@@ -163,5 +163,4 @@ extension UserDetailsVC: UserDetailTVCellDelegate {
         guard let field = key else { return }
         userData[field] = text
     }
-    
 }

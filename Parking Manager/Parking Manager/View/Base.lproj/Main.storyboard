@@ -251,7 +251,7 @@
                                 <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeTabTVCell" rowHeight="220" id="lZw-P5-qSO" customClass="HomeTabTVCell" customModule="Parking_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserDetailsTVCell" rowHeight="220" id="lZw-P5-qSO" customClass="UserDetailsTVCell" customModule="Parking_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="394" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lZw-P5-qSO" id="1FH-XF-N2P">
@@ -285,8 +285,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="detailLabel" destination="7T7-Z9-FlM" id="yb0-PG-SqE"/>
-                                            <outlet property="displayTextField" destination="2FC-vB-rSC" id="5FK-P4-f1x"/>
+                                            <outlet property="label" destination="7T7-Z9-FlM" id="9BG-Mw-dcm"/>
+                                            <outlet property="textField" destination="2FC-vB-rSC" id="cxJ-qV-eRK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -309,6 +309,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateDetails:" destination="CY6-MX-4KP" eventType="touchUpInside" id="sfm-6j-Qfo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

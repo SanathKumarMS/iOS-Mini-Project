@@ -20,7 +20,7 @@ enum UserDetailsFromStructure: String, CaseIterable {
 
 class HomeTabVM: BaseVM {
     
-    var dict: [String: String] = [:]
+    var userData: [String: String] = [:]
     
     //Get Details of the Logged in User 
     func getLoggedInUserDetails(completionHandler: @escaping (Bool, UIImage?) -> Void) {
@@ -32,7 +32,7 @@ class HomeTabVM: BaseVM {
                 completionHandler(false, nil)
                 return
             }
-            self?.dict = details
+            self?.userData = details
             FirebaseManager.shared.downloadImageFromStorage(name: md5Hex, completionHandler: { (data, error) in
                 if let error = error {
                     completionHandler(true, nil)

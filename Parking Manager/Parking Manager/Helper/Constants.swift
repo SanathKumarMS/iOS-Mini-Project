@@ -21,12 +21,13 @@ let defaultErrorMessage = "The operation could not be completed."
 let successMessage = "Success"
 let iPhone5SHeight = 568.0
 let topConstraintfor5S = 70.0
+let EmptyString = ""
 
 struct AlertTitles {
     static let error = "Error"
     static let close = "Close"
     static let profilePhoto = "Profile Photo"
-    static let success = "Success"
+    static let success = "Success!"
 }
 
 struct AlertMessages {
@@ -36,6 +37,7 @@ struct AlertMessages {
     static let fbCancel = "Cancel"
     static let chooseYourAction = "Choose your Action"
     static let successfulOperation = ""
+    static let detailsUpdated = "Your Profile details are updated!"
 }
 
 struct ToolBarTitles {
