@@ -270,7 +270,7 @@
                                                         <constraint firstAttribute="width" constant="89" id="3Qo-QB-lXA"/>
                                                         <constraint firstAttribute="height" constant="30" id="PLR-53-aaR"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -325,7 +325,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vQz-uY-0ft"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Svv-9i-3K8"/>
+                    <navigationItem key="navigationItem" id="Svv-9i-3K8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="f3k-Z1-4dE">
+                            <connections>
+                                <action selector="makeTextFieldEditable:" destination="CY6-MX-4KP" id="u8R-ve-Sop"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="homeTableView" destination="6YH-Uc-fhO" id="bGJ-Pt-Q6c"/>
                         <outlet property="profilePictureButton" destination="Ddn-EJ-O9r" id="PTs-qw-93t"/>
@@ -334,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLj-Ls-FOm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1484.057971014493" y="1722.9910714285713"/>
+            <point key="canvasLocation" x="1336" y="1723"/>
         </scene>
         <!--Search-->
         <scene sceneID="deb-U2-LW6">

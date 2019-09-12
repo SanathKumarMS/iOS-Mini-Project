@@ -22,6 +22,7 @@ class HomeTabVM: BaseVM {
     
     var dict: [String: String] = [:]
     
+    //Get Details of the Logged in User 
     func getLoggedInUserDetails(completionHandler: @escaping (Bool, UIImage?) -> Void) {
         let email = FirebaseManager.shared.getLoggedInUserEmail()
         let md5Data = Helper.MD5(string: email)

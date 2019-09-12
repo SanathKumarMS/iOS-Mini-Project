@@ -42,3 +42,10 @@ struct ToolBarTitles {
     static let done = "Done"
     static let cancel = "Cancel"
 }
+
+enum ImagePickerActionTypes: String {
+    case camera = "Camera"
+    case photoLibrary = "Photo Library"
+    case cancel = "Cancel"
+    case delete = "Delete"
+}

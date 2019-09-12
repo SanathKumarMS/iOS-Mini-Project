@@ -20,13 +20,6 @@ class UserDetailsVC: BaseVC {
     private var loggedInEmailID: String = ""
     private var userData: [String: String] = [:]
     
-    private enum ImagePickerActionTypes: String {
-        case camera = "Camera"
-        case photoLibrary = "Photo Library"
-        case cancel = "Cancel"
-        case delete = "Delete"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UIScreen.main.bounds.height <= CGFloat(iPhone5SHeight) {
