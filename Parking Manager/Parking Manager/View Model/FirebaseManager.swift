@@ -127,7 +127,7 @@ class FirebaseManager {
         let imageRef = imagesRef.child(imageName)
         guard let imageData = imageData else { return }
         
-        _ = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+        _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
             if let error = error {
                 completionHandler(nil, error)
                 return

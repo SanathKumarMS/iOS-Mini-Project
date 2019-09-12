@@ -55,7 +55,6 @@ class UserDetailsVC: BaseVC {
                 UserDetailsVM.currentVCForEmailField = .addTab
                 guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
                 self?.present(tabBarVC, animated: true, completion: nil)
-                //            self?.navigationController?.pushViewController(tabBarVC, animated: true)
             })
         case .addTab:
             viewModel.addUserToDatabase(email: userData[UserDetails.email.title] ?? "", name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
