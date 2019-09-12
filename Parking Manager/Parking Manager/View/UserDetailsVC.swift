@@ -42,21 +42,45 @@ class UserDetailsVC: BaseVC {
         if imageView.image != UIImage(named: defaultProfilePhoto) {
             imageData = imageView.image?.pngData()
         }
-        viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
-            guard error == nil else {
+        switch UserDetailsVM.currentVCForEmailField {
+        case .userDetails:
+            viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
+                guard error == nil else {
+                    self?.stopSpin()
+                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                    return
+                }
+                self?.stopSpin()
+                UserDetailsVM.currentVCForEmailField = .addTab
+                guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+                self?.present(tabBarVC, animated: true, completion: nil)
+                //            self?.navigationController?.pushViewController(tabBarVC, animated: true)
+            })
+        case .addTab:
+            viewModel.addUserToDatabase(email: userData[UserDetails.email.title] ?? "", name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
+                guard error == nil else {
+                    self?.stopSpin()
+                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                    return
+                }
                 self?.stopSpin()
                 let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
-                return
-            }
-            self?.stopSpin()
-            guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
-            self?.present(tabBarVC, animated: true, completion: nil)
-        })
+                self?.presentAlert(title: AlertTitles.success, message: AlertMessages.otherUsersDetailsUpdated, style: .alert, actions: [alertAction])
+            })
+        }
+        
     }
     
     func setupUI() {
-        navigationItem.title = "Enter Details"
+        switch UserDetailsVM.currentVCForEmailField {
+        case .userDetails:
+            navigationItem.title = "Enter Details"
+        case .addTab:
+            navigationItem.title = "Add Details of Other Users"
+        }
+        
         imagePicker.delegate = self
         loggedInEmailID = viewModel.getCurrentUsersEmail()
         makeCircularImageView()
@@ -124,10 +148,18 @@ extension UserDetailsVC: UITableViewDataSource {
         cell.userDetailsCellDelegate = self
         switch indexPath.row {
         case UserDetails.email.rawValue:
-            if !loggedInEmailID.isEmpty {
-                cell.textField.text = loggedInEmailID
-                cell.textField.isUserInteractionEnabled = false
+            switch UserDetailsVM.currentVCForEmailField {
+            case .userDetails:
+                if !loggedInEmailID.isEmpty {
+                    cell.textField.text = loggedInEmailID
+                    cell.textField.isUserInteractionEnabled = false
+                }
+            case .addTab:
+                cell.textField.text = ""
             }
+        case UserDetails.phone.rawValue:
+            cell.textField.keyboardType = .numberPad
+            cell.textField.textContentType = .telephoneNumber
         case UserDetails.vehicleType.rawValue:
             cell.addPickerToTextField()
         default:

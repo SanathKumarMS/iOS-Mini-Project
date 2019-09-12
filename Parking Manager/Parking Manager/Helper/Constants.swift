@@ -32,12 +32,14 @@ struct AlertTitles {
 
 struct AlertMessages {
     static let invalidEmail = "Invalid Email Entered"
+    static let invalidPassword = "Invalid Password Entered"
     static let emptyField = "Email or password field empty"
     static let googleCancel = "The operation couldn’t be completed. (org.openid.appauth.general error -3.)"
     static let fbCancel = "Cancel"
     static let chooseYourAction = "Choose your Action"
     static let successfulOperation = ""
     static let detailsUpdated = "Your Profile details are updated!"
+    static let otherUsersDetailsUpdated = "The user's details are added!"
 }
 
 struct ToolBarTitles {

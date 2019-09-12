@@ -39,6 +39,13 @@ enum UserDetails: Int, CaseIterable {
 
 class UserDetailsVM: BaseVM {
     
+    enum VCForEmailField: String {
+        case userDetails
+        case addTab
+    }
+    
+    static var currentVCForEmailField = VCForEmailField.userDetails
+    
     func getCurrentUsersEmail() -> String {
         return FirebaseManager.shared.getLoggedInUserEmail()
     }

@@ -25,7 +25,7 @@ class LoginVC: BaseVC {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
-        fbLoginButton.showsTouchWhenHighlighted = false
+        fbLoginButton.adjustsImageWhenHighlighted = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,11 +38,16 @@ class LoginVC: BaseVC {
         startSpin()
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
+        let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
         if email.isEmpty == false && password.isEmpty == false {
             if email.isValidEmail() == true {
+                guard password.isValidPassword() != false else {
+                    self.stopSpin()
+                    self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidPassword, style: .alert, actions: [alertAction])
+                    return
+                }
                 viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
                     if let msg = msg {
-                        let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                         self?.stopSpin()
                         self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
                     } else {
@@ -52,18 +57,13 @@ class LoginVC: BaseVC {
                     }
                 }
             } else {
-                let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                 self.stopSpin()
-                DispatchQueue.main.async {
-                    self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidEmail, style: .alert, actions: [alertAction])
-                }
+                self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidEmail, style: .alert, actions: [alertAction])
             }
         } else {
-            let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-            DispatchQueue.main.async {
-                self.stopSpin()
-                self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyField, style: .alert, actions: [alertAction])
-            }
+            self.stopSpin()
+            self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyField, style: .alert, actions: [alertAction])
+
         }
     }
 }

@@ -20,8 +20,9 @@
 		541876362320DD77005893B3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541876352320DD76005893B3 /* Extension+String.swift */; };
 		54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E7F2328EE30004AAC5B /* TabBarVC.swift */; };
 		54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E812328F78E004AAC5B /* HomeTabVC.swift */; };
-		54190E842328FD96004AAC5B /* HomeTabTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E832328FD96004AAC5B /* HomeTabTVCell.swift */; };
 		54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E852329099C004AAC5B /* HomeTabVM.swift */; };
+		54190E88232A4DAA004AAC5B /* SearchTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E87232A4DAA004AAC5B /* SearchTabVC.swift */; };
+		54190E8A232A4DBB004AAC5B /* SearchTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E89232A4DBB004AAC5B /* SearchTabVM.swift */; };
 		543A107B23210B0D004B577C /* AddTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107A23210B0D004B577C /* AddTabVC.swift */; };
 		543A107D23211818004B577C /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107C23211818004B577C /* UserDetailsVC.swift */; };
 		543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108023213DE2004B577C /* UserDetailsTVCell.swift */; };
@@ -51,8 +52,9 @@
 		541876352320DD76005893B3 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		54190E7F2328EE30004AAC5B /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		54190E812328F78E004AAC5B /* HomeTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabVC.swift; sourceTree = "<group>"; };
-		54190E832328FD96004AAC5B /* HomeTabTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabTVCell.swift; sourceTree = "<group>"; };
 		54190E852329099C004AAC5B /* HomeTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabVM.swift; sourceTree = "<group>"; };
+		54190E87232A4DAA004AAC5B /* SearchTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabVC.swift; sourceTree = "<group>"; };
+		54190E89232A4DBB004AAC5B /* SearchTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabVM.swift; sourceTree = "<group>"; };
 		543A107A23210B0D004B577C /* AddTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabVC.swift; sourceTree = "<group>"; };
 		543A107C23211818004B577C /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		543A108023213DE2004B577C /* UserDetailsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsTVCell.swift; sourceTree = "<group>"; };
@@ -142,7 +144,7 @@
 				54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */,
 				54190E7F2328EE30004AAC5B /* TabBarVC.swift */,
 				54190E812328F78E004AAC5B /* HomeTabVC.swift */,
-				54190E832328FD96004AAC5B /* HomeTabTVCell.swift */,
+				54190E87232A4DAA004AAC5B /* SearchTabVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,6 +157,7 @@
 				54187632231FEAE4005893B3 /* LoginVM.swift */,
 				543A108623222115004B577C /* UserDetailsVM.swift */,
 				54190E852329099C004AAC5B /* HomeTabVM.swift */,
+				54190E89232A4DBB004AAC5B /* SearchTabVM.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			files = (
 				543A108523221544004B577C /* User.swift in Sources */,
 				543A108323213DF7004B577C /* BaseTVCell.swift in Sources */,
+				54190E8A232A4DBB004AAC5B /* SearchTabVM.swift in Sources */,
 				54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */,
 				543A108B23223021004B577C /* Helper.swift in Sources */,
 				543A107D23211818004B577C /* UserDetailsVC.swift in Sources */,
@@ -356,9 +360,9 @@
 				54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */,
 				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
-				54190E842328FD96004AAC5B /* HomeTabTVCell.swift in Sources */,
 				54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
+				54190E88232A4DAA004AAC5B /* SearchTabVC.swift in Sources */,
 				543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
