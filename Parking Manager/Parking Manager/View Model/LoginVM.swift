@@ -11,21 +11,16 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 class LoginVM: BaseVM {
-    
-    typealias ErrorHandler = ((String?) -> Void)
-    func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
+        
+    func loginOrSignUp(email: String, password: String, completionHandler: @escaping StringCompletionHandler) {
         FirebaseManager.shared.loginOrSignUp(email: email, password: password) { (error) in
-            var msg: String?
-            if let error = error {
-                msg = error.localizedDescription
-            }
             DispatchQueue.main.async {
-                completionHandler(msg)
+                completionHandler(error?.localizedDescription)
             }
         }
     }
     
-    func signInWithGoogle(user: GIDGoogleUser?, error: Error?, completionHandler: @escaping (String?) -> Void) {
+    func signInWithGoogle(user: GIDGoogleUser?, error: Error?, completionHandler: @escaping StringCompletionHandler) {
         var msg: String?
         if let error = error {
             msg = error.localizedDescription
@@ -35,7 +30,7 @@ class LoginVM: BaseVM {
             return
         }
         guard let user = user else {
-            msg = "The operation could not be completed"
+            msg = defaultErrorMessage
             DispatchQueue.main.async {
                 completionHandler(msg)
             }
@@ -45,38 +40,31 @@ class LoginVM: BaseVM {
         guard let authentication = user.authentication else { return }
         
         FirebaseManager.shared.signInWithGoogle(authentication: authentication) { (error) in
-            if let error = error {
-                msg = error.localizedDescription
-            }
             DispatchQueue.main.async {
-                completionHandler(msg)
+                completionHandler(error?.localizedDescription)
             }
         }
     }
     
-    func signInWithFB(result: LoginManagerLoginResult?, error: Error?, completionHandler: @escaping (String?) -> Void) {
+    func signInWithFB(result: LoginManagerLoginResult?, error: Error?, completionHandler: @escaping FBCompletionHandler) {
         var msg: String?
         if let error = error {
             msg = error.localizedDescription
             DispatchQueue.main.async {
-                completionHandler(msg)
+                completionHandler(msg, false)
             }
             return
         }
         guard let accessToken = AccessToken.current else {
-            msg = "Cancel"
             DispatchQueue.main.async {
-                completionHandler(msg)
+                completionHandler(nil, false)
             }
             return
         }
         
         FirebaseManager.shared.signInWithFB(accessToken: accessToken) { (error) in
-            if let error = error {
-                msg = error.localizedDescription
-            }
             DispatchQueue.main.async {
-                completionHandler(msg)
+                completionHandler(error?.localizedDescription, error == nil)
             }
         }
     }

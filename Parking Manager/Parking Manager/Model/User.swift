@@ -15,14 +15,16 @@ struct User {
     var vehicleType: String
     var vehicleNumber: String
     var md5HashOfEmail: String
+    var profilePicturePath: String
     
     func convertToJSON() -> [String: String] {
         var dict = [String: String]()
-        dict["email"] = email
-        dict["name"] = name
-        dict["phone"] = phone
-        dict["vehicleType"] = vehicleType
-        dict["vehicleNumber"] = vehicleNumber
+        dict[UserDetailsFromStructure.email.rawValue] = email
+        dict[UserDetailsFromStructure.name.rawValue] = name
+        dict[UserDetailsFromStructure.phone.rawValue] = phone
+        dict[UserDetailsFromStructure.vehicleType.rawValue] = vehicleType
+        dict[UserDetailsFromStructure.vehicleNumber.rawValue] = vehicleNumber
+        dict[UserDetailsFromStructure.profilePicturePath.rawValue] = profilePicturePath
         return dict
     }
 }
