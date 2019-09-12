@@ -29,9 +29,8 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UIScreen.main.bounds.height)
-        if UIScreen.main.bounds.height <= 568 {
-            imageViewTopConstraint.constant = 70
+        if UIScreen.main.bounds.height <= CGFloat(iPhone5SHeight) {
+            imageViewTopConstraint.constant = CGFloat(topConstraintfor5S)
         }
         setupUI()
     }
@@ -45,31 +44,26 @@ class UserDetailsVC: BaseVC {
     }
     
     @IBAction private func addUser(_ sender: Any) {
-        if userData.count == UserDetails.allCases.count - 1 {
-            guard let name = userData[UserDetails.name.title], let phone = userData[UserDetails.phone.title], let vehicleNumber = userData[UserDetails.vehicleNumber.title], let vehicleType = userData[UserDetails.vehicleType.title] else {
+        startSpin()
+        var imageData: Data?
+        if imageView.image != UIImage(named: defaultProfilePhoto) {
+            imageData = imageView.image?.pngData()
+        }
+        viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
+            guard error == nil else {
+                self?.stopSpin()
+                let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
+                self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
                 return
             }
-            var imageData: Data?
-            if imageView.image != UIImage(named: defaultProfilePhoto) {
-                imageData = imageView.image?.pngData()
-            }
-            viewModel.addUserToDatabase(email: loggedInEmailID, name: name, phone: phone, vehicleNumber: vehicleNumber, vehicleType: vehicleType, imageData: imageData, completionHandler: { [weak self] (message) in
-                guard let message = message else { return }
-
-                if message == successMessage {
-//                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-//                    self?.presentAlert(title: AlertTitles.success, message: "", style: .alert, actions: [alertAction])
-                    guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
-                    self?.present(tabBarVC, animated: true, completion: nil)
-                } else {
-                    let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
-                }
-            })
-        }
+            self?.stopSpin()
+            guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+            self?.present(tabBarVC, animated: true, completion: nil)
+        })
     }
     
     func setupUI() {
+        navigationItem.title = "Enter Details"
         imagePicker.delegate = self
         loggedInEmailID = viewModel.getCurrentUsersEmail()
         makeCircularImageView()
@@ -140,7 +134,6 @@ extension UserDetailsVC: UITableViewDataSource {
             if !loggedInEmailID.isEmpty {
                 cell.textField.text = loggedInEmailID
                 cell.textField.isUserInteractionEnabled = false
-                cell.textField.backgroundColor = .lightGray
             }
         case UserDetails.vehicleType.rawValue:
             cell.addPickerToTextField()

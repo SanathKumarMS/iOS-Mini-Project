@@ -230,7 +230,7 @@
             </objects>
             <point key="canvasLocation" x="3732" y="1010"/>
         </scene>
-        <!--Home-->
+        <!--Home TabVC-->
         <scene sceneID="pMW-vh-sRL">
             <objects>
                 <viewController storyboardIdentifier="HomeTabVC" id="CY6-MX-4KP" customClass="HomeTabVC" customModule="Parking_Manager" customModuleProvider="target" sceneMemberID="viewController">
@@ -325,7 +325,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vQz-uY-0ft"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" selectedImage="icon_home_page" id="hBg-5M-611"/>
+                    <navigationItem key="navigationItem" id="Svv-9i-3K8"/>
                     <connections>
                         <outlet property="homeTableView" destination="6YH-Uc-fhO" id="bGJ-Pt-Q6c"/>
                         <outlet property="profilePictureButton" destination="Ddn-EJ-O9r" id="PTs-qw-93t"/>
@@ -334,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLj-Ls-FOm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573.91304347826087" y="1722.9910714285713"/>
+            <point key="canvasLocation" x="1484.057971014493" y="1722.9910714285713"/>
         </scene>
         <!--Search-->
         <scene sceneID="deb-U2-LW6">
@@ -379,7 +379,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CY6-MX-4KP" kind="relationship" relationship="viewControllers" id="iBh-43-33o"/>
+                        <segue destination="SAI-tQ-7Vf" kind="relationship" relationship="viewControllers" id="iBh-43-33o"/>
                         <segue destination="AUW-5s-AdO" kind="relationship" relationship="viewControllers" id="3Ay-XU-shO"/>
                         <segue destination="aSM-kl-RWj" kind="relationship" relationship="viewControllers" id="0oP-eg-JdZ"/>
                         <segue destination="BXZ-gl-p8w" kind="relationship" relationship="viewControllers" id="1Cl-NG-okz"/>
@@ -406,6 +406,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6o-aq-G5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="128.98550724637681" y="83.035714285714278"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="nOi-oq-FQC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SAI-tQ-7Vf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" selectedImage="icon_home_page" id="hBg-5M-611"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lj6-dm-Bsa">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CY6-MX-4KP" kind="relationship" relationship="rootViewController" id="dm4-Dg-2Wr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OQJ-VA-P0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="573.91304347826087" y="1722.9910714285713"/>
         </scene>
     </scenes>
     <resources>

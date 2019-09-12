@@ -13,6 +13,7 @@ class HomeTabVC: BaseVC {
     @IBOutlet weak var profilePictureButton: UIButton!
     @IBOutlet weak var updateDetailsButton: UIButton!
     @IBOutlet private weak var homeTableView: UITableView!
+    @IBOutlet private weak var editButton: UIButton!
     private var viewModel = HomeTabVM()
     
     override func viewDidLoad() {
@@ -22,15 +23,23 @@ class HomeTabVC: BaseVC {
     }
     
     func setupUI() {
+        startSpin()
+        navigationItem.title = "Home"
         profilePictureButton.layer.cornerRadius = profilePictureButton.bounds.size.width / 2
         profilePictureButton.clipsToBounds = true
         profilePictureButton.showsTouchWhenHighlighted = false
         viewModel.getLoggedInUserDetails { [weak self] (success, image) in
             if success == true {
                 self?.homeTableView.reloadData()
+                self?.stopSpin()
+                guard let image = image else { return }
                 self?.profilePictureButton.setImage(image, for: .normal)
             }
+            self?.stopSpin()
         }
+    }
+    
+    @IBAction private func makeEditable() {
     }
 
 }

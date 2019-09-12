@@ -19,6 +19,8 @@ let projectName = "Parking Manager"
 let defaultProfilePhoto = "Network-Profile"
 let defaultErrorMessage = "The operation could not be completed."
 let successMessage = "Success"
+let iPhone5SHeight = 568.0
+let topConstraintfor5S = 70.0
 
 struct AlertTitles {
     static let error = "Error"

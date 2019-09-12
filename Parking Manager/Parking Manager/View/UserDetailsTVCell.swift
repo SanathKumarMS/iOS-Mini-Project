@@ -18,7 +18,7 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
     @IBOutlet weak var label: UILabel!
     
     private var picker: UIPickerView?
-    var userDetailsCellDelegate: UserDetailTVCellDelegate?
+    weak var userDetailsCellDelegate: UserDetailTVCellDelegate?
     private var toolBar: UIToolbar?
     
     override func awakeFromNib() {
@@ -72,7 +72,7 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.tag == 3 {
+        if textField.tag == UserDetails.vehicleType.rawValue {
             addPickerToTextField()
         }
     }

@@ -132,10 +132,6 @@ class FirebaseManager {
                 completionHandler(nil, error)
                 return
             }
-            guard metadata != nil else {
-                completionHandler(nil, error)
-                return
-            }
             imageRef.downloadURL { (url, error) in
                 completionHandler(url, error)
             }
