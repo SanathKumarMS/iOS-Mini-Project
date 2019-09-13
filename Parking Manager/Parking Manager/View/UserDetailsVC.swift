@@ -154,12 +154,16 @@ extension UserDetailsVC: UITableViewDataSource {
                     cell.textField.isUserInteractionEnabled = false
                 }
             case .addTab:
-                cell.textField.text = ""
+                cell.textField.text = EmptyString
             }
         case UserDetails.phone.rawValue:
             cell.textField.keyboardType = .numberPad
             cell.textField.textContentType = .telephoneNumber
         case UserDetails.vehicleType.rawValue:
+            let imageView = UIImageView(image: UIImage(named: dropDownImage))
+            imageView.frame = CGRect(x: -30, y: 0, width: 15, height: 15)
+            cell.textField.rightView = imageView
+            cell.textField.rightViewMode = .always
             cell.addPickerToTextField()
         default:
             break

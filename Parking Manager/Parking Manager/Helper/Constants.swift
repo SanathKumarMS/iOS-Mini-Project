@@ -24,6 +24,7 @@ let successMessage = "Success"
 let iPhone5SHeight = 568.0
 let topConstraintfor5S = 70.0
 let EmptyString = ""
+let dropDownImage = "dropdown.png"
 
 struct AlertTitles {
     static let error = "Error"
@@ -54,4 +55,8 @@ enum ImagePickerActionTypes: String {
     case photoLibrary = "Photo Library"
     case cancel = "Cancel"
     case delete = "Delete"
+}
+
+enum UserDefaultsKeys: String {
+    case isLoggedIn
 }

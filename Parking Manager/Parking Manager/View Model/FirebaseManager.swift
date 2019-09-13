@@ -57,14 +57,14 @@ class FirebaseManager {
     
     func signInWithFB(accessToken: AccessToken, completionHandler: @escaping ErrorHandler) {
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-        //        GraphRequest(graphPath: "me",
-        //                     parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-        //                if error == nil {
-        //                    if let dict = result as? [String: AnyObject] {
-        //                        print(dict)
-        //                    }
-        //                }
-        //            })
+                GraphRequest(graphPath: "me",
+                             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                        if error == nil {
+                            if let dict = result as? [String: AnyObject] {
+                                print(dict)
+                            }
+                        }
+                    })
         signInWithCredential(credential: credential, completionHandler: completionHandler)
     }
     

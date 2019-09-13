@@ -25,6 +25,7 @@ class LoginVC: BaseVC {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
+        fbLoginButton.permissions = ["public_profile","email"]
         fbLoginButton.adjustsImageWhenHighlighted = false
     }
     
@@ -52,6 +53,7 @@ class LoginVC: BaseVC {
                         self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
                     } else {
                         self?.stopSpin()
+                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
                         guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                         self?.navigationController?.pushViewController(userDetailsVC, animated: true)
                     }
@@ -84,6 +86,7 @@ extension LoginVC: GIDSignInDelegate {
                 }
             } else {
                 self?.stopSpin()
+                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
                 guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                 self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }
@@ -108,6 +111,7 @@ extension LoginVC: LoginButtonDelegate {
                 self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
             } else {
                 self?.stopSpin()
+                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
                 guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                 self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }
