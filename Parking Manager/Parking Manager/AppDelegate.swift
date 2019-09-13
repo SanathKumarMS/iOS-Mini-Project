@@ -17,10 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        //return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue) == true {
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "TabBarVC")
+        } else {
+            window?.rootViewController =  UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "LoginVC"))
+        }
         return true
     }
     

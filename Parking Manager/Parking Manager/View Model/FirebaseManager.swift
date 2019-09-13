@@ -17,15 +17,9 @@ class FirebaseManager {
     
     static var shared = FirebaseManager()
     
-    private init() {
-        
-    }
-    
-    let root = Database.database().reference()
-    let userDetails = Database.database().reference(withPath: "UserDetails")
-    let storage = Storage.storage()
-    
-    typealias ErrorHandler = (Error?) -> Void
+    private let root = Database.database().reference()
+    private let userDetails = Database.database().reference(withPath: "UserDetails")
+    private let storage = Storage.storage()
     
     // MARK: - Authentication
     
@@ -37,19 +31,19 @@ class FirebaseManager {
             }
             if let signInMethods = signInMethods {
                 if signInMethods.contains(EmailPasswordAuthSignInMethod) {
-                    print("User already present. Signing in")
+                    //User already present. Signing in
                     Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-                            completionHandler(error)
+                        completionHandler(error)
                     }
-                }
+                }   //User not present. Creating account and signing in
             } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
-                        if error == nil {
-                            print("User not present. Creating account and signing in")
-                            Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-                                completionHandler(error)
-                            }
-                        } else {
+                if error == nil {
+                    Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
+                        completionHandler(error)
                     }
+                } else {
+                    completionHandler(error)
+                }
             }
             }
         }
@@ -63,31 +57,24 @@ class FirebaseManager {
     
     func signInWithFB(accessToken: AccessToken, completionHandler: @escaping ErrorHandler) {
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-//        GraphRequest(graphPath: "me",
-//                     parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-//                if error == nil {
-//                    if let dict = result as? [String: AnyObject] {
-//                        print(dict)
-//                    }
-//                }
-//            })
         signInWithCredential(credential: credential, completionHandler: completionHandler)
     }
     
     func signInWithCredential(credential: AuthCredential, completionHandler: @escaping ErrorHandler) {
         Auth.auth().signIn(with: credential) { (_, error) in
-            if let error = error {
-                completionHandler(error)
-            }
             completionHandler(error)
         }
     }
     
     func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch let error {
-            print(error)
+        if GIDSignIn.sharedInstance()?.currentUser != nil {
+            GIDSignIn.sharedInstance()?.signOut()
+        } else {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                return
+            }
         }
     }
     
@@ -96,53 +83,93 @@ class FirebaseManager {
             if let email = user.email {
                 return email
             } else {
-                if let providerEmail = user.providerData[0].email {
+                if let providerEmail = user.providerData.first?.email {
                     return providerEmail
                 }
             }
         }
-        if let googleUser = GIDSignIn.sharedInstance()?.currentUser {
-            if let email = googleUser.profile.email {
-                return email
-            }
-        }
-        return ""
+        guard let googleUser = GIDSignIn.sharedInstance()?.currentUser, let email = googleUser.profile.email else { return "" }
+        return email
     }
     
     // MARK: - Realtime Database
     
+    //Add User Details to Realtime Database
     func addUser(user: User) {
         let childRef = userDetails.child(user.md5HashOfEmail)
         childRef.setValue(user.convertToJSON())
     }
     
+    //Get Details of a User Having Key as key
+    func getUserDetails(key: String, completionHandler: @escaping GetUserDetailsCompletionHandler) {
+        userDetails.child(key).observe(.value, with: { (snapshot) in
+            guard let details = snapshot.value as? [String: Any] else {
+                completionHandler(nil)
+                return
+            }
+            completionHandler(details as? [String : String])
+        })
+    }
+    
+    //Get Details of all the users in Firebase Database
+    func getAllUsersDetails(completionHandler: @escaping GetAllUserDetailsCompletionHandler) {
+        userDetails.observe(.value, with: { (snapshot) in
+            guard let details = snapshot.value as? [String: Any] else {
+                completionHandler(nil)
+                return
+            }
+            completionHandler(details)
+        })
+    }
+    
     // MARK: - Firebase Storage
     
-    func uploadPhotoToStorage(name: String, imageData: Data?) {
+    //Upload Profile picture to Firebase Storage and get its download URL
+    func uploadImageToStorage(name: String, imageData: Data?, completionHandler: @escaping ImageHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + ".jpg"
+        let imageName = name + jpgExtension
         let imageRef = imagesRef.child(imageName)
         guard let imageData = imageData else { return }
         
-        let uploadTask = imageRef.putData(imageData, metadata: nil) { (metadata, error) in
+        _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
             if let error = error {
-                print(error)
+                completionHandler(nil, error)
                 return
             }
-            guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
-                return
-            }
-            // Metadata contains file metadata such as size, content-type.
-            let size = metadata.size
-            // You can also access to download URL after upload.
             imageRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
+                completionHandler(url, error)
             }
         }
+    }
+    
+    //Delete Image from Storage
+    func deleteImageFromStorage(name: String, completionHandler: @escaping ErrorHandler) {
+        let storageRef = storage.reference()
+        let imagesRef = storageRef.child("images")
+        let imageName = name + jpgExtension
+        let imageRef = imagesRef.child(imageName)
+        imageRef.delete(completion: { (error) in
+            completionHandler(error)
+        })
+    }
+    
+    //Download Image from Storage
+    func downloadImageFromStorage(name: String, completionHandler: @escaping GetImageCompletionHandler) {
+        let storageRef = storage.reference()
+        let imagesRef = storageRef.child("images")
+        let imageName = name + jpgExtension
+        let imageRef = imagesRef.child(imageName)
+        imageRef.getData(maxSize: 30 * 1024 * 1024, completion: { (data, error) in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            guard let data = data else {
+                completionHandler(nil, nil)
+                return
+            }
+            completionHandler(data, nil)
+        })
     }
 }

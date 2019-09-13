@@ -15,4 +15,11 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         return predicate.evaluate(with: self)
     }
+    
+    func isValidPassword() -> Bool {
+        if self.count < 6 {
+            return false
+        }
+        return true
+    }
 }
