@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             window?.rootViewController =  UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "LoginVC"))
         }
-        //return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     

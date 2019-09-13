@@ -161,7 +161,7 @@ extension UserDetailsVC: UITableViewDataSource {
             cell.textField.textContentType = .telephoneNumber
         case UserDetails.vehicleType.rawValue:
             let imageView = UIImageView(image: UIImage(named: dropDownImage))
-            imageView.frame = CGRect(x: -30, y: 0, width: 15, height: 15)
+            imageView.frame = CGRect(x: -30, y: 0, width: 25, height: 25)
             cell.textField.rightView = imageView
             cell.textField.rightViewMode = .always
             cell.addPickerToTextField()

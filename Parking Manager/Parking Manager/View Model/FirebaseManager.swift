@@ -57,14 +57,6 @@ class FirebaseManager {
     
     func signInWithFB(accessToken: AccessToken, completionHandler: @escaping ErrorHandler) {
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-                GraphRequest(graphPath: "me",
-                             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-                        if error == nil {
-                            if let dict = result as? [String: AnyObject] {
-                                print(dict)
-                            }
-                        }
-                    })
         signInWithCredential(credential: credential, completionHandler: completionHandler)
     }
     
@@ -102,6 +94,7 @@ class FirebaseManager {
     
     // MARK: - Realtime Database
     
+    //Add User Details to Realtime Database
     func addUser(user: User) {
         let childRef = userDetails.child(user.md5HashOfEmail)
         childRef.setValue(user.convertToJSON())
@@ -118,6 +111,7 @@ class FirebaseManager {
         })
     }
     
+    //Get Details of all the users in Firebase Database
     func getAllUsersDetails(completionHandler: @escaping GetAllUserDetailsCompletionHandler) {
         userDetails.observe(.value, with: { (snapshot) in
             guard let details = snapshot.value as? [String: Any] else {
@@ -134,7 +128,7 @@ class FirebaseManager {
     func uploadImageToStorage(name: String, imageData: Data?, completionHandler: @escaping ImageHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + ".jpg"
+        let imageName = name + jpgExtension
         let imageRef = imagesRef.child(imageName)
         guard let imageData = imageData else { return }
         
@@ -153,7 +147,7 @@ class FirebaseManager {
     func deleteImageFromStorage(name: String, completionHandler: @escaping ErrorHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + ".jpg"
+        let imageName = name + jpgExtension
         let imageRef = imagesRef.child(imageName)
         imageRef.delete(completion: { (error) in
             completionHandler(error)
@@ -164,7 +158,7 @@ class FirebaseManager {
     func downloadImageFromStorage(name: String, completionHandler: @escaping GetImageCompletionHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + ".jpg"
+        let imageName = name + jpgExtension
         let imageRef = imagesRef.child(imageName)
         imageRef.getData(maxSize: 30 * 1024 * 1024, completion: { (data, error) in
             if let error = error {

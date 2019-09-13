@@ -25,6 +25,7 @@ let iPhone5SHeight = 568.0
 let topConstraintfor5S = 70.0
 let EmptyString = ""
 let dropDownImage = "dropdown.png"
+let jpgExtension = ".jpg"
 
 struct AlertTitles {
     static let error = "Error"
