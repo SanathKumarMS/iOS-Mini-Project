@@ -8,19 +8,35 @@
 
 import UIKit
 
+enum SegmentTypes: Int, CaseIterable {
+    case Bike
+    case Car
+    
+    var title: String {
+        switch self {
+        case .Bike:
+            return "Bike"
+        case .Car:
+            return "Car"
+        }
+    }
+}
+
 class SearchTabVM: BaseVM {
     
     var allUsers: [User] = []
-    
-    func getAllUsersData() {
+
+    func getAllUsersData(completionHandler: @escaping GetAllUserDataCompletionHandler) {
         FirebaseManager.shared.getAllUsersDetails(completionHandler: { [weak self] (details) in
             guard let details = details else {
+                completionHandler(nil)
                 return
             }
             
             for item in details {
                 let hashedKey = item.key
                 guard let dict = item.value as? [String: String] else {
+                    completionHandler(nil)
                     return
                 }
                 
@@ -34,7 +50,9 @@ class SearchTabVM: BaseVM {
                 let user = User(email: email ?? EmptyString, name: name ?? EmptyString, phone: phone ?? EmptyString, vehicleType: vehicleType ?? EmptyString, vehicleNumber: vehicleNumber ?? EmptyString, md5HashOfEmail: hashedKey, profilePicturePath: profilePicturePath ?? EmptyString)
                 self?.allUsers.append(user)
             }
-            print(self?.allUsers)
+            DispatchQueue.main.async {
+               completionHandler(self?.allUsers)
+            }
         })
     }
 }

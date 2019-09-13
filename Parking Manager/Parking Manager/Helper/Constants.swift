@@ -14,6 +14,7 @@ typealias StringCompletionHandler = (String?) -> Void
 typealias FBCompletionHandler = (String?, Bool) -> Void
 typealias GetUserDetailsCompletionHandler = ([String: String]?) -> Void
 typealias GetAllUserDetailsCompletionHandler = ([String: Any]?) -> Void
+typealias GetAllUserDataCompletionHandler = ([User]?) -> Void
 typealias GetImageCompletionHandler = (Data?, Error?) -> Void
 
 let projectName = "Parking Manager"

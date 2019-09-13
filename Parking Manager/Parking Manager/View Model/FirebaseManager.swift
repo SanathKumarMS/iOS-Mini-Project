@@ -124,10 +124,6 @@ class FirebaseManager {
                 completionHandler(nil)
                 return
             }
-//            for item in details {
-//                print(item.key)
-//                print(item.value)
-//            }
             completionHandler(details)
         })
     }
