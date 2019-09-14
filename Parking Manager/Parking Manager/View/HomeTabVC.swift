@@ -51,8 +51,8 @@ class HomeTabVC: BaseVC {
     }
     
     @IBAction private func logOut() {
-        viewModel.signOut()
         UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+        viewModel.signOut()
         present(UINavigationController(rootViewController: storyboard?.instantiateViewController(withIdentifier: String(describing: LoginVC.self)) ?? LoginVC()), animated: true, completion: nil)
     }
     

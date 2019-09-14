@@ -69,6 +69,7 @@ class FirebaseManager {
     func signOut() {
         if GIDSignIn.sharedInstance()?.currentUser != nil {
             GIDSignIn.sharedInstance()?.signOut()
+            return
         } else {
             do {
                 try Auth.auth().signOut()
@@ -76,6 +77,8 @@ class FirebaseManager {
                 return
             }
         }
+        let loginManager = LoginManager()
+        loginManager.logOut()
     }
     
     func getLoggedInUserEmail() -> String {

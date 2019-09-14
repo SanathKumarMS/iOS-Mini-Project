@@ -19,5 +19,6 @@ target 'Parking Manager' do
 	pod 'GoogleSignIn'
 	pod 'FBSDKLoginKit'
 	pod 'Firebase/Storage'
+	pod 'MessageKit'
 
 end

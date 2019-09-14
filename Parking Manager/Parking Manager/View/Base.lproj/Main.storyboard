@@ -247,7 +247,7 @@
                                 <state key="normal" image="Network-Profile"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-Uc-fhO">
-                                <rect key="frame" x="10" y="301" width="394" height="404"/>
+                                <rect key="frame" x="10" y="287" width="394" height="418"/>
                                 <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -318,7 +318,7 @@
                         <color key="tintColor" red="0.185723478" green="0.29803921570000003" blue="0.1868204158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ddn-EJ-O9r" firstAttribute="centerX" secondItem="oqS-kr-J5g" secondAttribute="centerX" id="2RS-j4-29K"/>
-                            <constraint firstItem="6YH-Uc-fhO" firstAttribute="top" secondItem="Ddn-EJ-O9r" secondAttribute="bottom" constant="64" id="Lel-RU-fl4"/>
+                            <constraint firstItem="6YH-Uc-fhO" firstAttribute="top" secondItem="Ddn-EJ-O9r" secondAttribute="bottom" constant="50" id="Lel-RU-fl4"/>
                             <constraint firstItem="q6o-xl-YLS" firstAttribute="top" secondItem="6YH-Uc-fhO" secondAttribute="bottom" constant="10" id="WSp-Kh-TLF"/>
                             <constraint firstItem="q6o-xl-YLS" firstAttribute="centerX" secondItem="oqS-kr-J5g" secondAttribute="centerX" id="cFL-kJ-dtO"/>
                             <constraint firstItem="6YH-Uc-fhO" firstAttribute="leading" secondItem="vQz-uY-0ft" secondAttribute="leading" constant="10" id="e9u-yC-Vi2"/>
