@@ -13,6 +13,7 @@ class HomeTabVC: BaseVC {
     @IBOutlet private weak var profilePictureButton: UIButton!
     @IBOutlet private weak var updateDetailsButton: UIButton!
     @IBOutlet private weak var homeTableView: UITableView!
+    @IBOutlet private weak var editButton: UIBarButtonItem!
     private var viewModel = HomeTabVM()
     private var imagePicker = UIImagePickerController()
     private var isTextEditable = false
@@ -24,10 +25,18 @@ class HomeTabVC: BaseVC {
         setupUI()
     }
     
-    @IBAction private func makeTextFieldEditable(_ sender: Any) {
-        isTextEditable = true
-        updateDetailsButton.isHidden = false
-        profilePictureButton.isUserInteractionEnabled = true
+    @IBAction private func editAction(_ sender: Any) {
+        if isTextEditable == false {
+            isTextEditable = true
+            updateDetailsButton.isHidden = false
+            editButton.title = "Done"
+            profilePictureButton.isUserInteractionEnabled = true
+        } else {
+            isTextEditable = false
+            updateDetailsButton.isHidden = true
+            editButton.title = "Edit"
+            profilePictureButton.isUserInteractionEnabled = false
+        }
         homeTableView.reloadData()
     }
     

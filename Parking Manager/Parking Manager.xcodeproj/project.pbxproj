@@ -24,6 +24,8 @@
 		54190E88232A4DAA004AAC5B /* SearchTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E87232A4DAA004AAC5B /* SearchTabVC.swift */; };
 		54190E8A232A4DBB004AAC5B /* SearchTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E89232A4DBB004AAC5B /* SearchTabVM.swift */; };
 		54190E8C232A6E0A004AAC5B /* SearchTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E8B232A6E0A004AAC5B /* SearchTVCell.swift */; };
+		54190E8E232CE74A004AAC5B /* ChatTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E8D232CE74A004AAC5B /* ChatTabVC.swift */; };
+		54190E90232CE761004AAC5B /* ChatTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54190E8F232CE761004AAC5B /* ChatTabVM.swift */; };
 		543A107B23210B0D004B577C /* AddTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107A23210B0D004B577C /* AddTabVC.swift */; };
 		543A107D23211818004B577C /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A107C23211818004B577C /* UserDetailsVC.swift */; };
 		543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108023213DE2004B577C /* UserDetailsTVCell.swift */; };
@@ -57,6 +59,8 @@
 		54190E87232A4DAA004AAC5B /* SearchTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabVC.swift; sourceTree = "<group>"; };
 		54190E89232A4DBB004AAC5B /* SearchTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabVM.swift; sourceTree = "<group>"; };
 		54190E8B232A6E0A004AAC5B /* SearchTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTVCell.swift; sourceTree = "<group>"; };
+		54190E8D232CE74A004AAC5B /* ChatTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabVC.swift; sourceTree = "<group>"; };
+		54190E8F232CE761004AAC5B /* ChatTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabVM.swift; sourceTree = "<group>"; };
 		543A107A23210B0D004B577C /* AddTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabVC.swift; sourceTree = "<group>"; };
 		543A107C23211818004B577C /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		543A108023213DE2004B577C /* UserDetailsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsTVCell.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				54190E812328F78E004AAC5B /* HomeTabVC.swift */,
 				54190E87232A4DAA004AAC5B /* SearchTabVC.swift */,
 				54190E8B232A6E0A004AAC5B /* SearchTVCell.swift */,
+				54190E8D232CE74A004AAC5B /* ChatTabVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				543A108623222115004B577C /* UserDetailsVM.swift */,
 				54190E852329099C004AAC5B /* HomeTabVM.swift */,
 				54190E89232A4DBB004AAC5B /* SearchTabVM.swift */,
+				54190E8F232CE761004AAC5B /* ChatTabVM.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 				543A108723222115004B577C /* UserDetailsVM.swift in Sources */,
 				54A0D066232783D600A3DBA9 /* Constants.swift in Sources */,
 				54187633231FEAE4005893B3 /* LoginVM.swift in Sources */,
+				54190E8E232CE74A004AAC5B /* ChatTabVC.swift in Sources */,
 				541876362320DD77005893B3 /* Extension+String.swift in Sources */,
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
@@ -365,6 +372,7 @@
 				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
 				54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */,
+				54190E90232CE761004AAC5B /* ChatTabVM.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
 				54190E88232A4DAA004AAC5B /* SearchTabVC.swift in Sources */,
 				543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */,
