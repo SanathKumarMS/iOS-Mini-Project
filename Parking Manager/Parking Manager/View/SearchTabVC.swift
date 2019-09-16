@@ -38,7 +38,11 @@ class SearchTabVC: BaseVC {
         case UserDetailsToDisplay.email.rawValue:
             openMailApp(emailAddress: text)
         case UserDetailsToDisplay.phone.rawValue:
-            openDialerOrChat(phoneNumber: text)
+            guard let chatTabVC = storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
+            chatTabVC.recipientPhoneNumber = text
+            navigationController?.pushViewController(chatTabVC, animated: true)
+//            present(chatTabVC, animated: true)
+            //openDialerOrChat(phoneNumber: text)
         default:
             return
         }
@@ -124,7 +128,7 @@ extension SearchTabVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredData = viewModel.allUsers.filter({(user) -> Bool in
             
-            (user.name.lowercased().contains(searchText.lowercased()) || user.email.lowercased().contains(searchText.lowercased())) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
+            (user.name.lowercased().contains(searchText.lowercased()) || user.email.lowercased().contains(searchText.lowercased()) || user.vehicleNumber.lowercased().contains(searchText.lowercased())) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
 //            (user.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || user.email.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
         })
         tableView.reloadData()

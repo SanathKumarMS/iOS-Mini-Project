@@ -19,7 +19,9 @@ class FirebaseManager {
     
     private let root = Database.database().reference()
     private let userDetails = Database.database().reference(withPath: "UserDetails")
+    private let messageRef = Database.database().reference(withPath: "Messages")
     private let storage = Storage.storage()
+    private let userMessagesRef = Database.database().reference(withPath: "UserMessages")
     
     // MARK: - Authentication
     
@@ -125,6 +127,39 @@ class FirebaseManager {
         })
     }
     
+    //Add Message to Database
+    func addMessage(message: Message) {
+        let childRef = messageRef.childByAutoId()
+        childRef.setValue(message.convertToDictionary())
+        guard let messageKey = childRef.key else { return }
+        let userMessagesFromIDRef = userMessagesRef.child(message.fromID)
+        userMessagesFromIDRef.child(messageKey).setValue(1)
+        let userMessagesToIDRef = userMessagesRef.child(message.toID)
+        userMessagesToIDRef.child(messageKey).setValue(1)
+    }
+    
+    //Get Chat Messages from Database
+    func getChat(fromID: String, toID: String) {
+        var messages = [Message]()
+        userMessagesRef.child(fromID).observeSingleEvent(of: .value) { [weak self] (snapshot) in
+            guard let details = snapshot.value as? [String: Any] else {
+                return
+            }
+            
+            let messageIDs = details.keys
+            for messageID in messageIDs {
+                self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
+                    guard let details = snapshot.value as? [String: Any] else {
+                        return
+                    }
+                    
+                    //Read message values here
+
+                })
+            }
+        }
+    }
+    
     // MARK: - Firebase Storage
     
     //Upload Profile picture to Firebase Storage and get its download URL
@@ -175,4 +210,5 @@ class FirebaseManager {
             completionHandler(data, nil)
         })
     }
+    
 }

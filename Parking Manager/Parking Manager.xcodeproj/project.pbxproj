@@ -33,6 +33,9 @@
 		543A108523221544004B577C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108423221544004B577C /* User.swift */; };
 		543A108723222115004B577C /* UserDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108623222115004B577C /* UserDetailsVM.swift */; };
 		543A108B23223021004B577C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A108A23223021004B577C /* Helper.swift */; };
+		54762FEF232F922C000BF9F7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FEE232F922C000BF9F7 /* Message.swift */; };
+		54762FF1232FCD49000BF9F7 /* BaseCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */; };
+		54762FF3232FCD63000BF9F7 /* ChatCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF2232FCD63000BF9F7 /* ChatCVCell.swift */; };
 		54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */; };
 		54A0D066232783D600A3DBA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D065232783D600A3DBA9 /* Constants.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -68,6 +71,9 @@
 		543A108423221544004B577C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		543A108623222115004B577C /* UserDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVM.swift; sourceTree = "<group>"; };
 		543A108A23223021004B577C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		54762FEE232F922C000BF9F7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCVCell.swift; sourceTree = "<group>"; };
+		54762FF2232FCD63000BF9F7 /* ChatCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCVCell.swift; sourceTree = "<group>"; };
 		54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
 		54A0D065232783D600A3DBA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				543A108423221544004B577C /* User.swift */,
+				54762FEE232F922C000BF9F7 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,6 +159,8 @@
 				54190E87232A4DAA004AAC5B /* SearchTabVC.swift */,
 				54190E8B232A6E0A004AAC5B /* SearchTVCell.swift */,
 				54190E8D232CE74A004AAC5B /* ChatTabVC.swift */,
+				54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */,
+				54762FF2232FCD63000BF9F7 /* ChatCVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 				543A108B23223021004B577C /* Helper.swift in Sources */,
 				54190E8C232A6E0A004AAC5B /* SearchTVCell.swift in Sources */,
 				543A107D23211818004B577C /* UserDetailsVC.swift in Sources */,
+				54762FEF232F922C000BF9F7 /* Message.swift in Sources */,
 				543A107B23210B0D004B577C /* AddTabVC.swift in Sources */,
 				543A108723222115004B577C /* UserDetailsVM.swift in Sources */,
 				54A0D066232783D600A3DBA9 /* Constants.swift in Sources */,
@@ -368,6 +378,7 @@
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
 				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,
+				54762FF1232FCD49000BF9F7 /* BaseCVCell.swift in Sources */,
 				54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */,
 				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
@@ -375,6 +386,7 @@
 				54190E90232CE761004AAC5B /* ChatTabVM.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,
 				54190E88232A4DAA004AAC5B /* SearchTabVC.swift in Sources */,
+				54762FF3232FCD63000BF9F7 /* ChatCVCell.swift in Sources */,
 				543A108123213DE2004B577C /* UserDetailsTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
