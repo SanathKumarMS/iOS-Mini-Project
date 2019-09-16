@@ -14,8 +14,8 @@ protocol UserDetailTVCellDelegate: class {
 
 class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
     
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var userDetailTextField: UITextField!
+    @IBOutlet weak var titleLabel: UILabel!
     
     private var picker: UIPickerView?
     weak var userDetailsCellDelegate: UserDetailTVCellDelegate?
@@ -23,8 +23,8 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textField.delegate = self
-        textField.addTarget(self, action: #selector(editingChanges), for: .editingChanged)
+        userDetailTextField.delegate = self
+        userDetailTextField.addTarget(self, action: #selector(editingChanges), for: .editingChanged)
     }
     
     func addPickerToTextField() {
@@ -34,11 +34,11 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
         picker?.reloadAllComponents()
         picker?.showsSelectionIndicator = true
         
-        textField.inputView = picker
+        userDetailTextField.inputView = picker
         setupToolBar()
     }
     
-    func setupToolBar() {
+    private func setupToolBar() {
         toolBar = UIToolbar()
         toolBar?.barStyle = UIBarStyle.default
         toolBar?.isTranslucent = true
@@ -51,28 +51,28 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
         
         toolBar?.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar?.isUserInteractionEnabled = true
-        textField.inputAccessoryView = toolBar
+        userDetailTextField.inputAccessoryView = toolBar
     }
     
     @objc func donePicker() {
         let selectedIndex = picker?.selectedRow(inComponent: 0) ?? 0
-        textField.text = VehicleTypes.allCases[selectedIndex].rawValue
-        textField.resignFirstResponder()
+        userDetailTextField.text = VehicleTypes.allCases[selectedIndex].rawValue
+        userDetailTextField.resignFirstResponder()
         editingChanges()
     }
     
     @objc func cancelPicker() {
-        textField.text = ""
-        textField.resignFirstResponder()
+        userDetailTextField.text = ""
+        userDetailTextField.resignFirstResponder()
         editingChanges()
     }
     
     @objc func editingChanges() {
-        userDetailsCellDelegate?.addUser(tag: textField.tag, text: textField.text ?? "")
+        userDetailsCellDelegate?.addUser(tag: userDetailTextField.tag, text: userDetailTextField.text ?? "")
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.tag == UserDetails.vehicleType.rawValue {
+        if textField.tag == UserDetailsToDisplay.vehicleType.rawValue {
             addPickerToTextField()
         }
     }
@@ -93,9 +93,9 @@ extension UserDetailsTVCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if textField.tag == UserDetails.vehicleType.rawValue {
-            textField.text = VehicleTypes.allCases[row].rawValue
-            userDetailsCellDelegate?.addUser(tag: textField.tag, text: textField.text ?? "")
+        if userDetailTextField.tag == UserDetailsToDisplay.vehicleType.rawValue {
+            userDetailTextField.text = VehicleTypes.allCases[row].rawValue
+            userDetailsCellDelegate?.addUser(tag: userDetailTextField.tag, text: userDetailTextField.text ?? "")
         }
     }
 }

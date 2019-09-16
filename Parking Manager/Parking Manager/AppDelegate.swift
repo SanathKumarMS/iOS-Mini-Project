@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue) == true {
             window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "TabBarVC")
         } else {
-            window?.rootViewController =  UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "LoginVC"))
+            window?.rootViewController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "LoginVC"))
         }
         return true
     }

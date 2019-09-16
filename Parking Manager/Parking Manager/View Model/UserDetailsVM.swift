@@ -14,7 +14,7 @@ enum VehicleTypes: String, CaseIterable {
     case car = "Car"
 }
 
-enum UserDetails: Int, CaseIterable {
+enum UserDetailsToDisplay: Int, CaseIterable {
     case email
     case name
     case phone

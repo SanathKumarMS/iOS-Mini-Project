@@ -10,8 +10,8 @@ import UIKit
 
 class SearchTVCell: BaseTVCell {
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var fieldLabel: UILabel!
+    @IBOutlet weak var detailButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()

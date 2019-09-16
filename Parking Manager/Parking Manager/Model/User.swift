@@ -19,12 +19,12 @@ struct User {
     
     func convertToJSON() -> [String: String] {
         var dict = [String: String]()
-        dict[UserDetailsFromStructure.email.rawValue] = email
-        dict[UserDetailsFromStructure.name.rawValue] = name
-        dict[UserDetailsFromStructure.phone.rawValue] = phone
-        dict[UserDetailsFromStructure.vehicleType.rawValue] = vehicleType
-        dict[UserDetailsFromStructure.vehicleNumber.rawValue] = vehicleNumber
-        dict[UserDetailsFromStructure.profilePicturePath.rawValue] = profilePicturePath
+        dict[UserDetails.email.rawValue] = email
+        dict[UserDetails.name.rawValue] = name
+        dict[UserDetails.phone.rawValue] = phone
+        dict[UserDetails.vehicleType.rawValue] = vehicleType
+        dict[UserDetails.vehicleNumber.rawValue] = vehicleNumber
+        dict[UserDetails.profilePicturePath.rawValue] = profilePicturePath
         return dict
     }
 }

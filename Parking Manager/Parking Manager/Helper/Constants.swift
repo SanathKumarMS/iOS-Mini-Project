@@ -17,15 +17,16 @@ typealias GetAllUserDetailsCompletionHandler = ([String: Any]?) -> Void
 typealias GetAllUserDataCompletionHandler = ([User]?) -> Void
 typealias GetImageCompletionHandler = (Data?, Error?) -> Void
 
-let projectName = "Parking Manager"
-let defaultProfilePhoto = "Network-Profile"
-let defaultErrorMessage = "The operation could not be completed."
-let successMessage = "Success"
-let iPhone5SHeight = 568.0
-let topConstraintfor5S = 70.0
-let EmptyString = ""
-let dropDownImage = "dropdown.png"
-let jpgExtension = ".jpg"
+struct Constants {
+    static let projectName = "Parking Manager"
+    static let defaultProfilePhoto = "Network-Profile"
+    static let defaultErrorMessage = "The operation could not be completed."
+    static let successMessage = "Success"
+    static let iPhone5SHeight = 568.0
+    static let topConstraintfor5S = 70.0
+    static let dropDownImage = "dropdown.png"
+    static let jpgExtension = ".jpg"
+}
 
 struct AlertTitles {
     static let error = "Error"

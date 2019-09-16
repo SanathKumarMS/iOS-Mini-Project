@@ -37,13 +37,13 @@ class FirebaseManager {
                     }
                 }   //User not present. Creating account and signing in
             } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
-                if error == nil {
+                guard let error = error else {
                     Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
                         completionHandler(error)
                     }
-                } else {
-                    completionHandler(error)
+                    return
                 }
+                completionHandler(error)
             }
             }
         }
@@ -131,7 +131,7 @@ class FirebaseManager {
     func uploadImageToStorage(name: String, imageData: Data?, completionHandler: @escaping ImageHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + jpgExtension
+        let imageName = name + Constants.jpgExtension
         let imageRef = imagesRef.child(imageName)
         guard let imageData = imageData else { return }
         
@@ -150,7 +150,7 @@ class FirebaseManager {
     func deleteImageFromStorage(name: String, completionHandler: @escaping ErrorHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + jpgExtension
+        let imageName = name + Constants.jpgExtension
         let imageRef = imagesRef.child(imageName)
         imageRef.delete(completion: { (error) in
             completionHandler(error)
@@ -161,7 +161,7 @@ class FirebaseManager {
     func downloadImageFromStorage(name: String, completionHandler: @escaping GetImageCompletionHandler) {
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images")
-        let imageName = name + jpgExtension
+        let imageName = name + Constants.jpgExtension
         let imageRef = imagesRef.child(imageName)
         imageRef.getData(maxSize: 30 * 1024 * 1024, completion: { (data, error) in
             if let error = error {

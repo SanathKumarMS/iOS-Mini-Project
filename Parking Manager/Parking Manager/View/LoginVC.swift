@@ -101,16 +101,15 @@ extension LoginVC: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         startSpin()
         viewModel.signInWithFB(result: result, error: error) { [weak self] (msg, success) in
+            self?.stopSpin()
             if !success {
                 guard let msg = msg else {
-                    self?.stopSpin()
                     return
                 }
                 let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                self?.stopSpin()
+                
                 self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
             } else {
-                self?.stopSpin()
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
                 guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                 self?.navigationController?.pushViewController(userDetailsVC, animated: true)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum UserDetailsFromStructure: String, CaseIterable {
+enum UserDetails: String, CaseIterable {
     case email
     case name
     case phone

@@ -175,8 +175,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="label" destination="3dW-bb-l6Y" id="Ep1-qp-b0N"/>
-                                            <outlet property="textField" destination="zxf-DS-LZz" id="P7r-Rs-Q0l"/>
+                                            <outlet property="titleLabel" destination="3dW-bb-l6Y" id="tqc-jT-bgg"/>
+                                            <outlet property="userDetailTextField" destination="zxf-DS-LZz" id="pkd-HI-l5e"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -238,13 +238,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddn-EJ-O9r">
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddn-EJ-O9r">
                                 <rect key="frame" x="140" y="103" width="134" height="134"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="134" id="d0E-an-pUi"/>
                                     <constraint firstAttribute="width" constant="134" id="ldO-BK-x52"/>
                                 </constraints>
                                 <state key="normal" image="Network-Profile"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="67"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-Uc-fhO">
                                 <rect key="frame" x="10" y="287" width="394" height="418"/>
@@ -285,8 +290,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="label" destination="7T7-Z9-FlM" id="9BG-Mw-dcm"/>
-                                            <outlet property="textField" destination="2FC-vB-rSC" id="cxJ-qV-eRK"/>
+                                            <outlet property="titleLabel" destination="7T7-Z9-FlM" id="lcI-dg-lXw"/>
+                                            <outlet property="userDetailTextField" destination="2FC-vB-rSC" id="zbs-dy-B3m"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -381,14 +386,14 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bko-yE-4p5">
-                                <rect key="frame" x="20" y="262" width="374" height="472"/>
+                                <rect key="frame" x="0.0" y="262" width="414" height="551"/>
                                 <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTVCell" rowHeight="90" id="GhG-kd-5nM" customClass="SearchTVCell" customModule="Parking_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GhG-kd-5nM" id="Jjz-63-0c3">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRN-0H-uke">
@@ -421,8 +426,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <connections>
-                                            <outlet property="button" destination="dX8-Vm-JeJ" id="Fsr-zY-098"/>
-                                            <outlet property="label" destination="xRN-0H-uke" id="2Tq-um-i0Y"/>
+                                            <outlet property="detailButton" destination="dX8-Vm-JeJ" id="hng-WR-1kf"/>
+                                            <outlet property="fieldLabel" destination="xRN-0H-uke" id="vcg-4A-V0Y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -436,10 +441,10 @@
                         <constraints>
                             <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="nHW-7i-gJJ" secondAttribute="trailing" constant="20" id="3NV-6i-NNA"/>
                             <constraint firstItem="R2o-gc-RI6" firstAttribute="top" secondItem="nHW-7i-gJJ" secondAttribute="bottom" constant="46" id="7x7-ZN-gRg"/>
-                            <constraint firstItem="Bko-yE-4p5" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" constant="20" id="VK7-VA-D8w"/>
-                            <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="Bko-yE-4p5" secondAttribute="trailing" constant="20" id="Yyk-YR-TT4"/>
+                            <constraint firstItem="Bko-yE-4p5" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" id="VK7-VA-D8w"/>
+                            <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="Bko-yE-4p5" secondAttribute="trailing" id="Yyk-YR-TT4"/>
                             <constraint firstItem="nHW-7i-gJJ" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" constant="20" id="cRl-Yu-vsQ"/>
-                            <constraint firstItem="MHO-1P-4sx" firstAttribute="bottom" secondItem="Bko-yE-4p5" secondAttribute="bottom" constant="79" id="hRM-J0-HAC"/>
+                            <constraint firstItem="MHO-1P-4sx" firstAttribute="bottom" secondItem="Bko-yE-4p5" secondAttribute="bottom" id="hRM-J0-HAC"/>
                             <constraint firstItem="R2o-gc-RI6" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" constant="20" id="i8F-yN-meL"/>
                             <constraint firstItem="Bko-yE-4p5" firstAttribute="top" secondItem="R2o-gc-RI6" secondAttribute="bottom" constant="32" id="ieo-Yc-FnO"/>
                             <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="R2o-gc-RI6" secondAttribute="trailing" constant="20" id="jBa-WP-8Ks"/>

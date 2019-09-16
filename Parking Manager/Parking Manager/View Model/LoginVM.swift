@@ -30,7 +30,7 @@ class LoginVM: BaseVM {
             return
         }
         guard let user = user else {
-            msg = defaultErrorMessage
+            msg = Constants.defaultErrorMessage
             DispatchQueue.main.async {
                 completionHandler(msg)
             }

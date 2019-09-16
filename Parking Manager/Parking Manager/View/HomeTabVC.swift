@@ -43,14 +43,14 @@ class HomeTabVC: BaseVC {
     @IBAction private func updateDetails(_ sender: Any) {
         startSpin()
         var imageData: Data?
-        if profilePictureButton.imageView?.image != UIImage(named: defaultProfilePhoto) {
+        if profilePictureButton.imageView?.image != UIImage(named: Constants.defaultProfilePhoto) {
             imageData = profilePictureButton.imageView?.image?.pngData()
         }
-        viewModel.addUserToDatabase(email: viewModel.userData[UserDetailsFromStructure.email.rawValue] ?? EmptyString, name: viewModel.userData[UserDetailsFromStructure.name.rawValue] ?? EmptyString, phone: viewModel.userData[UserDetailsFromStructure.phone.rawValue] ?? EmptyString, vehicleNumber: viewModel.userData[UserDetailsFromStructure.vehicleNumber.rawValue] ?? EmptyString, vehicleType: viewModel.userData[UserDetailsFromStructure.vehicleType.rawValue] ?? EmptyString, imageData: imageData, completionHandler: { [weak self] (error) in
+        viewModel.addUserToDatabase(email: viewModel.userData[UserDetails.email.rawValue] ?? "", name: viewModel.userData[UserDetails.name.rawValue] ?? "", phone: viewModel.userData[UserDetails.phone.rawValue] ?? "", vehicleNumber: viewModel.userData[UserDetails.vehicleNumber.rawValue] ?? "", vehicleType: viewModel.userData[UserDetails.vehicleType.rawValue] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
             guard error == nil else {
                 let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
                 self?.stopSpin()
-                self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                self?.presentAlert(title: AlertTitles.error, message: Constants.defaultErrorMessage, style: .alert, actions: [alertAction])
                 return
             }
             self?.stopSpin()
@@ -65,24 +65,22 @@ class HomeTabVC: BaseVC {
         present(UINavigationController(rootViewController: storyboard?.instantiateViewController(withIdentifier: String(describing: LoginVC.self)) ?? LoginVC()), animated: true, completion: nil)
     }
     
-    func setupUI() {
+    private func setupUI() {
         startSpin()
         navigationItem.title = "Home"
         imagePicker.delegate = self
         profilePictureButton.isUserInteractionEnabled = false
         profilePictureButton.addTarget(self, action: #selector(setImage), for:  .touchUpInside)
-        profilePictureButton.layer.cornerRadius = profilePictureButton.bounds.size.width / 2
         profilePictureButton.clipsToBounds = true
-        profilePictureButton.adjustsImageWhenHighlighted = false
         updateDetailsButton.isHidden = true
         viewModel.getLoggedInUserDetails { [weak self] (success, image) in
+            self?.stopSpin()
             if success == true {
                 self?.homeTableView.reloadData()
                 self?.stopSpin()
                 guard let image = image else { return }
                 self?.profilePictureButton.setImage(image, for: .normal)
             }
-            self?.stopSpin()
         }
     }
     
@@ -92,7 +90,7 @@ class HomeTabVC: BaseVC {
         let photoLibrary = AlertAction(title: ImagePickerActionTypes.photoLibrary.rawValue, style: .default)
         let cancel = AlertAction(title: ImagePickerActionTypes.cancel.rawValue, style: .cancel)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
-        if profilePictureButton.imageView?.image != UIImage(named: defaultProfilePhoto) {
+        if profilePictureButton.imageView?.image != UIImage(named: Constants.defaultProfilePhoto) {
             let delete = AlertAction(title: ImagePickerActionTypes.delete.rawValue, style: .default)
             alertActions.append(delete)
         }
@@ -107,7 +105,7 @@ class HomeTabVC: BaseVC {
             case ImagePickerActionTypes.cancel.rawValue:
                 return
             case ImagePickerActionTypes.delete.rawValue:
-                self?.profilePictureButton.setImage(UIImage(named: defaultProfilePhoto), for: .normal)
+                self?.profilePictureButton.setImage(UIImage(named: Constants.defaultProfilePhoto), for: .normal)
             default:
                 return
             }
@@ -129,19 +127,19 @@ extension HomeTabVC: UITableViewDelegate {
 
 extension HomeTabVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserDetails.allCases.count
+        return UserDetailsToDisplay.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserDetailsTVCell.self)) as? UserDetailsTVCell else { return UserDetailsTVCell() }
-        cell.textField.tag = indexPath.row
-        cell.label.text = UserDetails.allCases[indexPath.row].title + ":"
-        cell.textField.isUserInteractionEnabled = isTextEditable
+        cell.userDetailTextField.tag = indexPath.row
+        cell.titleLabel.text = UserDetailsToDisplay.allCases[indexPath.row].title + ":"
+        cell.userDetailTextField.isUserInteractionEnabled = isTextEditable
         cell.userDetailsCellDelegate = self
-        if cell.textField.tag == UserDetails.email.rawValue {
-            cell.textField.isUserInteractionEnabled = false
+        if cell.userDetailTextField.tag == UserDetailsToDisplay.email.rawValue {
+            cell.userDetailTextField.isUserInteractionEnabled = false
         }
-        cell.textField.text = viewModel.userData[UserDetailsFromStructure.allCases[indexPath.row].rawValue]
+        cell.userDetailTextField.text = viewModel.userData[UserDetails.allCases[indexPath.row].rawValue]
         return cell
     }
 }
@@ -151,14 +149,13 @@ extension HomeTabVC: UITableViewDataSource {
 extension HomeTabVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            profilePictureButton.imageView?.contentMode = .scaleAspectFill
             profilePictureButton.setImage(image, for: .normal)
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 
@@ -167,7 +164,7 @@ extension HomeTabVC: UIImagePickerControllerDelegate, UINavigationControllerDele
 extension HomeTabVC: UserDetailTVCellDelegate {
     
     func addUser(tag: Int, text: String) {
-        let key = UserDetailsFromStructure.allCases[tag].rawValue
+        let key = UserDetails.allCases[tag].rawValue
         viewModel.userData[key] = text
     }
 }

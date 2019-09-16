@@ -22,8 +22,8 @@ class UserDetailsVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UIScreen.main.bounds.height <= CGFloat(iPhone5SHeight) {
-            imageViewTopConstraint.constant = CGFloat(topConstraintfor5S)
+        if UIScreen.main.bounds.height <= CGFloat(Constants.iPhone5SHeight) {
+            imageViewTopConstraint.constant = CGFloat(Constants.topConstraintfor5S)
         }
         setupUI()
     }
@@ -39,16 +39,16 @@ class UserDetailsVC: BaseVC {
     @IBAction private func addUser(_ sender: Any) {
         startSpin()
         var imageData: Data?
-        if imageView.image != UIImage(named: defaultProfilePhoto) {
+        if imageView.image != UIImage(named: Constants.defaultProfilePhoto) {
             imageData = imageView.image?.pngData()
         }
         switch UserDetailsVM.currentVCForEmailField {
         case .userDetails:
-            viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
+            viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetailsToDisplay.name.title] ?? "", phone: userData[UserDetailsToDisplay.phone.title] ?? "", vehicleNumber: userData[UserDetailsToDisplay.vehicleNumber.title] ?? "", vehicleType: userData[UserDetailsToDisplay.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
                 guard error == nil else {
                     self?.stopSpin()
                     let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                    self?.presentAlert(title: AlertTitles.error, message: Constants.defaultErrorMessage, style: .alert, actions: [alertAction])
                     return
                 }
                 self?.stopSpin()
@@ -57,11 +57,11 @@ class UserDetailsVC: BaseVC {
                 self?.present(tabBarVC, animated: true, completion: nil)
             })
         case .addTab:
-            viewModel.addUserToDatabase(email: userData[UserDetails.email.title] ?? "", name: userData[UserDetails.name.title] ?? "", phone: userData[UserDetails.phone.title] ?? "", vehicleNumber: userData[UserDetails.vehicleNumber.title] ?? "", vehicleType: userData[UserDetails.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
+            viewModel.addUserToDatabase(email: userData[UserDetailsToDisplay.email.title] ?? "", name: userData[UserDetailsToDisplay.name.title] ?? "", phone: userData[UserDetailsToDisplay.phone.title] ?? "", vehicleNumber: userData[UserDetailsToDisplay.vehicleNumber.title] ?? "", vehicleType: userData[UserDetailsToDisplay.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
                 guard error == nil else {
                     self?.stopSpin()
                     let alertAction = AlertAction(title: AlertTitles.close, style: .cancel)
-                    self?.presentAlert(title: AlertTitles.error, message: defaultErrorMessage, style: .alert, actions: [alertAction])
+                    self?.presentAlert(title: AlertTitles.error, message: Constants.defaultErrorMessage, style: .alert, actions: [alertAction])
                     return
                 }
                 self?.stopSpin()
@@ -99,7 +99,7 @@ class UserDetailsVC: BaseVC {
         let photoLibrary = AlertAction(title: ImagePickerActionTypes.photoLibrary.rawValue, style: .default)
         let cancel = AlertAction(title: ImagePickerActionTypes.cancel.rawValue, style: .cancel)
         alertActions.append(contentsOf: [camera, photoLibrary, cancel])
-        if imageView.image != UIImage(named: defaultProfilePhoto) {
+        if imageView.image != UIImage(named: Constants.defaultProfilePhoto) {
             let delete = AlertAction(title: ImagePickerActionTypes.delete.rawValue, style: .default)
             alertActions.append(delete)
         }
@@ -114,7 +114,7 @@ class UserDetailsVC: BaseVC {
             case ImagePickerActionTypes.cancel.rawValue:
                 return
             case ImagePickerActionTypes.delete.rawValue:
-                self?.imageView.image = UIImage(named: defaultProfilePhoto)
+                self?.imageView.image = UIImage(named: Constants.defaultProfilePhoto)
             default:
                 return
             }
@@ -136,34 +136,34 @@ extension UserDetailsVC: UITableViewDelegate {
 
 extension UserDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserDetails.allCases.count
+        return UserDetailsToDisplay.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserDetailsTVCell.self)) as? UserDetailsTVCell else { return UserDetailsTVCell() }
-        cell.textField.tag = indexPath.row
-        cell.label.text = UserDetails.allCases[indexPath.row].title + ":"
-        cell.label.font = UIFont.systemFont(ofSize: 12)
+        cell.userDetailTextField.tag = indexPath.row
+        cell.titleLabel.text = UserDetailsToDisplay.allCases[indexPath.row].title + ":"
+        cell.titleLabel.font = UIFont.systemFont(ofSize: 12)
         cell.userDetailsCellDelegate = self
         switch indexPath.row {
-        case UserDetails.email.rawValue:
+        case UserDetailsToDisplay.email.rawValue:
             switch UserDetailsVM.currentVCForEmailField {
             case .userDetails:
                 if !loggedInEmailID.isEmpty {
-                    cell.textField.text = loggedInEmailID
-                    cell.textField.isUserInteractionEnabled = false
+                    cell.userDetailTextField.text = loggedInEmailID
+                    cell.userDetailTextField.isUserInteractionEnabled = false
                 }
             case .addTab:
-                cell.textField.text = EmptyString
+                cell.userDetailTextField.text = ""
             }
-        case UserDetails.phone.rawValue:
-            cell.textField.keyboardType = .numberPad
-            cell.textField.textContentType = .telephoneNumber
-        case UserDetails.vehicleType.rawValue:
-            let imageView = UIImageView(image: UIImage(named: dropDownImage))
+        case UserDetailsToDisplay.phone.rawValue:
+            cell.userDetailTextField.keyboardType = .numberPad
+            cell.userDetailTextField.textContentType = .telephoneNumber
+        case UserDetailsToDisplay.vehicleType.rawValue:
+            let imageView = UIImageView(image: UIImage(named: Constants.dropDownImage))
             imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            cell.textField.rightView = imageView
-            cell.textField.rightViewMode = .always
+            cell.userDetailTextField.rightView = imageView
+            cell.userDetailTextField.rightViewMode = .always
             cell.addPickerToTextField()
         default:
             break
@@ -194,7 +194,7 @@ extension UserDetailsVC: UIImagePickerControllerDelegate, UINavigationController
 extension UserDetailsVC: UserDetailTVCellDelegate {
     
     func addUser(tag: Int, text: String) {
-        let key = UserDetails(rawValue: tag)?.title
+        let key = UserDetailsToDisplay(rawValue: tag)?.title
         guard let field = key else { return }
         userData[field] = text
     }

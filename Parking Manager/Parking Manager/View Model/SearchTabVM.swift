@@ -40,14 +40,14 @@ class SearchTabVM: BaseVM {
                     return
                 }
                 
-                let email = dict[UserDetailsFromStructure.email.rawValue]
-                let name = dict[UserDetailsFromStructure.name.rawValue]
-                let phone = dict[UserDetailsFromStructure.phone.rawValue]
-                let vehicleNumber = dict[UserDetailsFromStructure.vehicleNumber.rawValue]
-                let vehicleType = dict[UserDetailsFromStructure.vehicleType.rawValue]
-                let profilePicturePath = dict[UserDetailsFromStructure.profilePicturePath.rawValue]
+                let email = dict[UserDetails.email.rawValue]
+                let name = dict[UserDetails.name.rawValue]
+                let phone = dict[UserDetails.phone.rawValue]
+                let vehicleNumber = dict[UserDetails.vehicleNumber.rawValue]
+                let vehicleType = dict[UserDetails.vehicleType.rawValue]
+                let profilePicturePath = dict[UserDetails.profilePicturePath.rawValue]
                 
-                let user = User(email: email ?? EmptyString, name: name ?? EmptyString, phone: phone ?? EmptyString, vehicleType: vehicleType ?? EmptyString, vehicleNumber: vehicleNumber ?? EmptyString, md5HashOfEmail: hashedKey, profilePicturePath: profilePicturePath ?? EmptyString)
+                let user = User(email: email ?? "", name: name ?? "", phone: phone ?? "", vehicleType: vehicleType ?? "", vehicleNumber: vehicleNumber ?? "", md5HashOfEmail: hashedKey, profilePicturePath: profilePicturePath ?? "")
                 self?.allUsers.append(user)
             }
             DispatchQueue.main.async {

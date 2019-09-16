@@ -21,13 +21,7 @@ class SearchTabVC: BaseVC {
         super.viewDidLoad()
 
         navigationItem.title = "Search"
-        viewModel.getAllUsersData(completionHandler: { [weak self] (userData) in
-            guard let userData = userData else { return }
-            self?.filteredData = userData.filter({ (user) -> Bool in
-                user.vehicleType == VehicleTypes.bike.rawValue
-            })
-            self?.tableView.reloadData()
-        })
+        getAllUsersData()
     }
     
     @IBAction private func segmentIndexChanged() {
@@ -41,28 +35,34 @@ class SearchTabVC: BaseVC {
     @IBAction private func onClickedValue(_ sender: Any) {
         guard let button = sender as? UIButton, let text = button.title(for: .normal) else { return }
         switch button.tag {
-        case UserDetails.email.rawValue:
+        case UserDetailsToDisplay.email.rawValue:
             openMailApp(emailAddress: text)
-        case UserDetails.phone.rawValue:
+        case UserDetailsToDisplay.phone.rawValue:
             openDialerOrChat(phoneNumber: text)
         default:
             return
         }
     }
     
+    func getAllUsersData() {
+        viewModel.getAllUsersData(completionHandler: { [weak self] (userData) in
+            guard let userData = userData else { return }
+            self?.filteredData = userData.filter({ (user) -> Bool in
+                user.vehicleType == VehicleTypes.bike.rawValue
+            })
+            self?.tableView.reloadData()
+        })
+    }
+    
     func openMailApp(emailAddress: String) {
-        if let mailURL = URL(string: "mailto:\(String(describing: emailAddress))") {
-            if UIApplication.shared.canOpenURL(mailURL) {
-                UIApplication.shared.open(mailURL)
-            }
+        if let mailURL = URL(string: "mailto:\(String(describing: emailAddress))"), UIApplication.shared.canOpenURL(mailURL) == true {
+            UIApplication.shared.open(mailURL)
         }
     }
     
     func openDialerOrChat(phoneNumber: String) {
-        if let phoneURL = URL(string: "tel://\(phoneNumber)") {
-            if UIApplication.shared.canOpenURL(phoneURL) {
-                UIApplication.shared.open(phoneURL)
-            }
+        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) == true {
+            UIApplication.shared.open(phoneURL)
         }
     }
 }
@@ -91,25 +91,25 @@ extension SearchTabVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserDetails.allCases.count
+        return UserDetailsToDisplay.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchTVCell.self)) as? SearchTVCell else { return SearchTVCell() }
         let user = filteredData[indexPath.section]
-        cell.label.text = UserDetails.allCases[indexPath.row].title
-        cell.button.tag = indexPath.row
+        cell.fieldLabel.text = UserDetailsToDisplay.allCases[indexPath.row].title
+        cell.detailButton.tag = indexPath.row
         switch indexPath.row {
-        case UserDetails.email.rawValue:
-            cell.button.setTitle(user.email, for: .normal)
-        case UserDetails.name.rawValue:
-            cell.button.setTitle(user.name, for: .normal)
-        case UserDetails.phone.rawValue:
-            cell.button.setTitle(user.phone, for: .normal)
-        case UserDetails.vehicleType.rawValue:
-            cell.button.setTitle(user.vehicleType, for: .normal)
-        case UserDetails.vehicleNumber.rawValue:
-            cell.button.setTitle(user.vehicleNumber, for: .normal)
+        case UserDetailsToDisplay.email.rawValue:
+            cell.detailButton.setTitle(user.email, for: .normal)
+        case UserDetailsToDisplay.name.rawValue:
+            cell.detailButton.setTitle(user.name, for: .normal)
+        case UserDetailsToDisplay.phone.rawValue:
+            cell.detailButton.setTitle(user.phone, for: .normal)
+        case UserDetailsToDisplay.vehicleType.rawValue:
+            cell.detailButton.setTitle(user.vehicleType, for: .normal)
+        case UserDetailsToDisplay.vehicleNumber.rawValue:
+            cell.detailButton.setTitle(user.vehicleNumber, for: .normal)
         default:
             break
         }
@@ -124,7 +124,8 @@ extension SearchTabVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredData = viewModel.allUsers.filter({(user) -> Bool in
             
-            (user.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || user.email.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
+            (user.name.lowercased().contains(searchText.lowercased()) || user.email.lowercased().contains(searchText.lowercased())) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
+//            (user.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || user.email.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
         })
         tableView.reloadData()
     }
