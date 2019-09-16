@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.hasEnteredDetails.rawValue) == false {
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.hasEnteredDetails.rawValue) != true {
             let navVC = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: String(describing: LoginVC.self)))
             navVC.pushViewController(storyboard.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)), animated: true)
             window?.rootViewController = navVC

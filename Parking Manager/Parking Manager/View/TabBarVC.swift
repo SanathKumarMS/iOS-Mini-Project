@@ -12,7 +12,19 @@ class TabBarVC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = self
+        
+    }
+}
 
-        // Do any additional setup after loading the view.
+// MARK: - UITabBarControllerDelegate
+
+extension TabBarVC: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        guard let navVC = viewController as? UINavigationController else { return }
+        guard let addTabVC = navVC.viewControllers.first as? UserDetailsVC else { return }
+        
+        addTabVC.currentVCType = .addTab
     }
 }

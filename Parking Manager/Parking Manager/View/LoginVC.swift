@@ -54,6 +54,7 @@ class LoginVC: BaseVC {
                     } else {
                         self?.stopSpin()
                         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+                        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
                         guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                         self?.navigationController?.pushViewController(userDetailsVC, animated: true)
                     }
@@ -87,6 +88,7 @@ extension LoginVC: GIDSignInDelegate {
             } else {
                 self?.stopSpin()
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
                 guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                 self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }
@@ -111,6 +113,7 @@ extension LoginVC: LoginButtonDelegate {
                 self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
             } else {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
                 guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
                 self?.navigationController?.pushViewController(userDetailsVC, animated: true)
             }

@@ -19,13 +19,14 @@ class UserDetailsVC: BaseVC {
     private var viewModel = UserDetailsVM()
     private var loggedInEmailID: String = ""
     private var userData: [String: String] = [:]
+    var currentVCType = ViewControllerType.userDetails
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if UIScreen.main.bounds.height <= CGFloat(Constants.iPhone5SHeight) {
             imageViewTopConstraint.constant = CGFloat(Constants.topConstraintfor5S)
         }
-        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+        
         setupUI()
     }
     
@@ -44,7 +45,7 @@ class UserDetailsVC: BaseVC {
         if imageView.image != UIImage(named: Constants.defaultProfilePhoto) {
             imageData = imageView.image?.pngData()
         }
-        switch UserDetailsVM.currentVCForEmailField {
+        switch currentVCType {
         case .userDetails:
             viewModel.addUserToDatabase(email: loggedInEmailID, name: userData[UserDetailsToDisplay.name.title] ?? "", phone: userData[UserDetailsToDisplay.phone.title] ?? "", vehicleNumber: userData[UserDetailsToDisplay.vehicleNumber.title] ?? "", vehicleType: userData[UserDetailsToDisplay.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
                 guard error == nil else {
@@ -54,7 +55,6 @@ class UserDetailsVC: BaseVC {
                     return
                 }
                 self?.stopSpin()
-                UserDetailsVM.currentVCForEmailField = .addTab
                 guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
                 self?.present(tabBarVC, animated: true, completion: nil)
             })
@@ -75,7 +75,7 @@ class UserDetailsVC: BaseVC {
     }
     
     func setupUI() {
-        switch UserDetailsVM.currentVCForEmailField {
+        switch currentVCType {
         case .userDetails:
             navigationItem.title = "Enter Details"
         case .addTab:
@@ -149,7 +149,7 @@ extension UserDetailsVC: UITableViewDataSource {
         cell.userDetailsCellDelegate = self
         switch indexPath.row {
         case UserDetailsToDisplay.email.rawValue:
-            switch UserDetailsVM.currentVCForEmailField {
+            switch currentVCType {
             case .userDetails:
                 if !loggedInEmailID.isEmpty {
                     cell.userDetailTextField.text = loggedInEmailID
