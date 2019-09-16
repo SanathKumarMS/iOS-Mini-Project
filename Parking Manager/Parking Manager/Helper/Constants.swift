@@ -61,4 +61,5 @@ enum ImagePickerActionTypes: String {
 
 enum UserDefaultsKeys: String {
     case isLoggedIn
+    case hasEnteredDetails
 }

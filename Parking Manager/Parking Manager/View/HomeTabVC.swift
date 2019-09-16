@@ -25,6 +25,35 @@ class HomeTabVC: BaseVC {
         setupUI()
     }
     
+    @IBAction private func setImage(_ sender: Any) {
+        var alertActions: [AlertAction] = []
+        let camera = AlertAction(title: ImagePickerActionTypes.camera.rawValue, style: .default)
+        let photoLibrary = AlertAction(title: ImagePickerActionTypes.photoLibrary.rawValue, style: .default)
+        let cancel = AlertAction(title: ImagePickerActionTypes.cancel.rawValue, style: .cancel)
+        alertActions.append(contentsOf: [camera, photoLibrary, cancel])
+        if profilePictureButton.imageView?.image != UIImage(named: Constants.defaultProfilePhoto) {
+            let delete = AlertAction(title: ImagePickerActionTypes.delete.rawValue, style: .default)
+            alertActions.append(delete)
+        }
+        presentAlert(title: AlertTitles.profilePhoto, message: AlertMessages.chooseYourAction, style: .actionSheet, actions: alertActions, completionHandler: { [weak self] (item) in
+            switch item.title {
+            case ImagePickerActionTypes.camera.rawValue:
+                self?.imagePicker.sourceType = .camera
+                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
+            case ImagePickerActionTypes.photoLibrary.rawValue:
+                self?.imagePicker.sourceType = .photoLibrary
+                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
+            case ImagePickerActionTypes.cancel.rawValue:
+                return
+            case ImagePickerActionTypes.delete.rawValue:
+                self?.profilePictureButton.setImage(UIImage(named: Constants.defaultProfilePhoto), for: .normal)
+            default:
+                return
+            }
+        })
+        imagePicker.allowsEditing = false
+    }
+    
     @IBAction private func editAction(_ sender: Any) {
         if isTextEditable == false {
             isTextEditable = true
@@ -70,7 +99,6 @@ class HomeTabVC: BaseVC {
         navigationItem.title = "Home"
         imagePicker.delegate = self
         profilePictureButton.isUserInteractionEnabled = false
-        profilePictureButton.addTarget(self, action: #selector(setImage), for:  .touchUpInside)
         profilePictureButton.clipsToBounds = true
         updateDetailsButton.isHidden = true
         viewModel.getLoggedInUserDetails { [weak self] (success, image) in
@@ -82,35 +110,6 @@ class HomeTabVC: BaseVC {
                 self?.profilePictureButton.setImage(image, for: .normal)
             }
         }
-    }
-    
-    @objc func setImage() {
-        var alertActions: [AlertAction] = []
-        let camera = AlertAction(title: ImagePickerActionTypes.camera.rawValue, style: .default)
-        let photoLibrary = AlertAction(title: ImagePickerActionTypes.photoLibrary.rawValue, style: .default)
-        let cancel = AlertAction(title: ImagePickerActionTypes.cancel.rawValue, style: .cancel)
-        alertActions.append(contentsOf: [camera, photoLibrary, cancel])
-        if profilePictureButton.imageView?.image != UIImage(named: Constants.defaultProfilePhoto) {
-            let delete = AlertAction(title: ImagePickerActionTypes.delete.rawValue, style: .default)
-            alertActions.append(delete)
-        }
-        presentAlert(title: AlertTitles.profilePhoto, message: AlertMessages.chooseYourAction, style: .actionSheet, actions: alertActions, completionHandler: { [weak self] (item) in
-            switch item.title {
-            case ImagePickerActionTypes.camera.rawValue:
-                self?.imagePicker.sourceType = .camera
-                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
-            case ImagePickerActionTypes.photoLibrary.rawValue:
-                self?.imagePicker.sourceType = .photoLibrary
-                self?.present(self?.imagePicker ?? UIImagePickerController(), animated: true, completion: nil)
-            case ImagePickerActionTypes.cancel.rawValue:
-                return
-            case ImagePickerActionTypes.delete.rawValue:
-                self?.profilePictureButton.setImage(UIImage(named: Constants.defaultProfilePhoto), for: .normal)
-            default:
-                return
-            }
-        })
-        imagePicker.allowsEditing = false
     }
 
 }

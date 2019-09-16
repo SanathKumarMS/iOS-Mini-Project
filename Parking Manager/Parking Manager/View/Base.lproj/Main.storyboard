@@ -250,6 +250,9 @@
                                         <integer key="value" value="67"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="setImage:" destination="CY6-MX-4KP" eventType="touchUpInside" id="znr-iw-G2D"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-Uc-fhO">
                                 <rect key="frame" x="10" y="287" width="394" height="418"/>

@@ -123,7 +123,6 @@
 				54187615231E3A34005893B3 /* Assets.xcassets */,
 				5418761A231E3A34005893B3 /* Info.plist */,
 				54187620231E3B08005893B3 /* GoogleService-Info.plist */,
-				541876352320DD76005893B3 /* Extension+String.swift */,
 			);
 			path = "Parking Manager";
 			sourceTree = "<group>";
@@ -174,6 +173,7 @@
 		54A0D064232770F000A3DBA9 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				541876352320DD76005893B3 /* Extension+String.swift */,
 				543A108A23223021004B577C /* Helper.swift */,
 				54A0D065232783D600A3DBA9 /* Constants.swift */,
 			);

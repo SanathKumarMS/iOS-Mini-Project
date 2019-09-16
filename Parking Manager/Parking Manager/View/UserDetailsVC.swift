@@ -25,6 +25,7 @@ class UserDetailsVC: BaseVC {
         if UIScreen.main.bounds.height <= CGFloat(Constants.iPhone5SHeight) {
             imageViewTopConstraint.constant = CGFloat(Constants.topConstraintfor5S)
         }
+        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
         setupUI()
     }
     
@@ -37,6 +38,7 @@ class UserDetailsVC: BaseVC {
     }
     
     @IBAction private func addUser(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
         startSpin()
         var imageData: Data?
         if imageView.image != UIImage(named: Constants.defaultProfilePhoto) {
@@ -161,7 +163,7 @@ extension UserDetailsVC: UITableViewDataSource {
             cell.userDetailTextField.textContentType = .telephoneNumber
         case UserDetailsToDisplay.vehicleType.rawValue:
             let imageView = UIImageView(image: UIImage(named: Constants.dropDownImage))
-            imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+            imageView.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
             cell.userDetailTextField.rightView = imageView
             cell.userDetailTextField.rightViewMode = .always
             cell.addPickerToTextField()
