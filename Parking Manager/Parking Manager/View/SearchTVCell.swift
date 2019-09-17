@@ -11,7 +11,7 @@ import UIKit
 class SearchTVCell: BaseTVCell {
     
     @IBOutlet weak var fieldLabel: UILabel!
-    @IBOutlet weak var detailButton: UIButton!
+    @IBOutlet weak var valueLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

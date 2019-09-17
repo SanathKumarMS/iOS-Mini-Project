@@ -32,6 +32,7 @@ class SearchTabVC: BaseVC {
         tableView.reloadData()
     }
 
+    //Delete later
     @IBAction private func onClickedValue(_ sender: Any) {
         guard let button = sender as? UIButton, let text = button.title(for: .normal) else { return }
         switch button.tag {
@@ -80,6 +81,25 @@ extension SearchTabVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let cell = tableView.cellForRow(at: indexPath) as? SearchTVCell else { return }
+        switch indexPath.row {
+        case UserDetailsToDisplay.email.rawValue :
+            guard let email = cell.valueLabel.text else { return }
+            openMailApp(emailAddress: email)
+        case UserDetailsToDisplay.phone.rawValue:
+            guard let phone = cell.valueLabel.text else { return }
+            
+            guard let emailCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? SearchTVCell else { return }
+            
+            guard let userEmail = emailCell.valueLabel.text else { return }
+            
+            guard let chatTabVC = storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
+            chatTabVC.recipientPhoneNumber = phone
+            chatTabVC.recipientEmail = userEmail
+            navigationController?.pushViewController(chatTabVC, animated: true)
+        default:
+            break
+        }
     }
 }
 
@@ -102,18 +122,18 @@ extension SearchTabVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchTVCell.self)) as? SearchTVCell else { return SearchTVCell() }
         let user = filteredData[indexPath.section]
         cell.fieldLabel.text = UserDetailsToDisplay.allCases[indexPath.row].title
-        cell.detailButton.tag = indexPath.row
+        cell.valueLabel.tag = indexPath.row
         switch indexPath.row {
         case UserDetailsToDisplay.email.rawValue:
-            cell.detailButton.setTitle(user.email, for: .normal)
+            cell.valueLabel.text = user.email
         case UserDetailsToDisplay.name.rawValue:
-            cell.detailButton.setTitle(user.name, for: .normal)
+            cell.valueLabel.text = user.name
         case UserDetailsToDisplay.phone.rawValue:
-            cell.detailButton.setTitle(user.phone, for: .normal)
+            cell.valueLabel.text = user.phone
         case UserDetailsToDisplay.vehicleType.rawValue:
-            cell.detailButton.setTitle(user.vehicleType, for: .normal)
+            cell.valueLabel.text = user.vehicleType
         case UserDetailsToDisplay.vehicleNumber.rawValue:
-            cell.detailButton.setTitle(user.vehicleNumber, for: .normal)
+            cell.valueLabel.text = user.vehicleNumber
         default:
             break
         }

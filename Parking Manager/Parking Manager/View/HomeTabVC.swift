@@ -14,6 +14,7 @@ class HomeTabVC: BaseVC {
     @IBOutlet private weak var updateDetailsButton: UIButton!
     @IBOutlet private weak var homeTableView: UITableView!
     @IBOutlet private weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var profilePictureButtonTopConstraint: NSLayoutConstraint!
     private var viewModel = HomeTabVM()
     private var imagePicker = UIImagePickerController()
     private var isTextEditable = false
@@ -22,6 +23,9 @@ class HomeTabVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if UIScreen.main.bounds.height <= CGFloat(Constants.iPhone5SHeight) {
+            profilePictureButtonTopConstraint.constant = CGFloat(Constants.topConstraintfor5S)
+        }
         setupUI()
     }
     

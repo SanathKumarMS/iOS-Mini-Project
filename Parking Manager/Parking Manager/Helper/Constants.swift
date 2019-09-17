@@ -9,6 +9,9 @@
 import Foundation
 
 typealias ErrorHandler = (Error?) -> Void
+typealias LoginOrSignUpHandler = (Error?, Bool?) -> Void
+typealias FBLoginOrSignUpHandler = (String?, Bool, Bool?) -> Void
+typealias MsgAndNewUserHandler = (String?, Bool?) -> Void
 typealias ImageHandler = (URL?, Error?) -> Void
 typealias StringCompletionHandler = (String?) -> Void
 typealias FBCompletionHandler = (String?, Bool) -> Void

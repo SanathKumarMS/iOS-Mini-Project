@@ -47,16 +47,24 @@ class LoginVC: BaseVC {
                     self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidPassword, style: .alert, actions: [alertAction])
                     return
                 }
-                viewModel.loginOrSignUp(email: email, password: password) { [weak self] (msg) in
-                    if let msg = msg {
+                viewModel.loginOrSignUp(email: email, password: password) { [weak self] (error, newUser) in
+                    if let error = error {
                         self?.stopSpin()
-                        self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
+                        self?.presentAlert(title: AlertTitles.error, message: error.localizedDescription, style: .alert, actions: [alertAction])
                     } else {
                         self?.stopSpin()
                         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-                        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
-                        guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
-                        self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                        guard let newUser = newUser else { return }
+                        
+                        if newUser == true {
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                            guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
+                            self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                        } else {
+                            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                            guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+                            self?.present(tabBarVC, animated: true, completion: nil)
+                        }
                     }
                 }
             } else {
@@ -77,7 +85,7 @@ extension LoginVC: GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         startSpin()
-        viewModel.signInWithGoogle(user: user, error: error) { [weak self] (msg) in
+        viewModel.signInWithGoogle(user: user, error: error) { [weak self] (msg, newUser) in
             if let msg = msg {
                 //For Handling Cancel in Google Sign in
                 self?.stopSpin()
@@ -88,9 +96,15 @@ extension LoginVC: GIDSignInDelegate {
             } else {
                 self?.stopSpin()
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
-                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
-                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                if newUser == true {
+                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                    guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
+                    self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                } else {
+                    UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                    guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+                    self?.present(tabBarVC, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -102,7 +116,7 @@ extension LoginVC: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         startSpin()
-        viewModel.signInWithFB(result: result, error: error) { [weak self] (msg, success) in
+        viewModel.signInWithFB(result: result, error: error) { [weak self] (msg, success, newUser) in
             self?.stopSpin()
             if !success {
                 guard let msg = msg else {
@@ -113,9 +127,15 @@ extension LoginVC: LoginButtonDelegate {
                 self?.presentAlert(title: AlertTitles.error, message: msg, style: .alert, actions: [alertAction])
             } else {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
-                guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
-                self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                if newUser == true {
+                    UserDefaults.standard.set(false, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                    guard let userDetailsVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: UserDetailsVC.self)) as? UserDetailsVC else { return }
+                    self?.navigationController?.pushViewController(userDetailsVC, animated: true)
+                } else {
+                    UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
+                    guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
+                    self?.present(tabBarVC, animated: true, completion: nil)
+                }
             }
         }
     }

@@ -11,4 +11,5 @@ import UIKit
 class ChatCVCell: BaseCVCell {
     
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var bubbleView: UIView!
 }

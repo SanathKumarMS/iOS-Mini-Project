@@ -10,7 +10,7 @@ import UIKit
 
 class ChatTabVC: BaseVC {
     
-    @IBOutlet private weak var messageLabel: UITextField!
+    @IBOutlet private weak var messageTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     var recipientPhoneNumber: String? {
         didSet {
@@ -18,25 +18,45 @@ class ChatTabVC: BaseVC {
         }
     }
     var recipientEmail: String = ""
-    var messages = [Message]()
+    
     private var viewModel = ChatTabVM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        viewModel.getChatMessages(completionHandler: { [weak self] (message) in
-            guard let message = message else { return }
+        viewModel.getChatMessages(chatPartner: recipientEmail, completionHandler: { [weak self] (message) in
+            guard message != nil else { return }
             
-            self?.messages.append(message)
-            print(self?.messages)
             self?.collectionView.reloadData()
+            self?.scrollToBottom()
+//            self?.collectionView.collectionViewLayout.invalidateLayout()
         })
+
+//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        }
+        
     }
     
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        collectionView.collectionViewLayout.invalidateLayout()
+//    }
+    
     @IBAction private func sendMessageButton(_ sender: Any) {
-        guard let messageText = messageLabel.text else { return }
-        viewModel.addMessageToDatabase(text: messageText)
-        messageLabel.text = ""
+        guard let messageText = messageTextField.text else { return }
+        viewModel.addMessageToDatabase(text: messageText, chatPartner: recipientEmail)
+        messageTextField.text = ""
+    }
+    
+    func scrollToBottom() {
+        collectionView.scrollToItem(at: IndexPath(item: viewModel.messages.count - 1, section: 0), at: .bottom, animated: false)
+    }
+    
+    func estimateHeightForText(text: String) -> CGRect {
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
     }
 }
 
@@ -46,14 +66,17 @@ extension ChatTabVC: UICollectionViewDelegate {
 
 extension ChatTabVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
+        return viewModel.messages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ChatCVCell.self), for: indexPath) as? ChatCVCell else { return ChatCVCell() }
         
-        cell.backgroundColor = .red
-        cell.messageLabel.text = messages[indexPath.row].text
+        if viewModel.messages[indexPath.row].fromID == viewModel.toID {
+            cell.messageLabel.textAlignment = .left
+        }
+        cell.backgroundColor = .gray
+        cell.messageLabel.text = viewModel.messages[indexPath.row].text
         return cell
     }
     
@@ -61,6 +84,14 @@ extension ChatTabVC: UICollectionViewDataSource {
 
 extension ChatTabVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+//        var height: CGFloat = 200
+//        let text = viewModel.messages[indexPath.row].text
+//        height = estimateHeightForText(text: text).height + 20
+//        return CGSize(width: view.frame.width, height: height)
+//        if let cell = collectionView.cellForItem(at: indexPath) as? ChatCVCell {
+//            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+//        }
         return CGSize(width: view.frame.width, height: 150)
     }
 }

@@ -25,46 +25,87 @@ class FirebaseManager {
     
     // MARK: - Authentication
     
-    func loginOrSignUp(email: String, password: String, completionHandler: @escaping ErrorHandler) {
+    func loginOrSignUp(email: String, password: String, completionHandler: @escaping LoginOrSignUpHandler) {
         Auth.auth().fetchSignInMethods(forEmail: email) {(signInMethods, error) in
             if let error = error {
-                completionHandler(error)
+                completionHandler(error, nil)
                 return
             }
             if let signInMethods = signInMethods {
                 if signInMethods.contains(EmailPasswordAuthSignInMethod) {
                     //User already present. Signing in
                     Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-                        completionHandler(error)
+                        completionHandler(error, false)
                     }
                 }   //User not present. Creating account and signing in
             } else { Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
                 guard let error = error else {
                     Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-                        completionHandler(error)
+                        completionHandler(error, true)
                     }
                     return
                 }
-                completionHandler(error)
+                completionHandler(error, nil)
             }
             }
         }
     }
     
-    func signInWithGoogle(authentication: GIDAuthentication, completionHandler: @escaping ErrorHandler) {
+    func signInWithGoogle(email: String, authentication: GIDAuthentication, completionHandler: @escaping LoginOrSignUpHandler) {
+        var newUser: Bool?
+        Auth.auth().fetchSignInMethods(forEmail: email) { (signInMethods, error) in
+            guard error == nil else {
+                completionHandler(error, nil)
+                return
+            }
+            if let signInMethods = signInMethods {
+                if signInMethods.contains(GoogleAuthSignInMethod) {
+                    newUser = false
+                } else {
+                    newUser = true
+                }
+            }
+        }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        signInWithCredential(credential: credential, completionHandler: completionHandler)
+        signInWithCredential(credential: credential, newUser: newUser, completionHandler: completionHandler)
     }
     
-    func signInWithFB(accessToken: AccessToken, completionHandler: @escaping ErrorHandler) {
+    func signInWithFB(accessToken: AccessToken, completionHandler: @escaping LoginOrSignUpHandler) {
+        var newUser: Bool?
+        let r = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], tokenString: AccessToken.current?.tokenString, version: nil, httpMethod: HTTPMethod(rawValue: "GET"))
+        
+        r.start(completionHandler: { (_, result, error) in
+            guard error == nil else {
+                completionHandler(error, nil)
+                return
+            }
+            
+            if let result = result as? [String: String] {
+                if let email = result["email"] {
+                    Auth.auth().fetchSignInMethods(forEmail: email) { (signInMethods, error) in
+                        guard error == nil else {
+                            completionHandler(error, nil)
+                            return
+                        }
+                        if let signInMethods = signInMethods {
+                            if signInMethods.contains(FacebookAuthSignInMethod) {
+                                newUser = false
+                            } else {
+                                newUser = true
+                            }
+                        }
+                    }
+                }
+            }
+        })
         let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-        signInWithCredential(credential: credential, completionHandler: completionHandler)
+        signInWithCredential(credential: credential, newUser: newUser, completionHandler: completionHandler)
     }
     
-    func signInWithCredential(credential: AuthCredential, completionHandler: @escaping ErrorHandler) {
+    func signInWithCredential(credential: AuthCredential,newUser: Bool?, completionHandler: @escaping LoginOrSignUpHandler) {
         Auth.auth().signIn(with: credential) { (_, error) in
-            completionHandler(error)
+            completionHandler(error, newUser)
         }
     }
     
@@ -140,12 +181,7 @@ class FirebaseManager {
     
     //Get Chat Messages from Database
     func getChat(fromID: String, toID: String, completionHandler: @escaping GetMessageHandler) {
-//        var messages = [Message]()
         userMessagesRef.child(fromID).observe(.childAdded) { [weak self] (snapshot) in
-//            guard let details = snapshot.value as? [String: Any] else {
-//                return
-//            }
-            
             let messageID = snapshot.key
             self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let messageDetails = snapshot.value as? [String: Any] else {
@@ -158,25 +194,7 @@ class FirebaseManager {
                     let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
                     completionHandler(message)
                 }
-
             })
-            
-//            let messageIDs = details.keys
-//            for messageID in messageIDs {
-//                self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
-//                    guard let messageDetails = snapshot.value as? [String: Any] else {
-//                        return
-//                    }
-//
-//                    guard let messageFromID = messageDetails["fromID"] as? String, let messageToID = messageDetails["toID"] as? String, let messageTimestamp = messageDetails["timestamp"] as? String, let messageText = messageDetails["text"] as? String else { return }
-//
-//                    if messageFromID == fromID {
-//                        let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
-//                        messages.append(message)
-//                    }
-//                })
-//            }
-//            completionHandler(messages)
         }
     }
     
