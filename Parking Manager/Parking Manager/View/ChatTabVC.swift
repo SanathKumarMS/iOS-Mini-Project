@@ -32,10 +32,9 @@ class ChatTabVC: BaseVC {
 //            self?.collectionView.collectionViewLayout.invalidateLayout()
         })
 
-//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//        }
-        
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
     
 //    override func viewWillLayoutSubviews() {
@@ -51,12 +50,6 @@ class ChatTabVC: BaseVC {
     
     func scrollToBottom() {
         collectionView.scrollToItem(at: IndexPath(item: viewModel.messages.count - 1, section: 0), at: .bottom, animated: false)
-    }
-    
-    func estimateHeightForText(text: String) -> CGRect {
-        let size = CGSize(width: 200, height: 1000)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
     }
 }
 
@@ -93,5 +86,6 @@ extension ChatTabVC: UICollectionViewDelegateFlowLayout {
 //            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 //        }
         return CGSize(width: view.frame.width, height: 150)
+//        return UICollectionViewFlowLayout.automaticSize
     }
 }

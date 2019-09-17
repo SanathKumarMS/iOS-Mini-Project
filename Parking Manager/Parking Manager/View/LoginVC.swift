@@ -21,7 +21,6 @@ class LoginVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Parking Manager"
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         fbLoginButton.delegate = self
