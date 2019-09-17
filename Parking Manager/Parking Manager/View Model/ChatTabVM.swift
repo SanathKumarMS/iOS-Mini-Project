@@ -12,7 +12,7 @@ class ChatTabVM: BaseVM {
     
     func addMessageToDatabase(text: String) {
         let fromID = md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
-        let toID = md5Hash(email: "sanath2@gmail.com")
+        let toID = md5Hash(email: "sanathkumar.ms@ymedialabs.com")
         let dateString = getTimestamp()
         let message = Message(fromID: fromID, toID: toID, timestamp: dateString, text: text)
         FirebaseManager.shared.addMessage(message: message)
@@ -32,10 +32,18 @@ class ChatTabVM: BaseVM {
         return md5Data.map { String(format: "%02hhx", $0) }.joined()
     }
     
-    func getChatMessages() {
+    func getChatMessages(completionHandler: @escaping GetMessageHandler) {
         let fromID = md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
         let toID = md5Hash(email: "sanathkumar.ms@ymedialabs.com")
         
-        FirebaseManager.shared.getChat(fromID: fromID, toID: toID)
+        FirebaseManager.shared.getChat(fromID: fromID, toID: toID, completionHandler: { (message) in
+            guard let message = message else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completionHandler(message)
+            }
+        })
     }
 }

@@ -139,24 +139,44 @@ class FirebaseManager {
     }
     
     //Get Chat Messages from Database
-    func getChat(fromID: String, toID: String) {
-        var messages = [Message]()
-        userMessagesRef.child(fromID).observeSingleEvent(of: .value) { [weak self] (snapshot) in
-            guard let details = snapshot.value as? [String: Any] else {
-                return
-            }
+    func getChat(fromID: String, toID: String, completionHandler: @escaping GetMessageHandler) {
+//        var messages = [Message]()
+        userMessagesRef.child(fromID).observe(.childAdded) { [weak self] (snapshot) in
+//            guard let details = snapshot.value as? [String: Any] else {
+//                return
+//            }
             
-            let messageIDs = details.keys
-            for messageID in messageIDs {
-                self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
-                    guard let details = snapshot.value as? [String: Any] else {
-                        return
-                    }
-                    
-                    //Read message values here
+            let messageID = snapshot.key
+            self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let messageDetails = snapshot.value as? [String: Any] else {
+                    return
+                }
 
-                })
-            }
+                guard let messageFromID = messageDetails["fromID"] as? String, let messageToID = messageDetails["toID"] as? String, let messageTimestamp = messageDetails["timestamp"] as? String, let messageText = messageDetails["text"] as? String else { return }
+
+                if (messageFromID == fromID && messageToID == toID) || (messageFromID == toID && messageToID == fromID) {
+                    let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
+                    completionHandler(message)
+                }
+
+            })
+            
+//            let messageIDs = details.keys
+//            for messageID in messageIDs {
+//                self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
+//                    guard let messageDetails = snapshot.value as? [String: Any] else {
+//                        return
+//                    }
+//
+//                    guard let messageFromID = messageDetails["fromID"] as? String, let messageToID = messageDetails["toID"] as? String, let messageTimestamp = messageDetails["timestamp"] as? String, let messageText = messageDetails["text"] as? String else { return }
+//
+//                    if messageFromID == fromID {
+//                        let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
+//                        messages.append(message)
+//                    }
+//                })
+//            }
+//            completionHandler(messages)
         }
     }
     

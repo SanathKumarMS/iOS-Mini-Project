@@ -548,6 +548,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BXZ-gl-p8w" id="Lpp-ig-ScI"/>
+                                    <outlet property="delegate" destination="BXZ-gl-p8w" id="Ixw-Aj-4Xa"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

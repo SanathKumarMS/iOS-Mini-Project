@@ -16,6 +16,8 @@ typealias GetUserDetailsCompletionHandler = ([String: String]?) -> Void
 typealias GetAllUserDetailsCompletionHandler = ([String: Any]?) -> Void
 typealias GetAllUserDataCompletionHandler = ([User]?) -> Void
 typealias GetImageCompletionHandler = (Data?, Error?) -> Void
+typealias GetChatHandler = ([Message]?) -> Void
+typealias GetMessageHandler = (Message?) -> Void
 
 struct Constants {
     static let projectName = "Parking Manager"
