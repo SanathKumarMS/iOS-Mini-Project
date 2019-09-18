@@ -76,6 +76,11 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
             addPickerToTextField()
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }
 

@@ -11,7 +11,7 @@ import UIKit
 class ChatTabVC: BaseVC {
     
     @IBOutlet private weak var messageTextField: UITextField!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var tableView: UITableView!
     var recipientPhoneNumber: String? {
         didSet {
             navigationItem.title = self.recipientPhoneNumber
@@ -24,75 +24,60 @@ class ChatTabVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        tableView.estimatedRowHeight = 100
         viewModel.getChatMessages(chatPartner: recipientEmail, completionHandler: { [weak self] (message) in
             guard message != nil else { return }
             
-            self?.collectionView.reloadData()
-            self?.scrollToBottom()
-//            self?.collectionView.collectionViewLayout.invalidateLayout()
+            self?.tableView.reloadData()
         })
-
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        }
     }
-    
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        collectionView.collectionViewLayout.invalidateLayout()
-//    }
     
     @IBAction private func sendMessageButton(_ sender: Any) {
         guard let messageText = messageTextField.text else { return }
+        if messageText.isEmpty {
+            return
+        }
         viewModel.addMessageToDatabase(text: messageText, chatPartner: recipientEmail)
         messageTextField.text = ""
     }
-    
-    func scrollToBottom() {
-        collectionView.scrollToItem(at: IndexPath(item: viewModel.messages.count - 1, section: 0), at: .bottom, animated: false)
-    }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UITableViewDelegate
 
-extension ChatTabVC: UICollectionViewDelegate {
-
+extension ChatTabVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension ChatTabVC: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ChatTabVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.messages.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ChatCVCell.self), for: indexPath) as? ChatCVCell else { return ChatCVCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ChatTabTVCell.self), for: indexPath) as? ChatTabTVCell else { return ChatTabTVCell() }
         
         if viewModel.messages[indexPath.row].fromID == viewModel.toID {
+            cell.bubbleVIewTrailingConstraint.constant = cell.bounds.width * 0.25
+            cell.bubbleViewLeadingConstraint.constant = 10
             cell.messageLabel.textAlignment = .left
+        } else {
+            cell.bubbleViewLeadingConstraint.constant = cell.bounds.width * 0.25
+            cell.bubbleVIewTrailingConstraint.constant = 10
+            cell.messageLabel.textAlignment = .right
         }
-        cell.backgroundColor = .gray
         cell.messageLabel.text = viewModel.messages[indexPath.row].text
-        cell.layoutIfNeeded()
         return cell
     }
-    
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-
-//extension ChatTabVC: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-////        var height: CGFloat = 200
-////        let text = viewModel.messages[indexPath.row].text
-////        height = estimateHeightForText(text: text).height + 20
-////        return CGSize(width: view.frame.width, height: height)
-////        if let cell = collectionView.cellForItem(at: indexPath) as? ChatCVCell {
-////            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-////        }
-//        return CGSize(width: view.frame.width, height: 150)
-////        return UICollectionViewFlowLayout.automaticSize
-//    }
-//}
+extension ChatTabVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}

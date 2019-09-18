@@ -31,6 +31,7 @@ struct Constants {
     static let topConstraintfor5S = 70.0
     static let dropDownImage = "dropdown_image"
     static let jpgExtension = ".jpg"
+    static let dateFormat = "yyyy-MM-dd HH:mm"
 }
 
 struct AlertTitles {
@@ -50,6 +51,7 @@ struct AlertMessages {
     static let successfulOperation = ""
     static let detailsUpdated = "Your Profile details are updated!"
     static let otherUsersDetailsUpdated = "The user's details are added!"
+    static let emptyEmailField = "The email field cannot be empty"
 }
 
 struct ToolBarTitles {

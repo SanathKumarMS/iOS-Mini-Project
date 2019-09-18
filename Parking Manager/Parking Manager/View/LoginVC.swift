@@ -30,8 +30,14 @@ class LoginVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         emailField.text = ""
         passwordField.text = ""
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     @IBAction private func manualLogin(_ sender: Any) {

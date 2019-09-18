@@ -33,23 +33,6 @@ class SearchTabVC: BaseVC {
         })
         tableView.reloadData()
     }
-
-    //Delete later
-    @IBAction private func onClickedValue(_ sender: Any) {
-        guard let button = sender as? UIButton, let text = button.title(for: .normal) else { return }
-        switch button.tag {
-        case UserDetailsToDisplay.email.rawValue:
-            openMailApp(emailAddress: text)
-        case UserDetailsToDisplay.phone.rawValue:
-            guard let chatTabVC = storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
-            chatTabVC.recipientPhoneNumber = text
-            navigationController?.pushViewController(chatTabVC, animated: true)
-//            present(chatTabVC, animated: true)
-            //openDialerOrChat(phoneNumber: text)
-        default:
-            return
-        }
-    }
     
     func getAllUsersData() {
         viewModel.getAllUsersData(completionHandler: { [weak self] (userData) in
@@ -67,7 +50,7 @@ class SearchTabVC: BaseVC {
         }
     }
     
-    func openDialerOrChat(phoneNumber: String) {
+    func openDialer(phoneNumber: String) {
         if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) == true {
             UIApplication.shared.open(phoneURL)
         }
@@ -96,14 +79,23 @@ extension SearchTabVC: UITableViewDelegate {
         case UserDetailsToDisplay.phone.rawValue:
             guard let phone = cell.valueLabel.text else { return }
             
-            guard let emailCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? SearchTVCell else { return }
-            
-            guard let userEmail = emailCell.valueLabel.text else { return }
-            
-            guard let chatTabVC = storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
-            chatTabVC.recipientPhoneNumber = phone
-            chatTabVC.recipientEmail = userEmail
-            navigationController?.pushViewController(chatTabVC, animated: true)
+            let callAction = AlertAction(title: "Call", style: .default)
+            let chatAction = AlertAction(title: "Message", style: .default)
+            let cancelAction = AlertAction(title: "Cancel", style: .cancel)
+            self.presentAlert(title: "", message: "", style: .actionSheet, actions: [callAction, chatAction, cancelAction]) { [weak self] (alertAction) in
+                if alertAction.title == "Call" {
+                    self?.openDialer(phoneNumber: phone)
+                } else if alertAction.title == "Message" {
+                    guard let emailCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? SearchTVCell else { return }
+                    
+                    guard let userEmail = emailCell.valueLabel.text else { return }
+                    
+                    guard let chatTabVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
+                    chatTabVC.recipientPhoneNumber = phone
+                    chatTabVC.recipientEmail = userEmail
+                    self?.navigationController?.pushViewController(chatTabVC, animated: true)
+                }
+            }
         default:
             break
         }

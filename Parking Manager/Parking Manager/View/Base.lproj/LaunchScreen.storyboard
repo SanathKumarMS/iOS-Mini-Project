@@ -18,16 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-9s-0fD">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-76x76" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-9s-0fD">
+                                <rect key="frame" x="169" y="410" width="76" height="76"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="WgH-9s-0fD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Kr-0t-rCY"/>
-                            <constraint firstItem="WgH-9s-0fD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8Y4-3Z-zCf"/>
-                            <constraint firstItem="WgH-9s-0fD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="EzP-M5-hST"/>
-                            <constraint firstItem="WgH-9s-0fD" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="rC1-1Y-JwC"/>
+                            <constraint firstItem="WgH-9s-0fD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="08N-Zc-Wcn"/>
+                            <constraint firstItem="WgH-9s-0fD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5Wy-P4-FkF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -37,4 +35,7 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon-App-76x76" width="76" height="76"/>
+    </resources>
 </document>

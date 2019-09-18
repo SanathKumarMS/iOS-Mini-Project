@@ -64,6 +64,8 @@ class HomeTabVC: BaseVC {
             updateDetailsButton.isHidden = false
             editButton.title = "Done"
             profilePictureButton.isUserInteractionEnabled = true
+            guard let cell = homeTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? UserDetailsTVCell else { return }
+            cell.userDetailTextField.becomeFirstResponder()
         } else {
             isTextEditable = false
             updateDetailsButton.isHidden = true
@@ -148,6 +150,9 @@ extension HomeTabVC: UITableViewDataSource {
         cell.userDetailsCellDelegate = self
         if cell.userDetailTextField.tag == UserDetailsToDisplay.email.rawValue {
             cell.userDetailTextField.isUserInteractionEnabled = false
+        }
+        if cell.userDetailTextField.tag == UserDetailsToDisplay.phone.rawValue {
+            cell.userDetailTextField.keyboardType = .numberPad
         }
         cell.userDetailTextField.text = viewModel.userData[UserDetails.allCases[indexPath.row].rawValue]
         return cell

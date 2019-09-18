@@ -30,14 +30,6 @@ class UserDetailsVC: BaseVC {
         setupUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
     @IBAction private func addUser(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
         startSpin()
@@ -59,6 +51,12 @@ class UserDetailsVC: BaseVC {
                 self?.present(tabBarVC, animated: true, completion: nil)
             })
         case .addTab:
+            if userData[UserDetailsToDisplay.email.title] == nil {
+                stopSpin()
+                let alertAction = AlertAction(title: "OK", style: .default)
+                self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyEmailField, style: .alert, actions: [alertAction])
+                return
+            }
             viewModel.addUserToDatabase(email: userData[UserDetailsToDisplay.email.title] ?? "", name: userData[UserDetailsToDisplay.name.title] ?? "", phone: userData[UserDetailsToDisplay.phone.title] ?? "", vehicleNumber: userData[UserDetailsToDisplay.vehicleNumber.title] ?? "", vehicleType: userData[UserDetailsToDisplay.vehicleType.title] ?? "", imageData: imageData, completionHandler: { [weak self] (error) in
                 guard error == nil else {
                     self?.stopSpin()
@@ -79,7 +77,7 @@ class UserDetailsVC: BaseVC {
         case .userDetails:
             navigationItem.title = "Enter Details"
         case .addTab:
-            navigationItem.title = "Add Details of Other Users"
+            navigationItem.title = "Add Details"
         }
         
         imagePicker.delegate = self
