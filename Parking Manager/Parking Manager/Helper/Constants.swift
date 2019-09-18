@@ -29,7 +29,7 @@ struct Constants {
     static let successMessage = "Success"
     static let iPhone5SHeight = 568.0
     static let topConstraintfor5S = 70.0
-    static let dropDownImage = "dropdown.png"
+    static let dropDownImage = "dropdown_image"
     static let jpgExtension = ".jpg"
 }
 

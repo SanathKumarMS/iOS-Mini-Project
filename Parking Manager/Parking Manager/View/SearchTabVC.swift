@@ -21,6 +21,8 @@ class SearchTabVC: BaseVC {
         super.viewDidLoad()
 
         navigationItem.title = "Search"
+        searchBar.layer.borderColor = UIColor.lightGray.cgColor
+        searchBar.layer.borderWidth = 2
         getAllUsersData()
     }
     
@@ -75,6 +77,11 @@ class SearchTabVC: BaseVC {
 // MARK: - UITableViewDelegate
 
 extension SearchTabVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -83,7 +90,7 @@ extension SearchTabVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let cell = tableView.cellForRow(at: indexPath) as? SearchTVCell else { return }
         switch indexPath.row {
-        case UserDetailsToDisplay.email.rawValue :
+        case UserDetailsToDisplay.email.rawValue:
             guard let email = cell.valueLabel.text else { return }
             openMailApp(emailAddress: email)
         case UserDetailsToDisplay.phone.rawValue:

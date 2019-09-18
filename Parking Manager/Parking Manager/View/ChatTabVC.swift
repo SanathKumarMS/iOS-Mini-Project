@@ -53,9 +53,13 @@ class ChatTabVC: BaseVC {
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
 extension ChatTabVC: UICollectionViewDelegate {
 
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension ChatTabVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,22 +74,25 @@ extension ChatTabVC: UICollectionViewDataSource {
         }
         cell.backgroundColor = .gray
         cell.messageLabel.text = viewModel.messages[indexPath.row].text
+        cell.layoutIfNeeded()
         return cell
     }
     
 }
 
-extension ChatTabVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+// MARK: - UICollectionViewDelegateFlowLayout
 
-//        var height: CGFloat = 200
-//        let text = viewModel.messages[indexPath.row].text
-//        height = estimateHeightForText(text: text).height + 20
-//        return CGSize(width: view.frame.width, height: height)
-//        if let cell = collectionView.cellForItem(at: indexPath) as? ChatCVCell {
-//            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-//        }
-        return CGSize(width: view.frame.width, height: 150)
-//        return UICollectionViewFlowLayout.automaticSize
-    }
-}
+//extension ChatTabVC: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+////        var height: CGFloat = 200
+////        let text = viewModel.messages[indexPath.row].text
+////        height = estimateHeightForText(text: text).height + 20
+////        return CGSize(width: view.frame.width, height: height)
+////        if let cell = collectionView.cellForItem(at: indexPath) as? ChatCVCell {
+////            return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+////        }
+//        return CGSize(width: view.frame.width, height: 150)
+////        return UICollectionViewFlowLayout.automaticSize
+//    }
+//}

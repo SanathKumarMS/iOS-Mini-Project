@@ -93,9 +93,16 @@ class HomeTabVC: BaseVC {
     }
     
     @IBAction private func logOut() {
-        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-        viewModel.signOut()
-        present(UINavigationController(rootViewController: storyboard?.instantiateViewController(withIdentifier: String(describing: LoginVC.self)) ?? LoginVC()), animated: true, completion: nil)
+        let okAction = AlertAction(title: "OK", style: .default)
+        let cancelAction = AlertAction(title: "Cancel", style: .cancel)
+        self.presentAlert(title: "Log out", message: "Are you sure you want to log out?", style: .alert, actions: [okAction, cancelAction]) { [weak self] (alertAction) in
+            if alertAction.title == "OK" {
+                UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+                self?.viewModel.signOut()
+                self?.present(UINavigationController(rootViewController: self?.storyboard?.instantiateViewController(withIdentifier: String(describing: LoginVC.self)) ?? LoginVC()), animated: true, completion: nil)
+            }
+        }
+        
     }
     
     private func setupUI() {

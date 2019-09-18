@@ -138,7 +138,7 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hFY-ID-iZH">
                                 <rect key="frame" x="10" y="286" width="394" height="419"/>
-                                <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserDetailsTVCell" rowHeight="220" id="gZ1-mA-yAR" customClass="UserDetailsTVCell" customModule="Parking_Manager" customModuleProvider="target">
@@ -176,7 +176,7 @@
                                                 <constraint firstItem="3dW-bb-l6Y" firstAttribute="top" secondItem="rIb-x4-Iyz" secondAttribute="topMargin" id="qRH-h8-nNw"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="3dW-bb-l6Y" id="tqc-jT-bgg"/>
                                             <outlet property="userDetailTextField" destination="zxf-DS-LZz" id="pkd-HI-l5e"/>
@@ -207,7 +207,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.22293871154929112" green="0.88804727157360408" blue="0.78263284998979443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.18572347801363914" green="0.29803921568627451" blue="0.18682041584842801" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bs8-My-gIa" firstAttribute="centerX" secondItem="fpD-Uu-Rn7" secondAttribute="centerX" id="0Vc-QM-Wrb"/>
@@ -259,7 +259,7 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-Uc-fhO">
                                 <rect key="frame" x="10" y="287" width="394" height="418"/>
-                                <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserDetailsTVCell" rowHeight="220" id="lZw-P5-qSO" customClass="UserDetailsTVCell" customModule="Parking_Manager" customModuleProvider="target">
@@ -294,7 +294,7 @@
                                                 <constraint firstItem="2FC-vB-rSC" firstAttribute="trailing" secondItem="1FH-XF-N2P" secondAttribute="trailingMargin" id="qA0-rP-Av5"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="7T7-Z9-FlM" id="lcI-dg-lXw"/>
                                             <outlet property="userDetailTextField" destination="2FC-vB-rSC" id="zbs-dy-B3m"/>
@@ -325,7 +325,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.77647058823529413" green="0.83921568627450982" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.185723478" green="0.29803921570000003" blue="0.1868204158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ddn-EJ-O9r" firstAttribute="centerX" secondItem="oqS-kr-J5g" secondAttribute="centerX" id="2RS-j4-29K"/>
@@ -373,28 +373,41 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="nHW-7i-gJJ">
                                 <rect key="frame" x="20" y="100" width="374" height="56"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Name</string>
                                     <string>Vehicle Number</string>
                                 </scopeButtonTitles>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="AUW-5s-AdO" id="cYH-Tu-cys"/>
                                 </connections>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="R2o-gc-RI6">
-                                <rect key="frame" x="20" y="202" width="374" height="29"/>
+                                <rect key="frame" x="20" y="181" width="374" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xuu-VB-eDT"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Bike"/>
                                     <segment title="Car"/>
                                 </segments>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="segmentIndexChanged" destination="AUW-5s-AdO" eventType="valueChanged" id="bDg-SC-4MU"/>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bko-yE-4p5">
-                                <rect key="frame" x="0.0" y="262" width="414" height="551"/>
-                                <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="253" width="414" height="560"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTVCell" rowHeight="90" id="GhG-kd-5nM" customClass="SearchTVCell" customModule="Parking_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="90"/>
@@ -426,7 +439,7 @@
                                                 <constraint firstItem="eD6-nZ-ukL" firstAttribute="top" secondItem="xRN-0H-uke" secondAttribute="bottom" constant="8" id="ohJ-ip-ULW"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="fieldLabel" destination="xRN-0H-uke" id="vcg-4A-V0Y"/>
                                             <outlet property="valueLabel" destination="eD6-nZ-ukL" id="Fcv-aA-0FR"/>
@@ -439,10 +452,10 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.2229387115" green="0.88804727159999997" blue="0.78263285000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="nHW-7i-gJJ" secondAttribute="trailing" constant="20" id="3NV-6i-NNA"/>
-                            <constraint firstItem="R2o-gc-RI6" firstAttribute="top" secondItem="nHW-7i-gJJ" secondAttribute="bottom" constant="46" id="7x7-ZN-gRg"/>
+                            <constraint firstItem="R2o-gc-RI6" firstAttribute="top" secondItem="nHW-7i-gJJ" secondAttribute="bottom" constant="25" id="7x7-ZN-gRg"/>
                             <constraint firstItem="Bko-yE-4p5" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" id="VK7-VA-D8w"/>
                             <constraint firstItem="MHO-1P-4sx" firstAttribute="trailing" secondItem="Bko-yE-4p5" secondAttribute="trailing" id="Yyk-YR-TT4"/>
                             <constraint firstItem="nHW-7i-gJJ" firstAttribute="leading" secondItem="MHO-1P-4sx" secondAttribute="leading" constant="20" id="cRl-Yu-vsQ"/>
@@ -529,19 +542,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-VL-GT8">
-                                                    <rect key="frame" x="5" y="0.0" width="200" height="98"/>
+                                                    <rect key="frame" x="5" y="0.0" width="50" height="90"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVt-hS-ZZz">
-                                                            <rect key="frame" x="8" y="0.0" width="192" height="98"/>
+                                                            <rect key="frame" x="8" y="0.0" width="42" height="90"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="rVt-hS-ZZz" secondAttribute="trailing" id="MfE-2k-wIS"/>
-                                                        <constraint firstAttribute="width" constant="200" id="X3V-Rp-mtV"/>
                                                         <constraint firstItem="rVt-hS-ZZz" firstAttribute="top" secondItem="iBe-VL-GT8" secondAttribute="top" id="Z1n-29-U9u"/>
                                                         <constraint firstAttribute="bottom" secondItem="rVt-hS-ZZz" secondAttribute="bottom" id="kmd-Qq-Yfu"/>
                                                         <constraint firstItem="rVt-hS-ZZz" firstAttribute="leading" secondItem="iBe-VL-GT8" secondAttribute="leading" constant="8" id="rNC-9b-kT8"/>
@@ -552,7 +563,7 @@
                                         <constraints>
                                             <constraint firstItem="iBe-VL-GT8" firstAttribute="top" secondItem="QrS-LV-jbh" secondAttribute="top" id="7dT-W4-fHH"/>
                                             <constraint firstItem="iBe-VL-GT8" firstAttribute="leading" secondItem="QrS-LV-jbh" secondAttribute="leading" constant="5" id="I3L-qW-KtL"/>
-                                            <constraint firstAttribute="bottom" secondItem="iBe-VL-GT8" secondAttribute="bottom" id="rdL-lF-jvd"/>
+                                            <constraint firstAttribute="bottom" secondItem="iBe-VL-GT8" secondAttribute="bottom" constant="8" id="rdL-lF-jvd"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="bubbleView" destination="iBe-VL-GT8" id="SpX-UL-Hm9"/>
