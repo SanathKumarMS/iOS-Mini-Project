@@ -34,7 +34,7 @@ class HomeTabVM: BaseVM {
             }
             self?.userData = details
             FirebaseManager.shared.downloadImageFromStorage(name: md5Hex, completionHandler: { (data, error) in
-                if let error = error {
+                if let _ = error {
                     completionHandler(true, nil)
                     return
                 }

@@ -148,7 +148,6 @@ extension SearchTabVC: UISearchBarDelegate {
         filteredData = viewModel.allUsers.filter({(user) -> Bool in
             
             (user.name.lowercased().contains(searchText.lowercased()) || user.email.lowercased().contains(searchText.lowercased()) || user.vehicleNumber.lowercased().contains(searchText.lowercased())) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
-//            (user.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || user.email.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
         })
         tableView.reloadData()
     }
