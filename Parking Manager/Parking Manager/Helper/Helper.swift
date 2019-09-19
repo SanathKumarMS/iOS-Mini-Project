@@ -29,4 +29,9 @@ class Helper {
         }
         return digestData
     }
+    
+    static func md5Hash(email: String) -> String {
+        let md5Data = Helper.MD5(string: email)
+        return md5Data.map { String(format: "%02hhx", $0) }.joined()
+    }
 }

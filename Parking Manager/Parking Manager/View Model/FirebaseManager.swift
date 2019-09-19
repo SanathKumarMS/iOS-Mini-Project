@@ -113,11 +113,12 @@ class FirebaseManager {
         if GIDSignIn.sharedInstance()?.currentUser != nil {
             GIDSignIn.sharedInstance()?.signOut()
             return
-        } else {
+        } else if Auth.auth().currentUser != nil {
             do {
                 try Auth.auth().signOut()
-            } catch {
                 return
+            } catch {
+                
             }
         }
         let loginManager = LoginManager()
@@ -179,7 +180,7 @@ class FirebaseManager {
         userMessagesToIDRef.child(messageKey).setValue(1)
     }
     
-    //Get Chat Messages from Database
+    //Get Chat Messages between 2 users from Database
     func getChat(fromID: String, toID: String, completionHandler: @escaping GetMessageHandler) {
         userMessagesRef.child(fromID).observe(.childAdded) { [weak self] (snapshot) in
             let messageID = snapshot.key
@@ -194,6 +195,24 @@ class FirebaseManager {
                     let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
                     completionHandler(message)
                 }
+            })
+        }
+    }
+    
+    func getAllChatInteractions(fromID: String, completionHandler: @escaping GetMessageHandler) {
+        
+        userMessagesRef.child(fromID).observe(.childAdded) { [weak self] (snapshot) in
+            let messageID = snapshot.key
+            self?.messageRef.child(messageID).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let messageDetails = snapshot.value as? [String: Any] else {
+                    completionHandler(nil)
+                    return
+                }
+                
+                guard let messageFromID = messageDetails["fromID"] as? String, let messageToID = messageDetails["toID"] as? String, let messageTimestamp = messageDetails["timestamp"] as? String, let messageText = messageDetails["text"] as? String else { return }
+                
+                let message = Message(fromID: messageFromID, toID: messageToID, timestamp: messageTimestamp, text: messageText)
+                completionHandler(message)
             })
         }
     }

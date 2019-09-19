@@ -36,6 +36,9 @@
 		54762FEF232F922C000BF9F7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FEE232F922C000BF9F7 /* Message.swift */; };
 		54762FF1232FCD49000BF9F7 /* BaseCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */; };
 		54762FF72331F235000BF9F7 /* ChatTabTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF62331F235000BF9F7 /* ChatTabTVCell.swift */; };
+		54762FF923335559000BF9F7 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF823335558000BF9F7 /* ChatListVC.swift */; };
+		54762FFB23335658000BF9F7 /* ChatListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FFA23335658000BF9F7 /* ChatListTVCell.swift */; };
+		54762FFD233361AF000BF9F7 /* ChatListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FFC233361AF000BF9F7 /* ChatListVM.swift */; };
 		54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */; };
 		54A0D066232783D600A3DBA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D065232783D600A3DBA9 /* Constants.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -74,6 +77,9 @@
 		54762FEE232F922C000BF9F7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCVCell.swift; sourceTree = "<group>"; };
 		54762FF62331F235000BF9F7 /* ChatTabTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabTVCell.swift; sourceTree = "<group>"; };
+		54762FF823335558000BF9F7 /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
+		54762FFA23335658000BF9F7 /* ChatListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTVCell.swift; sourceTree = "<group>"; };
+		54762FFC233361AF000BF9F7 /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
 		54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
 		54A0D065232783D600A3DBA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +167,8 @@
 				54190E8D232CE74A004AAC5B /* ChatTabVC.swift */,
 				54762FF0232FCD49000BF9F7 /* BaseCVCell.swift */,
 				54762FF62331F235000BF9F7 /* ChatTabTVCell.swift */,
+				54762FF823335558000BF9F7 /* ChatListVC.swift */,
+				54762FFA23335658000BF9F7 /* ChatListTVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +183,7 @@
 				54190E852329099C004AAC5B /* HomeTabVM.swift */,
 				54190E89232A4DBB004AAC5B /* SearchTabVM.swift */,
 				54190E8F232CE761004AAC5B /* ChatTabVM.swift */,
+				54762FFC233361AF000BF9F7 /* ChatListVM.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -373,14 +382,17 @@
 				543A108723222115004B577C /* UserDetailsVM.swift in Sources */,
 				54A0D066232783D600A3DBA9 /* Constants.swift in Sources */,
 				54187633231FEAE4005893B3 /* LoginVM.swift in Sources */,
+				54762FFB23335658000BF9F7 /* ChatListTVCell.swift in Sources */,
 				54190E8E232CE74A004AAC5B /* ChatTabVC.swift in Sources */,
 				541876362320DD77005893B3 /* Extension+String.swift in Sources */,
 				54187631231FEAB4005893B3 /* BaseVM.swift in Sources */,
 				54187628231E6D64005893B3 /* BaseVC.swift in Sources */,
+				54762FF923335559000BF9F7 /* ChatListVC.swift in Sources */,
 				5418762D231E9EB0005893B3 /* FirebaseManager.swift in Sources */,
 				54762FF1232FCD49000BF9F7 /* BaseCVCell.swift in Sources */,
 				54190E862329099C004AAC5B /* HomeTabVM.swift in Sources */,
 				54762FF72331F235000BF9F7 /* ChatTabTVCell.swift in Sources */,
+				54762FFD233361AF000BF9F7 /* ChatListVM.swift in Sources */,
 				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
 				54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */,

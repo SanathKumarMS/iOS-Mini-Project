@@ -25,6 +25,7 @@ enum SegmentTypes: Int, CaseIterable {
 class SearchTabVM: BaseVM {
     
     var allUsers: [User] = []
+    var filteredData: [User] = []
 
     func getAllUsersData(completionHandler: @escaping GetAllUserDataCompletionHandler) {
         FirebaseManager.shared.getAllUsersDetails(completionHandler: { [weak self] (details) in
@@ -53,6 +54,19 @@ class SearchTabVM: BaseVM {
             DispatchQueue.main.async {
                completionHandler(self?.allUsers)
             }
+        })
+    }
+    
+    func filterDataForSearchText(searchText: String, segmentType: SegmentTypes) {
+        filteredData = allUsers.filter({ (user) -> Bool in
+            (user.name.lowercased().contains(searchText) || user.email.lowercased().contains(searchText
+            .lowercased()) || user.vehicleNumber.lowercased().contains(searchText.lowercased())) && user.vehicleType == segmentType.title
+        })
+    }
+    
+    func filterDataForSegment(segmentType: SegmentTypes) {
+        filteredData = allUsers.filter({ (user) -> Bool in
+            user.vehicleType == segmentType.title
         })
     }
 }

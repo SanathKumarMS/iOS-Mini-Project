@@ -12,12 +12,13 @@ class ChatTabVC: BaseVC {
     
     @IBOutlet private weak var messageTextField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
-    var recipientPhoneNumber: String? {
+    var recipientPhoneNumber: String = ""
+    var recipientEmail: String = ""
+    var recipientName: String? {
         didSet {
-            navigationItem.title = self.recipientPhoneNumber
+            navigationItem.title = self.recipientName
         }
     }
-    var recipientEmail: String = ""
     
     private var viewModel = ChatTabVM()
     
@@ -29,6 +30,7 @@ class ChatTabVC: BaseVC {
             guard message != nil else { return }
             
             self?.tableView.reloadData()
+            self?.scrollToBottom()
         })
     }
     
@@ -39,6 +41,11 @@ class ChatTabVC: BaseVC {
         }
         viewModel.addMessageToDatabase(text: messageText, chatPartner: recipientEmail)
         messageTextField.text = ""
+    }
+    
+    func scrollToBottom() {
+        let indexPath = IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
 }
 

@@ -15,8 +15,8 @@ class ChatTabVM: BaseVM {
     var messages = [Message]()
     
     func addMessageToDatabase(text: String, chatPartner: String) {
-        let fromID = md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
-        let toID = md5Hash(email: chatPartner)
+        let fromID = Helper.md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
+        let toID = Helper.md5Hash(email: chatPartner)
         let dateString = getTimestamp()
         let message = Message(fromID: fromID, toID: toID, timestamp: dateString, text: text)
         FirebaseManager.shared.addMessage(message: message)
@@ -31,14 +31,9 @@ class ChatTabVM: BaseVM {
         return dateString
     }
     
-    func md5Hash(email: String) -> String {
-        let md5Data = Helper.MD5(string: email)
-        return md5Data.map { String(format: "%02hhx", $0) }.joined()
-    }
-    
     func getChatMessages(chatPartner: String, completionHandler: @escaping GetMessageHandler) {
-        let fromID = md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
-        let toID = md5Hash(email: chatPartner)
+        let fromID = Helper.md5Hash(email: FirebaseManager.shared.getLoggedInUserEmail())
+        let toID = Helper.md5Hash(email: chatPartner)
         self.fromID = fromID
         self.toID = toID
         

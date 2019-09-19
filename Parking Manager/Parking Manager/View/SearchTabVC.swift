@@ -14,32 +14,39 @@ class SearchTabVC: BaseVC {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     @IBOutlet private weak var tableView: UITableView!
     private var viewModel = SearchTabVM()
-    private var filteredData: [User] = []
+    
     private var searchActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "Search"
-        searchBar.layer.borderColor = UIColor.lightGray.cgColor
-        searchBar.layer.borderWidth = 2
+        setupUI()
         getAllUsersData()
     }
     
     @IBAction private func segmentIndexChanged() {
         searchBar.text = ""
-        filteredData = viewModel.allUsers.filter({ (user) -> Bool in
-            user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
-        })
+        viewModel.filterDataForSegment(segmentType: SegmentTypes.allCases[segmentedControl.selectedSegmentIndex])
         tableView.reloadData()
+        if tableView.numberOfSections > 0 && tableView.numberOfRows(inSection: 0) > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+    }
+    
+    func setupUI() {
+        searchBar.layer.borderColor = UIColor.lightGray.cgColor
+        searchBar.layer.borderWidth = 2
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
     }
     
     func getAllUsersData() {
         viewModel.getAllUsersData(completionHandler: { [weak self] (userData) in
-            guard let userData = userData else { return }
-            self?.filteredData = userData.filter({ (user) -> Bool in
-                user.vehicleType == VehicleTypes.bike.rawValue
-            })
+            guard userData != nil else { return }
+            
+            self?.viewModel.filterDataForSegment(segmentType: SegmentTypes.Bike)
             self?.tableView.reloadData()
         })
     }
@@ -88,11 +95,16 @@ extension SearchTabVC: UITableViewDelegate {
                 } else if alertAction.title == "Message" {
                     guard let emailCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section)) as? SearchTVCell else { return }
                     
+                    guard let nameCell = tableView.cellForRow(at: IndexPath(row: 1, section: indexPath.section)) as? SearchTVCell else { return }
+                    
                     guard let userEmail = emailCell.valueLabel.text else { return }
+                    
+                    guard let userName = nameCell.valueLabel.text else { return }
                     
                     guard let chatTabVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: ChatTabVC.self)) as? ChatTabVC else { return }
                     chatTabVC.recipientPhoneNumber = phone
                     chatTabVC.recipientEmail = userEmail
+                    chatTabVC.recipientName = userName
                     self?.navigationController?.pushViewController(chatTabVC, animated: true)
                 }
             }
@@ -106,11 +118,11 @@ extension SearchTabVC: UITableViewDelegate {
 
 extension SearchTabVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return filteredData.count
+        return viewModel.filteredData.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return filteredData[section].name
+        return viewModel.filteredData[section].name
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,7 +131,7 @@ extension SearchTabVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchTVCell.self)) as? SearchTVCell else { return SearchTVCell() }
-        let user = filteredData[indexPath.section]
+        let user = viewModel.filteredData[indexPath.section]
         cell.fieldLabel.text = UserDetailsToDisplay.allCases[indexPath.row].title
         cell.valueLabel.tag = indexPath.row
         switch indexPath.row {
@@ -145,10 +157,7 @@ extension SearchTabVC: UITableViewDataSource {
 extension SearchTabVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = viewModel.allUsers.filter({(user) -> Bool in
-            
-            (user.name.lowercased().contains(searchText.lowercased()) || user.email.lowercased().contains(searchText.lowercased()) || user.vehicleNumber.lowercased().contains(searchText.lowercased())) && user.vehicleType == SegmentTypes.allCases[segmentedControl.selectedSegmentIndex].title
-        })
+        viewModel.filterDataForSearchText(searchText: searchText, segmentType: SegmentTypes.allCases[segmentedControl.selectedSegmentIndex])
         tableView.reloadData()
     }
 }

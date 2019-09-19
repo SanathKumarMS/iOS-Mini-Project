@@ -24,7 +24,7 @@ struct Message {
     }
 }
 
-enum MessageDetails: String {
+enum MessageDetails: String, CaseIterable {
     case fromID
     case toID
     case timestamp
