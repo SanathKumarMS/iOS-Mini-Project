@@ -76,7 +76,7 @@ class ChatListVM: BaseVM {
             (message.fromID == fromID && message.toID == toID) || (message.fromID == toID && message.toID == fromID)
         }
         filteredMessages.sort { (message1, message2) -> Bool in
-            message1.timestamp > message2.timestamp
+            message1.timestamp >= message2.timestamp
         }
     }
 }
