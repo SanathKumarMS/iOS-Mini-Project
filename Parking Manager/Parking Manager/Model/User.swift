@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct User {
     var email: String
@@ -27,4 +28,23 @@ struct User {
         dict[UserDetails.profilePicturePath.rawValue] = profilePicturePath
         return dict
     }
+}
+
+class ProfileDetails: Object {
+    @objc dynamic var email: String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var phone: String = ""
+    @objc dynamic var vehicleType: String = ""
+    @objc dynamic var vehicleNumber: String = ""
+    @objc dynamic var md5HashOfEmail: String = ""
+    @objc dynamic var profilePicture: Data?
+    
+    override static func primaryKey() -> String? {
+        return "email"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["md5HashOfEmail"]
+    }
+
 }
