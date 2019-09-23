@@ -30,7 +30,7 @@ struct User {
     }
 }
 
-class ProfileDetails: Object {
+class UserProfile: Object {
     @objc dynamic var email: String = ""
     @objc dynamic var name: String = ""
     @objc dynamic var phone: String = ""

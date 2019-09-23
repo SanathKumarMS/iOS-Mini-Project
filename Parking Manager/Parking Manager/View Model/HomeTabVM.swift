@@ -27,6 +27,21 @@ class HomeTabVM: BaseVM {
         let email = FirebaseManager.shared.getLoggedInUserEmail()
         let md5Data = Helper.MD5(string: email)
         let md5Hex = md5Data.map { String(format: "%02hhx", $0) }.joined()
+        //Realm part
+        if let userProfile = RealmManager.shared.fetchDetailsForUser(email: email) {
+            userData[UserDetails.email.rawValue] = email
+            userData[UserDetails.name.rawValue] = userProfile.name
+            userData[UserDetails.phone.rawValue] = userProfile.phone
+            userData[UserDetails.vehicleType.rawValue] = userProfile.vehicleType
+            userData[UserDetails.vehicleNumber.rawValue] = userProfile.vehicleNumber
+            if let data = userProfile.profilePicture {
+                let image = UIImage(data: data)
+                completionHandler(true, image)
+            } else {
+                completionHandler(true, nil)
+            }
+            return
+        }
         FirebaseManager.shared.getUserDetails(key: md5Hex, completionHandler: { [weak self] (details) in
             guard let details = details else {
                 completionHandler(false, nil)
