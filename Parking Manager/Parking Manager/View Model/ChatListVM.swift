@@ -79,4 +79,14 @@ class ChatListVM: BaseVM {
             message1.timestamp >= message2.timestamp
         }
     }
+    
+    func formattedTimestamp(timestamp: String) -> String {
+        let splitTimestamp = timestamp.split(separator: " ")
+        let now = Date()
+        if now.description.split(separator: " ")[0] == splitTimestamp[0] {
+            return String(splitTimestamp[1])
+        } else {
+            return String(splitTimestamp[0])
+        }
+    }
 }

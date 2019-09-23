@@ -15,17 +15,23 @@ class ChatListVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Chat"
         viewModel.getChatList { [weak self] (success) in
             if success == true {
                 self?.tableView.reloadData()
             }
-        }
+        } 
         tableView.tableFooterView = UIView()
 //        viewModel.getChatPartnerImages { [weak self] (success) in
 //            if success == true {
 //                self?.tableView.reloadData()
 //            }
 //        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 }
 
@@ -51,6 +57,8 @@ extension ChatListVC: UITableViewDataSource {
         cell.nameLabel.text = viewModel.userData[indexPath.row].name
         viewModel.filterMessages(toID: viewModel.userData[indexPath.row].md5HashOfEmail)
         cell.lastMessageLabel.text = viewModel.filteredMessages[0].text
+        cell.timestampLabel.text = viewModel.formattedTimestamp(timestamp: viewModel.filteredMessages[0].timestamp)
+        cell.profileImageView.loadImageWithURL(urlString: viewModel.userData[indexPath.row].profilePicturePath)
         return cell
     }
     

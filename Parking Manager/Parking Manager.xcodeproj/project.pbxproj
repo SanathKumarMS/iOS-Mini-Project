@@ -39,6 +39,7 @@
 		54762FF923335559000BF9F7 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FF823335558000BF9F7 /* ChatListVC.swift */; };
 		54762FFB23335658000BF9F7 /* ChatListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FFA23335658000BF9F7 /* ChatListTVCell.swift */; };
 		54762FFD233361AF000BF9F7 /* ChatListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FFC233361AF000BF9F7 /* ChatListVM.swift */; };
+		54762FFF233897C0000BF9F7 /* Extension+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54762FFE233897C0000BF9F7 /* Extension+UIImageView.swift */; };
 		54A0D0632326100D00A3DBA9 /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */; };
 		54A0D066232783D600A3DBA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A0D065232783D600A3DBA9 /* Constants.swift */; };
 		552C1E08CBCBE3809937E62B /* Pods_Parking_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -80,6 +81,7 @@
 		54762FF823335558000BF9F7 /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		54762FFA23335658000BF9F7 /* ChatListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTVCell.swift; sourceTree = "<group>"; };
 		54762FFC233361AF000BF9F7 /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
+		54762FFE233897C0000BF9F7 /* Extension+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImageView.swift"; sourceTree = "<group>"; };
 		54A0D0622326100D00A3DBA9 /* SpinnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
 		54A0D065232783D600A3DBA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ADD4CE9590496E52E325B29B /* Pods_Parking_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 				541876352320DD76005893B3 /* Extension+String.swift */,
 				543A108A23223021004B577C /* Helper.swift */,
 				54A0D065232783D600A3DBA9 /* Constants.swift */,
+				54762FFE233897C0000BF9F7 /* Extension+UIImageView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				54762FFD233361AF000BF9F7 /* ChatListVM.swift in Sources */,
 				54190E822328F78E004AAC5B /* HomeTabVC.swift in Sources */,
 				5418762A231E6D8B005893B3 /* LoginVC.swift in Sources */,
+				54762FFF233897C0000BF9F7 /* Extension+UIImageView.swift in Sources */,
 				54190E802328EE30004AAC5B /* TabBarVC.swift in Sources */,
 				54190E90232CE761004AAC5B /* ChatTabVM.swift in Sources */,
 				5418760F231E3A2C005893B3 /* AppDelegate.swift in Sources */,

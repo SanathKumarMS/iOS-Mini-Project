@@ -34,6 +34,11 @@ class ChatTabVC: BaseVC {
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     @IBAction private func sendMessageButton(_ sender: Any) {
         guard let messageText = messageTextField.text else { return }
         if messageText.isEmpty {
