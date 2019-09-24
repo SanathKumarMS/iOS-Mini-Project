@@ -32,12 +32,21 @@ class ChatTabVC: BaseVC {
             self?.tableView.reloadData()
             self?.scrollToBottom()
         })
-        NotificationCenter.default.addObserver(self, selector: #selector(), name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
     }
     
     @IBAction private func sendMessageButton(_ sender: Any) {
@@ -49,9 +58,34 @@ class ChatTabVC: BaseVC {
         messageTextField.text = ""
     }
     
+    @objc func handleKeyboardWillShow(notification: Notification) {
+        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if sendMessageViewBottomConstraint.constant == 0 {
+                let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0
+                sendMessageViewBottomConstraint.constant = keyboardFrame.height
+                UIView.animate(withDuration: keyboardDuration) {
+                    self.view.layoutIfNeeded()
+                }
+                
+            }
+        }
+    }
+    
+    @objc func handleKeyboardWillHide(notification: Notification) {
+        let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0
+        sendMessageViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: keyboardDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     func scrollToBottom() {
         let indexPath = IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0)
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+    }
+    
+    deinit {
+         NotificationCenter.default.removeObserver(self)
     }
 }
 

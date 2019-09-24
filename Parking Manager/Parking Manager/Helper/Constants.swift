@@ -42,6 +42,10 @@ struct AlertTitles {
     static let success = "Success!"
 }
 
+struct AlertActionTitles {
+    static let ok = "OK"
+}
+
 struct AlertMessages {
     static let invalidEmail = "Invalid Email Entered"
     static let invalidPassword = "Invalid Password Entered"
@@ -53,6 +57,7 @@ struct AlertMessages {
     static let detailsUpdated = "Your Profile details are updated!"
     static let otherUsersDetailsUpdated = "The user's details are added!"
     static let emptyEmailField = "The email field cannot be empty"
+    static let invalidPhoneNumber = "Only digits allowed"
 }
 
 struct ToolBarTitles {

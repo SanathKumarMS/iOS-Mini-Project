@@ -51,7 +51,7 @@ class UserDetailsVC: BaseVC {
                 self?.present(tabBarVC, animated: true, completion: nil)
             })
         case .addTab:
-            if userData[UserDetailsToDisplay.email.title] == nil {
+            if userData[UserDetailsToDisplay.email.title] == nil || userData[UserDetailsToDisplay.email.title] == "" {
                 stopSpin()
                 let alertAction = AlertAction(title: "OK", style: .default)
                 self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyEmailField, style: .alert, actions: [alertAction])
@@ -194,6 +194,22 @@ extension UserDetailsVC: UIImagePickerControllerDelegate, UINavigationController
 extension UserDetailsVC: UserDetailTVCellDelegate {
     
     func addUser(tag: Int, text: String) {
+        if tag == 0 {
+            if text.isEmpty {
+                let alertAction = AlertAction(title: "OK", style: .default)
+                self.presentAlert(title: AlertTitles.error, message: AlertMessages.emptyEmailField, style: .alert, actions: [alertAction])
+                return
+            }
+        }
+        if tag == 2 {
+            if !text.isEmpty {
+                if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) == false {
+                    let okAction = AlertAction(title: AlertActionTitles.ok, style: .default)
+                    self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidPhoneNumber, style: .alert, actions: [okAction])
+                    return
+                }
+            }
+        }
         let key = UserDetailsToDisplay(rawValue: tag)?.title
         guard let field = key else { return }
         userData[field] = text

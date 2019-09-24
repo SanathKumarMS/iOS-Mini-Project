@@ -81,6 +81,19 @@ class UserDetailsTVCell: BaseTVCell, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == UserDetailsToDisplay.phone.rawValue {
+            guard let text = textField.text else { return }
+            
+            if !text.isEmpty {
+                if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) == false {
+                    textField.text = ""
+                }
+            }
+            
+        }
+    }
 
 }
 

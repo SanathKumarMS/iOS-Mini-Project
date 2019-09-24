@@ -179,6 +179,15 @@ extension HomeTabVC: UIImagePickerControllerDelegate, UINavigationControllerDele
 extension HomeTabVC: UserDetailTVCellDelegate {
     
     func addUser(tag: Int, text: String) {
+        if tag == 2 {
+            if !text.isEmpty {
+                if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) == false {
+                    let okAction = AlertAction(title: AlertActionTitles.ok, style: .default)
+                    self.presentAlert(title: AlertTitles.error, message: AlertMessages.invalidPhoneNumber, style: .alert, actions: [okAction])
+                    return
+                }
+            }
+        }
         let key = UserDetails.allCases[tag].rawValue
         viewModel.userData[key] = text
     }
