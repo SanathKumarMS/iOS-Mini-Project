@@ -12,6 +12,7 @@ class ChatTabVC: BaseVC {
     
     @IBOutlet private weak var messageTextField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var sendMessageViewBottomConstraint: NSLayoutConstraint!
     var recipientPhoneNumber: String = ""
     var recipientEmail: String = ""
     var recipientName: String? {
@@ -19,7 +20,6 @@ class ChatTabVC: BaseVC {
             navigationItem.title = self.recipientName
         }
     }
-    
     private var viewModel = ChatTabVM()
     
     override func viewDidLoad() {
@@ -32,6 +32,7 @@ class ChatTabVC: BaseVC {
             self?.tableView.reloadData()
             self?.scrollToBottom()
         })
+        NotificationCenter.default.addObserver(self, selector: #selector(), name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -699,6 +699,7 @@
                     <navigationItem key="navigationItem" id="uNH-rq-DCQ"/>
                     <connections>
                         <outlet property="messageTextField" destination="rT9-L4-LVV" id="jKx-wW-cl1"/>
+                        <outlet property="sendMessageViewBottomConstraint" destination="eaH-aE-aCV" id="Hap-S3-Bew"/>
                         <outlet property="tableView" destination="JF4-Cv-jp8" id="onh-bO-frE"/>
                     </connections>
                 </viewController>

@@ -17,7 +17,6 @@ class BaseVM {
         let md5Data = Helper.MD5(string: email)
         let md5Hex = md5Data.map { String(format: "%02hhx", $0) }.joined()
         //Realm part
-//        addToRealm(email: email, name: name, phone: phone, vehicleNumber: vehicleNumber, vehicleType: vehicleType, imageData: imageData)
         let userProfile = UserProfile()
         userProfile.email = email
         userProfile.name = name
@@ -61,32 +60,6 @@ class BaseVM {
         }
     }
     
-//    func addToRealm(email: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?) {
-//        
-//        let userProfile = UserProfile()
-//        userProfile.email = email
-//        userProfile.name = name
-//        userProfile.phone = phone
-//        userProfile.vehicleNumber = vehicleNumber
-//        userProfile.vehicleType = vehicleType
-//        userProfile.profilePicture = imageData
-//        
-//        let realm: Realm
-//        do {
-//            realm = try Realm()
-//            try realm.write {
-//                realm.add(userProfile)
-//            }
-//            let userProfile = realm.objects(UserProfile.self)
-//            print(userProfile)
-//            try realm.write {
-//                realm.deleteAll()
-//            }
-//        } catch let error {
-//            print(error)
-//        }
-//    }
-    
     func storeImageInDocuments(fileName: String, imageData: Data?) -> Bool {
         guard let imageData = imageData else {
             return false
@@ -94,13 +67,25 @@ class BaseVM {
         
         do {
             let documentsDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(Constants.jpgExtension)
+            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(Constants.jpgExtensionForRealm)
             try imageData.write(to: fileURL)
             return true
         } catch {
             print(error)
             return false
         }
+    }
+    
+    func getImageFromDocuments(fileName: String) -> UIImage? {
+        do {
+            let documentsDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(Constants.jpgExtensionForRealm)
+            let image = UIImage(contentsOfFile: fileURL.path)
+            return image
+        } catch {
+            return nil
+        }
+        
     }
     
     func signOut() {

@@ -34,12 +34,6 @@ class HomeTabVM: BaseVM {
             userData[UserDetails.phone.rawValue] = userProfile.phone
             userData[UserDetails.vehicleType.rawValue] = userProfile.vehicleType
             userData[UserDetails.vehicleNumber.rawValue] = userProfile.vehicleNumber
-//            if let data = userProfile.profilePicture {
-//                let image = UIImage(data: data)
-//                completionHandler(true, image)
-//            } else {
-//                completionHandler(true, nil)
-//            }
             if let fileName = userProfile.profilePictureName {
                 if let image = getImageFromDocuments(fileName: fileName) {
                     completionHandler(true, image)
@@ -72,16 +66,19 @@ class HomeTabVM: BaseVM {
         })
     }
     
-    func getImageFromDocuments(fileName: String) -> UIImage? {
-        do {
-            let documentsDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(Constants.jpgExtension)
-            let image = UIImage(contentsOfFile: fileURL.absoluteString)
-            return image
-        } catch {
-            return nil
-        }
+    func removeAllImagesFromDocuments() {
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         
+        do {
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            for fileURL in fileURLs {
+                if fileURL.pathExtension == ".jpg" || fileURL.pathExtension == "jpg" || fileURL.pathExtension == "png" {
+                    try FileManager.default.removeItem(at: fileURL)
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func getCurrentUsersEmail() -> String {

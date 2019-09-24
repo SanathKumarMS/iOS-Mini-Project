@@ -31,6 +31,7 @@ struct Constants {
     static let topConstraintfor5S = 70.0
     static let dropDownImage = "dropdown_image"
     static let jpgExtension = ".jpg"
+    static let jpgExtensionForRealm = "jpg"
     static let dateFormat = "yyyy-MM-dd HH:mm"
 }
 
