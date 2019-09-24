@@ -31,7 +31,6 @@ class UserDetailsVC: BaseVC {
     }
     
     @IBAction private func addUser(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
         startSpin()
         var imageData: Data?
         if imageView.image != UIImage(named: Constants.defaultProfilePhoto) {
@@ -47,6 +46,7 @@ class UserDetailsVC: BaseVC {
                     return
                 }
                 self?.stopSpin()
+                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasEnteredDetails.rawValue)
                 guard let tabBarVC = self?.storyboard?.instantiateViewController(withIdentifier: String(describing: TabBarVC.self)) as? TabBarVC else { return }
                 self?.present(tabBarVC, animated: true, completion: nil)
             })

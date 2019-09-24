@@ -24,7 +24,13 @@ class BaseVM {
         userProfile.phone = phone
         userProfile.vehicleNumber = vehicleNumber
         userProfile.vehicleType = vehicleType
-        userProfile.profilePicture = imageData
+        let filename = md5Hex
+        if storeImageInDocuments(fileName: filename, imageData: imageData) == true {
+            userProfile.profilePictureName = md5Hex
+        } else {
+            userProfile.profilePictureName = nil
+        }
+        
         if RealmManager.shared.fetchDetailsForUser(email: email) != nil {
             RealmManager.shared.updateDetailsForUser(userProfile: userProfile)
         } else {
@@ -55,31 +61,46 @@ class BaseVM {
         }
     }
     
-    func addToRealm(email: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?) {
-        
-        let userProfile = UserProfile()
-        userProfile.email = email
-        userProfile.name = name
-        userProfile.phone = phone
-        userProfile.vehicleNumber = vehicleNumber
-        userProfile.vehicleType = vehicleType
-        userProfile.profilePicture = imageData
-        
-        let realm: Realm
-        do {
-            realm = try Realm()
-            try realm.write {
-                realm.add(userProfile)
-            }
-            let userProfile = realm.objects(UserProfile.self)
-            print(userProfile)
-            try realm.write {
-                realm.deleteAll()
-            }
-        } catch let error {
-            print(error)
+//    func addToRealm(email: String, name: String, phone: String, vehicleNumber: String, vehicleType: String, imageData: Data?) {
+//        
+//        let userProfile = UserProfile()
+//        userProfile.email = email
+//        userProfile.name = name
+//        userProfile.phone = phone
+//        userProfile.vehicleNumber = vehicleNumber
+//        userProfile.vehicleType = vehicleType
+//        userProfile.profilePicture = imageData
+//        
+//        let realm: Realm
+//        do {
+//            realm = try Realm()
+//            try realm.write {
+//                realm.add(userProfile)
+//            }
+//            let userProfile = realm.objects(UserProfile.self)
+//            print(userProfile)
+//            try realm.write {
+//                realm.deleteAll()
+//            }
+//        } catch let error {
+//            print(error)
+//        }
+//    }
+    
+    func storeImageInDocuments(fileName: String, imageData: Data?) -> Bool {
+        guard let imageData = imageData else {
+            return false
         }
         
+        do {
+            let documentsDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(Constants.jpgExtension)
+            try imageData.write(to: fileURL)
+            return true
+        } catch {
+            print(error)
+            return false
+        }
     }
     
     func signOut() {

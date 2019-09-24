@@ -37,7 +37,7 @@ class UserProfile: Object {
     @objc dynamic var vehicleType: String = ""
     @objc dynamic var vehicleNumber: String = ""
     @objc dynamic var md5HashOfEmail: String = ""
-    @objc dynamic var profilePicture: Data?
+    @objc dynamic var profilePictureName: String?
     
     override static func primaryKey() -> String? {
         return "email"

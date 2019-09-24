@@ -17,7 +17,12 @@ class RealmManager {
     
     private init() {
         do {
-            realm = try Realm()
+            let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { (migration, oldSchemaVersion) in
+                if oldSchemaVersion < 1 {
+                    
+                }
+            })
+            realm = try Realm(configuration: config)
         } catch let error {
             realm = nil
             print(error)
@@ -27,6 +32,7 @@ class RealmManager {
     func add(userProfile: UserProfile) {
         do {
             try realm?.write {
+                realm?.deleteAll()
                 realm?.add(userProfile)
             }
         } catch let error {
